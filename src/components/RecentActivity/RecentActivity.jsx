@@ -4,19 +4,18 @@ import {
   Filter, 
   ChevronRight, 
   Coins, 
-  Sparkles, 
   UserPlus, 
-  CheckCircle2, 
-  PlayCircle, 
+  CheckSquare, 
+  Gamepad2, 
   Flame, 
-  History 
+  Sparkles 
 } from 'lucide-react';
 import { soundFx } from '../../utils/soundEffects';
 
 const ICON_MAP = {
   UserPlus: UserPlus,
-  CheckCircle2: CheckCircle2,
-  PlayCircle: PlayCircle,
+  CheckCircle2: CheckSquare,
+  PlayCircle: Gamepad2,
   Coins: Coins,
   Flame: Flame,
   Sparkles: Sparkles,
@@ -35,13 +34,10 @@ export function RecentActivity({ history, user }) {
   });
 
   return (
-    <div className={`${styles.activityContainer} glass-panel`}>
+    <div className={styles.activityContainer}>
       {/* Header */}
       <div className={styles.headerRow}>
-        <div className={styles.titleRow}>
-          <History size={16} className={styles.titleIcon} />
-          <h3>RECENT ACTIVITY</h3>
-        </div>
+        <h3 className={styles.titleText}>RECENT ACTIVITY</h3>
 
         <div className={styles.filterWrapper}>
           <button 
@@ -52,8 +48,7 @@ export function RecentActivity({ history, user }) {
             }}
             aria-label="Filter activities"
           >
-            <Filter size={15} />
-            <span className={styles.filterLabel}>{activeFilter.toUpperCase()}</span>
+            <Filter size={16} />
           </button>
 
           {showFilterMenu && (
@@ -83,17 +78,16 @@ export function RecentActivity({ history, user }) {
             <p>No activity yet in this filter.</p>
           </div>
         ) : (
-          filteredHistory.slice(0, 6).map((item) => {
+          filteredHistory.slice(0, 5).map((item) => {
             const IconComp = ICON_MAP[item.icon] || Sparkles;
-            const isVE = item.type === 've' || item.amount.includes('VEs');
 
             return (
               <div key={item.id} className={styles.activityRow}>
                 <div 
                   className={styles.iconCircle}
                   style={{ 
-                    background: `${item.color}15`, 
-                    borderColor: `${item.color}35`,
+                    background: `${item.color}20`, 
+                    borderColor: `${item.color}40`,
                     color: item.color 
                   }}
                 >
@@ -101,44 +95,35 @@ export function RecentActivity({ history, user }) {
                 </div>
 
                 <div className={styles.activityMeta}>
-                  <div className={styles.titleAndAmount}>
-                    <span className={styles.activityTitle}>{item.subtitle}</span>
-                    <span 
-                      className={styles.activityAmount}
-                      style={{ color: isVE ? '#fbbf24' : '#38bdf8' }}
-                    >
-                      {item.amount}
-                    </span>
-                  </div>
+                  <span className={styles.activityAmount}>{item.amount}</span>
+                  <span className={styles.activityTitle}>{item.subtitle}</span>
                   <span className={styles.activityTime}>{item.time}</span>
                 </div>
 
-                <ChevronRight size={14} className={styles.arrowIcon} />
+                <ChevronRight size={16} className={styles.arrowIcon} />
               </div>
             );
           })
         )}
       </div>
 
-      {/* Today's Summary Footer */}
+      {/* Today's Summary Footer (Screen 6) */}
       <div className={styles.summaryFooter}>
-        <div className={styles.summaryTitle}>Today's Summary</div>
+        <span className={styles.summaryTitle}>Today's Summary</span>
         <div className={styles.summaryStats}>
           <div className={styles.summaryItem}>
             <div className={styles.xpCircle}>XP</div>
-            <div>
-              <div className={styles.summaryValue}>{user.todayXP} XP</div>
-              <div className={styles.summarySub}>Total Earned</div>
+            <div className={styles.summaryTextCol}>
+              <span className={styles.summaryValue}>{user.todayXP} XP</span>
+              <span className={styles.summarySub}>Total Earned</span>
             </div>
           </div>
 
-          <div className={styles.summaryDivider}></div>
-
           <div className={styles.summaryItem}>
             <div className={styles.veCircle}>V</div>
-            <div>
-              <div className={styles.summaryValue}>{user.todayVEs} VEs</div>
-              <div className={styles.summarySub}>Total Earned</div>
+            <div className={styles.summaryTextCol}>
+              <span className={styles.summaryValue}>{user.todayVEs} VEs</span>
+              <span className={styles.summarySub}>Total Earned</span>
             </div>
           </div>
         </div>
@@ -146,3 +131,4 @@ export function RecentActivity({ history, user }) {
     </div>
   );
 }
+

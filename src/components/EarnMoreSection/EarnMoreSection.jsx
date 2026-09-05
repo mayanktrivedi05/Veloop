@@ -1,11 +1,11 @@
 import React from 'react';
 import styles from './EarnMoreSection.module.css';
 import { 
-  PlayCircle, 
-  CheckSquare, 
+  Play, 
+  ListChecks, 
   Users, 
+  Magnet, 
   Gamepad2, 
-  Dice5, 
   Flame, 
   ArrowRight, 
   Sparkles,
@@ -14,17 +14,17 @@ import {
 import { soundFx } from '../../utils/soundEffects';
 
 const ICON_MAP = {
-  PlayCircle: PlayCircle,
-  CheckSquare: CheckSquare,
-  Users: Users,
-  Gamepad2: Gamepad2,
-  Dice5: Dice5,
-  Flame: Flame,
+  'watch-earn': Play,
+  'daily-tasks': ListChecks,
+  'refer-earn': Users,
+  'xp-catcher': Magnet,
+  'mini-games': Gamepad2,
+  'streak-bonus': Flame,
 };
 
 export function EarnMoreSection({ activities, onSelectActivity, onOpenAllActivities, onOpenGame }) {
   return (
-    <div className={`${styles.sectionContainer} glass-panel`}>
+    <div className={styles.sectionContainer}>
       <div className={styles.sectionHeader}>
         <div>
           <div className={styles.titleBadge}>
@@ -48,7 +48,7 @@ export function EarnMoreSection({ activities, onSelectActivity, onOpenAllActivit
 
       <div className={styles.activitiesGrid}>
         {activities.map((item) => {
-          const IconComp = ICON_MAP[item.icon] || Sparkles;
+          const IconComp = ICON_MAP[item.id] || Sparkles;
           const isCompleted = item.completed;
 
           return (
@@ -68,17 +68,14 @@ export function EarnMoreSection({ activities, onSelectActivity, onOpenAllActivit
                 className={styles.iconCircle}
                 style={{ 
                   background: `${item.accentColor}20`, 
-                  borderColor: `${item.accentColor}50`,
+                  borderColor: `${item.accentColor}40`,
                   color: item.accentColor 
                 }}
               >
                 {isCompleted ? <Check size={18} className={styles.checkIcon} /> : <IconComp size={18} />}
               </div>
 
-              <div className={styles.activityInfo}>
-                <span className={styles.cardTitle}>{item.title}</span>
-                <span className={styles.rewardTag}>+{item.rewardXP} XP</span>
-              </div>
+              <span className={styles.cardTitle}>{item.title}</span>
 
               {isCompleted && (
                 <span className={styles.completedBadge}>Done</span>
@@ -90,3 +87,4 @@ export function EarnMoreSection({ activities, onSelectActivity, onOpenAllActivit
     </div>
   );
 }
+

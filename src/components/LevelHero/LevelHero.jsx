@@ -6,11 +6,10 @@ import { soundFx } from '../../utils/soundEffects';
 export function LevelHero({ user, onOpenGame }) {
   const [showTooltip, setShowTooltip] = useState(false);
   const percentage = Math.min(100, Math.round((user.currentXP / user.requiredXP) * 100));
-  const xpNeeded = Math.max(0, user.requiredXP - user.currentXP);
   const nextLvlNumber = user.currentLevel + 1;
 
   return (
-    <div className={`${styles.heroCard} glass-panel`}>
+    <div className={styles.heroCard}>
       <div className={styles.heroGlow}></div>
       
       <div className={styles.contentGrid}>
@@ -19,12 +18,8 @@ export function LevelHero({ user, onOpenGame }) {
           <div className={styles.shieldContainer}>
             <div className={styles.shieldOuterGlow}></div>
             <div className={styles.shieldShape}>
-              <div className={styles.badgeTopTag}>CURRENT LEVEL</div>
+              <span className={styles.badgeTopTag}>LEVEL</span>
               <span className={styles.levelBigNumber}>0{user.currentLevel}</span>
-              <div className={styles.badgeBottomRow}>
-                <Award size={13} className={styles.badgeIcon} />
-                <span>MASTER</span>
-              </div>
             </div>
           </div>
         </div>
@@ -34,7 +29,7 @@ export function LevelHero({ user, onOpenGame }) {
           <div className={styles.headerInfo}>
             <div className={styles.titleWithInfo}>
               <h2 className={styles.currentXPText}>
-                {user.currentXP.toLocaleString()} <span className={styles.xpUnit}>XP</span>
+                {user.currentXP.toLocaleString()} XP
               </h2>
               <span className={styles.toNextLevel}>
                 to reach Level 0{nextLvlNumber}
@@ -68,18 +63,6 @@ export function LevelHero({ user, onOpenGame }) {
 
           {/* Highly Visual XP Progress Bar */}
           <div className={styles.progressBarContainer}>
-            <div className={styles.barLabels}>
-              <span className={styles.rangeStart}>
-                Level 0{user.currentLevel}
-              </span>
-              <span className={styles.ratioCount}>
-                <strong>{user.currentXP.toLocaleString()}</strong> / {user.requiredXP.toLocaleString()} XP
-              </span>
-              <span className={styles.rangeEnd}>
-                Level 0{nextLvlNumber}
-              </span>
-            </div>
-
             <div className={styles.progressTrack}>
               <div 
                 className={styles.progressFill}
@@ -90,18 +73,14 @@ export function LevelHero({ user, onOpenGame }) {
             </div>
 
             <div className={styles.barFooter}>
-              <div className={styles.percentagePill}>
-                <Zap size={13} className={styles.zapIcon} />
-                <span>{percentage}% Completed</span>
-              </div>
-              <span className={styles.remainingText}>
-                <strong className={styles.neededXP}>{xpNeeded.toLocaleString()} XP</strong> remaining
+              <span className={styles.ratioCount}>
+                <strong>{user.currentXP.toLocaleString()}</strong> / {user.requiredXP.toLocaleString()} XP
               </span>
             </div>
           </div>
         </div>
 
-        {/* Right: Quick Action CTA to Play Mini-Game */}
+        {/* Right: Quick Action CTA (Desktop/Tablet) */}
         <div className={styles.ctaSection}>
           <div className={styles.ctaBox}>
             <div className={styles.ctaSparkle}>
@@ -110,7 +89,7 @@ export function LevelHero({ user, onOpenGame }) {
             <div className={styles.ctaContent}>
               <span className={styles.ctaTag}>ACCELERATE PROGRESS</span>
               <h4>Play XP Catcher</h4>
-              <p>Catch coins & score up to +50 XP in 20 seconds!</p>
+              <p>Catch coins & score up to +50 XP in 20s!</p>
             </div>
             <button 
               className={styles.playNowBtn} 
@@ -120,7 +99,7 @@ export function LevelHero({ user, onOpenGame }) {
               }}
             >
               <span>Play Now</span>
-              <ChevronRight size={16} />
+              <ChevronRight size={15} />
             </button>
           </div>
         </div>
@@ -128,3 +107,4 @@ export function LevelHero({ user, onOpenGame }) {
     </div>
   );
 }
+

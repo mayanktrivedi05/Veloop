@@ -3,27 +3,28 @@ import styles from './ActivityModal.module.css';
 import { 
   X, 
   ArrowLeft, 
-  PlayCircle, 
-  CheckSquare, 
+  Play, 
+  ListChecks, 
   Users, 
   Gamepad2, 
-  Dice5, 
+  Magnet, 
   Flame, 
   ChevronRight, 
   Check, 
   Sparkles,
   Copy,
-  Zap
+  Zap,
+  BarChart2
 } from 'lucide-react';
 import { soundFx } from '../../utils/soundEffects';
 
 const ICON_MAP = {
-  PlayCircle: PlayCircle,
-  CheckSquare: CheckSquare,
-  Users: Users,
-  Gamepad2: Gamepad2,
-  Dice5: Dice5,
-  Flame: Flame,
+  'watch-earn': Play,
+  'daily-tasks': ListChecks,
+  'refer-earn': Users,
+  'mini-games': Gamepad2,
+  'streak-bonus': Flame,
+  'xp-catcher': Magnet,
 };
 
 export function ActivityModal({ 
@@ -41,7 +42,6 @@ export function ActivityModal({
 
   if (!isOpen) return null;
 
-  // Handle playing simulated ad
   const handleWatchAd = (activity) => {
     setAdPlaying(true);
     setAdProgress(0);
@@ -55,7 +55,7 @@ export function ActivityModal({
         }
         return prev + 25;
       });
-    }, 400);
+    }, 350);
   };
 
   const handleCopyLink = () => {
@@ -80,16 +80,16 @@ export function ActivityModal({
               }
             }}
           >
-            <ArrowLeft size={18} />
+            <ArrowLeft size={20} />
           </button>
 
           <div className={styles.headerText}>
             <h3>EARN & LEVEL UP</h3>
-            <p>Complete activities. Earn XP. Climb levels. Get rewards.</p>
+            <p>Complete activities. Earn XP.<br />Climb levels. Get rewards.</p>
           </div>
 
           <button className={styles.closeBtn} onClick={onClose}>
-            <X size={18} />
+            <X size={20} />
           </button>
         </div>
 
@@ -106,7 +106,7 @@ export function ActivityModal({
                   color: selectedActivity.accentColor 
                 }}
               >
-                <Zap size={32} />
+                <Zap size={30} />
               </div>
 
               <h4>{selectedActivity.title}</h4>
@@ -140,7 +140,7 @@ export function ActivityModal({
                       onClick={() => handleWatchAd(selectedActivity)}
                       disabled={selectedActivity.completed}
                     >
-                      <PlayCircle size={18} />
+                      <Play size={18} fill="#fff" />
                       <span>{selectedActivity.completed ? 'Completed for today' : 'Watch 15s Video (+50 XP)'}</span>
                     </button>
                   )}
@@ -202,10 +202,10 @@ export function ActivityModal({
               )}
             </div>
           ) : (
-            /* Full Activity List View (matching Mockup page 33 bottom left) */
+            /* Full Activity List View (matching Screen 4) */
             <div className={styles.activityList}>
               {activities.map((item) => {
-                const IconComp = ICON_MAP[item.icon] || Sparkles;
+                const IconComp = ICON_MAP[item.id] || Sparkles;
                 const isCompleted = item.completed;
 
                 return (
@@ -247,17 +247,17 @@ export function ActivityModal({
           )}
         </div>
 
-        {/* Motivational Footer */}
+        {/* Motivational Footer (Screen 4) */}
         <div className={styles.modalFooter}>
-          <span className={styles.footerEmoji}>👏</span>
           <span className={styles.footerText}>
             Keep going! You're doing great!
           </span>
-          <div className={styles.footerBarMeter}>
-            <div className={styles.footerBarFill}></div>
+          <div className={styles.signalIcon}>
+            <BarChart2 size={18} color="#f59e0b" />
           </div>
         </div>
       </div>
     </div>
   );
 }
+

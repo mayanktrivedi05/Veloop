@@ -1,65 +1,46 @@
 import React from 'react';
 import styles from './TodayBoost.module.css';
-import { Star, CheckCircle, Flame, Sparkles } from 'lucide-react';
+import { Star, CheckSquare, Flame, Zap } from 'lucide-react';
 
 export function TodayBoost({ user }) {
   return (
-    <div className={`${styles.boostCard} glass-panel`}>
+    <div className={styles.boostSection}>
       <div className={styles.headerRow}>
         <div className={styles.titleBadge}>
-          <Sparkles size={14} className={styles.sparkleIcon} />
+          <Zap size={14} className={styles.zapIcon} />
           <span>TODAY'S BOOST</span>
         </div>
-        <span className={styles.activeLabel}>Active Booster +15%</span>
       </div>
 
-      <div className={styles.statsGrid}>
-        {/* Stat 1: XP Earned */}
-        <div className={styles.statItem}>
-          <div className={`${styles.iconBubble} ${styles.starBubble}`}>
-            <Star size={18} />
+      <div className={styles.statsRow}>
+        {/* Card 1: XP Earned */}
+        <div className={styles.statCard}>
+          <div className={`${styles.iconCircle} ${styles.xpCircle}`}>
+            <Star size={16} />
           </div>
-          <div className={styles.statText}>
-            <span className={styles.statLabel}>XP Earned</span>
-            <div className={styles.statValueRow}>
-              <span className={styles.statValue}>{user.todayXP}</span>
-              <span className={styles.statUnit}>XP</span>
-            </div>
-          </div>
+          <span className={styles.statLabel}>XP Earned</span>
+          <span className={styles.statValue}>{user.todayXP} XP</span>
         </div>
 
-        <div className={styles.divider}></div>
-
-        {/* Stat 2: Tasks Done */}
-        <div className={styles.statItem}>
-          <div className={`${styles.iconBubble} ${styles.tasksBubble}`}>
-            <CheckCircle size={18} />
+        {/* Card 2: Tasks Done */}
+        <div className={styles.statCard}>
+          <div className={`${styles.iconCircle} ${styles.tasksCircle}`}>
+            <CheckSquare size={16} />
           </div>
-          <div className={styles.statText}>
-            <span className={styles.statLabel}>Tasks Done</span>
-            <div className={styles.statValueRow}>
-              <span className={styles.statValue}>{user.tasksDone}</span>
-              <span className={styles.statTotal}>/{user.totalTasks}</span>
-            </div>
-          </div>
+          <span className={styles.statLabel}>Tasks Done</span>
+          <span className={styles.statValue}>{user.tasksDone} / {user.totalTasks}</span>
         </div>
 
-        <div className={styles.divider}></div>
-
-        {/* Stat 3: Streak */}
-        <div className={styles.statItem}>
-          <div className={`${styles.iconBubble} ${styles.streakBubble}`}>
-            <Flame size={18} />
+        {/* Card 3: Streak */}
+        <div className={styles.statCard}>
+          <div className={`${styles.iconCircle} ${styles.streakCircle}`}>
+            <Flame size={16} />
           </div>
-          <div className={styles.statText}>
-            <span className={styles.statLabel}>Streak</span>
-            <div className={styles.statValueRow}>
-              <span className={styles.statValue}>{user.streakDays}</span>
-              <span className={styles.statUnit}>Days</span>
-            </div>
-          </div>
+          <span className={styles.statLabel}>Streak</span>
+          <span className={styles.statValue}>{user.streakDays} Days</span>
         </div>
       </div>
     </div>
   );
 }
+

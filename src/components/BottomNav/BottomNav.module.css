@@ -4,18 +4,19 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background: rgba(18, 20, 33, 0.95);
-  backdrop-filter: blur(16px);
+  background: rgba(16, 18, 30, 0.96);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
   border-top: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 8px 16px;
-  z-index: 900;
+  padding: 6px 12px 10px 12px;
+  z-index: 999;
 }
 
 .navBar {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  max-width: 500px;
+  max-width: 480px;
   margin: 0 auto;
 }
 
@@ -23,8 +24,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
-  color: var(--text-muted);
+  gap: 3px;
+  color: #64748b;
   padding: 4px 10px;
   position: relative;
   transition: var(--transition-smooth);
@@ -40,6 +41,7 @@
 .navLabel {
   font-size: 0.65rem;
   font-weight: 700;
+  letter-spacing: 0.02em;
 }
 
 .itemActive {
@@ -48,9 +50,9 @@
 
 .activeGlow {
   position: absolute;
-  width: 24px;
-  height: 24px;
-  background: radial-gradient(circle, rgba(245, 158, 11, 0.4) 0%, transparent 70%);
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.5) 0%, transparent 70%);
   filter: blur(6px);
   top: -2px;
 }
@@ -60,3 +62,4 @@
     display: block;
   }
 }
+

@@ -1,250 +1,164 @@
 .rewardCard {
-  padding: 18px 20px;
-  background: linear-gradient(135deg, rgba(28, 32, 50, 0.9) 0%, rgba(20, 22, 36, 0.95) 100%);
-  border: 1px solid rgba(245, 158, 11, 0.2);
-  border-radius: var(--radius-lg);
+  padding: 16px 20px;
+  background: linear-gradient(135deg, rgba(26, 29, 44, 0.95) 0%, rgba(18, 20, 32, 0.98) 100%);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  border-radius: var(--radius-md);
   display: flex;
-  flex-direction: column;
-  gap: 14px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
 }
 
-.topRow {
+.leftCol {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
 }
 
-.rewardTag {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.75rem;
+.rewardTitle {
+  font-size: 1.05rem;
   font-weight: 800;
-  letter-spacing: 0.08em;
-  color: var(--accent-gold-light);
-}
-
-.sparkleIcon {
-  color: var(--accent-gold);
+  color: #ffffff;
+  letter-spacing: -0.01em;
 }
 
 .rewardSubtext {
   font-size: 0.78rem;
   color: var(--text-secondary);
-  margin-top: 2px;
+  margin-bottom: 8px;
 }
 
-.infoWrapper {
-  position: relative;
-}
-
-.infoBtn {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
+.viewRewardsBtn {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   background: rgba(255, 255, 255, 0.05);
-  color: var(--text-secondary);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  color: var(--accent-gold-light);
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 700;
+  transition: var(--transition-smooth);
+}
+
+.viewRewardsBtn:hover {
+  background: rgba(245, 158, 11, 0.15);
+  border-color: var(--accent-gold);
+  transform: translateY(-1px);
+}
+
+.rightCol {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  width: 90px;
+  height: 80px;
 }
 
-.infoTooltip {
-  position: absolute;
-  top: calc(100% + 8px);
-  right: 0;
-  width: 220px;
-  background: #1e2238;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: var(--radius-sm);
-  padding: 10px;
-  font-size: 0.72rem;
-  color: #cbd5e1;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-  z-index: 100;
-}
-
-.chestDisplay {
+.chestWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  padding: 12px 0;
-  position: relative;
+  justify-content: center;
 }
 
 .chestGlow {
   position: absolute;
-  width: 140px;
-  height: 90px;
-  background: radial-gradient(circle, rgba(245, 158, 11, 0.25) 0%, transparent 70%);
-  filter: blur(25px);
+  width: 80px;
+  height: 60px;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.4) 0%, rgba(245, 158, 11, 0.2) 60%, transparent 80%);
+  filter: blur(14px);
   pointer-events: none;
 }
 
-/* 3D-styled Chest */
-.chestGraphicBox {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.chestContainer {
+.chestGraphic {
   position: relative;
-  width: 70px;
-  height: 60px;
+  width: 54px;
+  height: 46px;
   animation: floatAnim 3s infinite ease-in-out;
 }
 
 .chestLid {
-  width: 70px;
-  height: 24px;
-  background: linear-gradient(180deg, #d97706 0%, #b45309 100%);
-  border-radius: 12px 12px 4px 4px;
+  width: 54px;
+  height: 18px;
+  background: linear-gradient(180deg, #f59e0b 0%, #b45309 100%);
+  border-radius: 10px 10px 2px 2px;
   border: 2px solid #fde047;
-  border-bottom: none;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  border-bottom: 1px solid #78350f;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .chestBody {
-  width: 66px;
-  height: 36px;
+  width: 50px;
+  height: 28px;
   margin: 0 auto;
   background: linear-gradient(180deg, #92400e 0%, #78350f 100%);
   border: 2px solid #fde047;
-  border-radius: 0 0 10px 10px;
+  border-radius: 0 0 8px 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.6);
   position: relative;
 }
 
 .chestLock {
-  width: 24px;
-  height: 22px;
-  background: #1e293b;
-  border-radius: 6px;
-  border: 1px solid #fde047;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
+  width: 14px;
+  height: 14px;
+  background: #fbbf24;
+  border-radius: 3px;
+  border: 1px solid #78350f;
+  box-shadow: 0 0 6px rgba(251, 191, 36, 0.8);
 }
 
-.orbiter {
+.crystal {
   position: absolute;
-  font-size: 1rem;
+  font-size: 0.9rem;
   pointer-events: none;
 }
 
-.orb1 {
+.crystal1 {
   top: -6px;
   right: -8px;
   animation: floatAnim 2.2s infinite ease-in-out;
 }
 
-.orb2 {
-  bottom: 0px;
+.crystal2 {
+  bottom: -4px;
   left: -8px;
+  font-size: 0.75rem;
   animation: floatAnim 2.8s infinite ease-in-out reverse;
 }
 
-.rewardsBreakdown {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+.crystal3 {
+  bottom: 8px;
+  right: -10px;
+  font-size: 0.8rem;
+  animation: floatAnim 2.4s infinite ease-in-out;
 }
 
-.rewardPill {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(15, 17, 28, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 6px 12px;
-  border-radius: var(--radius-full);
+@media (max-width: 480px) {
+  .rewardCard {
+    padding: 14px 16px;
+  }
+  .rewardTitle {
+    font-size: 0.95rem;
+  }
+  .rewardSubtext {
+    font-size: 0.72rem;
+  }
+  .rightCol {
+    width: 75px;
+    height: 70px;
+  }
 }
 
-.coinBadge {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: #f59e0b;
-  color: #fff;
-  font-size: 0.7rem;
-  font-weight: 900;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.gemBadge {
-  color: #38bdf8;
-}
-
-.rewardAmount {
-  font-size: 0.82rem;
-  font-weight: 800;
-  color: #ffffff;
-}
-
-/* Unlock Meter */
-.unlockMeter {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.meterHeader {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.75rem;
-  color: var(--text-secondary);
-}
-
-.unlockStatus {
-  font-weight: 600;
-  color: #cbd5e1;
-}
-
-.meterPercent {
-  font-weight: 800;
-  color: var(--accent-gold-light);
-}
-
-.meterTrack {
-  height: 8px;
-  background: rgba(15, 17, 26, 0.8);
-  border-radius: var(--radius-full);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  overflow: hidden;
-}
-
-.meterFill {
-  height: 100%;
-  background: linear-gradient(90deg, #f59e0b, #fbbf24);
-  border-radius: var(--radius-full);
-  box-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
-  transition: width 0.6s ease;
-}
-
-.viewRewardsBtn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  background: rgba(245, 158, 11, 0.12);
-  border: 1px solid rgba(245, 158, 11, 0.35);
-  color: var(--accent-gold-light);
-  padding: 10px 16px;
-  border-radius: var(--radius-md);
-  font-size: 0.82rem;
-  font-weight: 800;
-}
-
-.viewRewardsBtn:hover {
-  background: rgba(245, 158, 11, 0.22);
-  border-color: #f59e0b;
-}

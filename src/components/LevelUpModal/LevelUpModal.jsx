@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import styles from './LevelUpModal.module.css';
-import { Sparkles, Gem, Check, ArrowRight } from 'lucide-react';
+import { Sparkles, BarChart2, Target, Gift } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 export function LevelUpModal({ isOpen, onClaim, levelData, user }) {
@@ -8,7 +8,7 @@ export function LevelUpModal({ isOpen, onClaim, levelData, user }) {
     if (isOpen) {
       try {
         confetti({
-          particleCount: 80,
+          particleCount: 100,
           spread: 80,
           origin: { y: 0.5 },
           colors: ['#38bdf8', '#f59e0b', '#a855f7', '#10b981'],
@@ -31,69 +31,61 @@ export function LevelUpModal({ isOpen, onClaim, levelData, user }) {
         {/* Animated Background Radiance */}
         <div className={styles.radianceGlow}></div>
         <div className={styles.starCluster}>
-          <Sparkles size={20} className={`${styles.star} ${styles.star1}`} />
-          <Sparkles size={16} className={`${styles.star} ${styles.star2}`} />
-          <Sparkles size={22} className={`${styles.star} ${styles.star3}`} />
+          <Sparkles size={18} className={`${styles.star} ${styles.star1}`} />
+          <Sparkles size={14} className={`${styles.star} ${styles.star2}`} />
+          <Sparkles size={20} className={`${styles.star} ${styles.star3}`} />
         </div>
 
         {/* Title */}
         <div className={styles.titleSection}>
-          <span className={styles.levelUpSubtitle}>CONGRATULATIONS!</span>
           <h2 className={styles.levelUpHeading}>LEVEL UP!</h2>
           <p className={styles.reachedText}>You've reached</p>
         </div>
 
-        {/* Big Golden Hexagon Shield */}
-        <div className={styles.shieldWrapper}>
-          <div className={styles.shieldAura}></div>
-          <div className={styles.shieldShape}>
-            <span className={styles.badgeLabel}>LEVEL</span>
-            <span className={styles.badgeNum}>0{currentLevel}</span>
+        {/* 3D Pedestal Stage & Gold Hexagon Shield */}
+        <div className={styles.pedestalStage}>
+          <div className={styles.shieldWrapper}>
+            <div className={styles.shieldAura}></div>
+            <div className={styles.shieldShape}>
+              <span className={styles.badgeLabel}>LEVEL</span>
+              <span className={styles.badgeNum}>0{currentLevel}</span>
+            </div>
+            <div className={styles.laurelWingLeft}>🌿</div>
+            <div className={styles.laurelWingRight}>🌿</div>
+          </div>
+          <div className={styles.pedestalBase}>
+            <div className={styles.pedestalTopRing}></div>
+            <div className={styles.pedestalColumn}></div>
           </div>
         </div>
 
         {/* Unlocked Rewards Row */}
         <div className={styles.rewardsRow}>
           <div className={styles.rewardPill}>
-            <div className={styles.coinGraphic}>V</div>
-            <div className={styles.rewardTextCol}>
-              <span className={styles.rewardVal}>+{rewardVEs} VEs</span>
-              <span className={styles.rewardSub}>Bonus Coins</span>
-            </div>
+            <span className={styles.rewardIcon}>🪙</span>
+            <span className={styles.rewardVal}>+{rewardVEs} VEs</span>
           </div>
 
           <div className={styles.rewardPill}>
-            <div className={styles.gemGraphic}>
-              <Gem size={18} />
-            </div>
-            <div className={styles.rewardTextCol}>
-              <span className={styles.rewardVal}>+{rewardGems} Gems</span>
-              <span className={styles.rewardSub}>Rare Gems</span>
-            </div>
+            <span className={styles.rewardIcon}>💎</span>
+            <span className={styles.rewardVal}>+{rewardGems} Gems</span>
           </div>
         </div>
 
-        {/* Perks Unlocked */}
+        {/* Perks List (Screen 5) */}
         <div className={styles.perksSection}>
-          <span className={styles.perksTitle}>NEW PERKS UNLOCKED</span>
           <div className={styles.perkList}>
             <div className={styles.perkRow}>
-              <div className={styles.checkCircle}>
-                <Check size={12} />
-              </div>
-              <span>Higher daily XP limit (Up to 1,500 XP)</span>
+              <BarChart2 size={16} color="#38bdf8" />
+              <span>Higher daily XP limit</span>
             </div>
             <div className={styles.perkRow}>
-              <div className={styles.checkCircle}>
-                <Check size={12} />
-              </div>
-              <span>Access to exclusive XP Catcher Bonus Mode</span>
+              <Target size={16} color="#f59e0b" />
+              <span>Access to new challenges</span>
             </div>
             <div className={styles.perkRow}>
-              <div className={styles.checkCircle}>
-                <Check size={12} />
-              </div>
-              <span>Better multiplier reward opportunities (2X - 5X)</span>
+              <Gift size={16} color="#ec4899" />
+              <span>Better reward opportunities</span>
             </div>
           </div>
         </div>
@@ -101,9 +93,9 @@ export function LevelUpModal({ isOpen, onClaim, levelData, user }) {
         {/* Claim Rewards Button */}
         <button className={styles.claimBtn} onClick={onClaim}>
           <span>Claim Rewards</span>
-          <ArrowRight size={18} />
         </button>
       </div>
     </div>
   );
 }
+

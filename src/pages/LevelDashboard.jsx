@@ -86,12 +86,13 @@ export function LevelDashboard() {
               />
             </section>
 
-            {/* Middle Grid: Main Progression & Activity Columns */}
+            {/* Main Progression & Activity Grid */}
             <div className={styles.layoutColumns}>
-              {/* Left Column (Primary Progression & Earning) */}
-              <div className={styles.leftColumn}>
+              <div className={styles.boostArea}>
                 <TodayBoost user={user} />
+              </div>
 
+              <div className={styles.earnArea}>
                 <EarnMoreSection 
                   activities={activities}
                   onSelectActivity={(act) => {
@@ -104,20 +105,23 @@ export function LevelDashboard() {
                   }}
                   onOpenGame={() => setIsGameOpen(true)}
                 />
+              </div>
 
+              <div className={styles.rewardArea}>
+                <NextLevelReward 
+                  user={user}
+                  onOpenLevelModal={() => setIsLevelUpModalOpen(true)}
+                />
+              </div>
+
+              <div className={styles.roadmapArea}>
                 <LevelRoadmap 
                   levelTiers={levelTiers}
                   currentLevel={user.currentLevel}
                 />
               </div>
 
-              {/* Right Column (Rewards & Recent History) */}
-              <div className={styles.rightColumn}>
-                <NextLevelReward 
-                  user={user}
-                  onOpenLevelModal={() => setIsLevelUpModalOpen(true)}
-                />
-
+              <div className={styles.activityArea}>
                 <RecentActivity 
                   history={history}
                   user={user}
@@ -127,6 +131,7 @@ export function LevelDashboard() {
           </div>
         )}
       </main>
+
 
       {/* ---------------- MODALS & OVERLAYS ---------------- */}
       {/* 1. XP Catcher Mini-Game */}

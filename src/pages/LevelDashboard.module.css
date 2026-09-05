@@ -3,21 +3,21 @@
   display: flex;
   flex-direction: column;
   background: var(--bg-main);
-  padding-bottom: 70px;
+  padding-bottom: 85px;
 }
 
 .mainContent {
   max-width: 1240px;
   width: 100%;
   margin: 0 auto;
-  padding: 24px 20px;
+  padding: 20px 20px 40px 20px;
   flex: 1;
 }
 
 .dashboardGrid {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
 }
 
 .heroSection {
@@ -27,36 +27,43 @@
 .layoutColumns {
   display: grid;
   grid-template-columns: 1.35fr 1fr;
-  gap: 24px;
-  align-items: flex-start;
+  grid-template-areas:
+    "boost reward"
+    "earn activity"
+    "roadmap activity";
+  gap: 20px;
+  align-items: start;
 }
 
-.leftColumn {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.rightColumn {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
+.boostArea { grid-area: boost; }
+.earnArea { grid-area: earn; }
+.rewardArea { grid-area: reward; }
+.roadmapArea { grid-area: roadmap; }
+.activityArea { grid-area: activity; }
 
 @media (max-width: 1024px) {
   .layoutColumns {
     grid-template-columns: 1fr;
+    grid-template-areas:
+      "boost"
+      "earn"
+      "reward"
+      "roadmap"
+      "activity";
+    gap: 16px;
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .mainContent {
-    padding: 16px 12px;
+    padding: 8px 14px 40px 14px;
   }
   .dashboardGrid {
-    gap: 16px;
+    gap: 14px;
   }
-  .leftColumn, .rightColumn {
-    gap: 16px;
+  .layoutColumns {
+    gap: 14px;
   }
 }
+
+

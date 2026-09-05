@@ -2,10 +2,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 24px;
-  background: rgba(22, 24, 39, 0.85);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  padding: 14px 24px;
+  background: rgba(18, 20, 34, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -14,13 +15,25 @@
 .leftSection {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 16px;
 }
 
 .menuToggle {
   display: none;
-  color: var(--text-secondary);
+  color: #cbd5e1;
+  background: none;
+  border: none;
+  padding: 6px;
   cursor: pointer;
+}
+
+.menuToggle:hover {
+  color: #fff;
+}
+
+.desktopGreeting {
+  display: flex;
+  flex-direction: column;
 }
 
 .greetingRow {
@@ -30,8 +43,8 @@
 }
 
 .greetingRow h1 {
-  font-size: 1.35rem;
-  font-weight: 700;
+  font-size: 1.3rem;
+  font-weight: 800;
   letter-spacing: -0.02em;
   color: #ffffff;
 }
@@ -50,7 +63,7 @@
 }
 
 .subtext {
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   color: var(--text-secondary);
   margin-top: 2px;
 }
@@ -58,14 +71,14 @@
 .rightSection {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
 }
 
 .walletBar {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: rgba(15, 17, 28, 0.7);
+  background: rgba(15, 17, 28, 0.75);
   border: 1px solid rgba(255, 255, 255, 0.08);
   padding: 4px 10px;
   border-radius: var(--radius-full);
@@ -95,14 +108,14 @@
 }
 
 .balanceValue {
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 800;
   color: #fff;
   letter-spacing: -0.2px;
 }
 
 .currencyLabel {
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   color: var(--text-muted);
   font-weight: 600;
 }
@@ -117,8 +130,8 @@
 }
 
 .iconBtn {
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -136,11 +149,11 @@
 
 .notifBadge {
   position: absolute;
-  top: 6px;
-  right: 6px;
+  top: 5px;
+  right: 5px;
   background: var(--accent-rose);
   color: #fff;
-  font-size: 0.65rem;
+  font-size: 0.62rem;
   font-weight: 800;
   width: 16px;
   height: 16px;
@@ -173,7 +186,7 @@
 }
 
 .notifHeader h4 {
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   font-weight: 700;
 }
 
@@ -222,12 +235,12 @@
 }
 
 .userAvatar {
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   border: 2px solid var(--accent-gold);
   object-fit: cover;
-  box-shadow: 0 0 12px rgba(245, 158, 11, 0.4);
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.4);
 }
 
 .lvlPill {
@@ -237,33 +250,169 @@
   background: #111422;
   border: 1px solid var(--accent-gold);
   color: var(--accent-gold);
-  font-size: 0.62rem;
+  font-size: 0.6rem;
   font-weight: 900;
   padding: 1px 4px;
   border-radius: var(--radius-full);
 }
 
-@media (max-width: 900px) {
-  .stateSelectWrapper,
-  .quickLevelBtn {
+/* Mobile Greeting Banner */
+.mobileGreetingBanner {
+  display: none;
+  padding: 16px 20px 4px 20px;
+  max-width: 1240px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.mobileGreetingRow h2 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+}
+
+.mobileSubtext {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+/* Mobile Drawer */
+.drawerOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  z-index: 1500;
+  display: flex;
+  animation: fadeIn 0.2s ease;
+}
+
+.drawerContent {
+  width: 82%;
+  max-width: 320px;
+  height: 100%;
+  background: #141727;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  padding: 20px 18px;
+  gap: 20px;
+  box-shadow: 10px 0 30px rgba(0, 0, 0, 0.7);
+}
+
+.drawerHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.drawerUser {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.drawerAvatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 2px solid var(--accent-gold);
+}
+
+.drawerUserName {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.drawerUserHandle {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+}
+
+.drawerCloseBtn {
+  color: var(--text-secondary);
+  padding: 6px;
+}
+
+.drawerBalances {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.drawerBalanceCard {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.drawerBalLabel {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
+.drawerBalVal {
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.drawerNav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.drawerNavItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  color: #cbd5e1;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.drawerNavItem:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (max-width: 768px) {
+  .headerContainer {
+    padding: 10px 16px;
+  }
+  .menuToggle {
+    display: flex;
+  }
+  .desktopGreeting {
     display: none;
+  }
+  .walletBar {
+    display: none;
+  }
+  .avatarWrapper {
+    display: none;
+  }
+  .mobileGreetingBanner {
+    display: block;
   }
 }
 
-@media (max-width: 600px) {
-  .headerContainer {
-    padding: 12px 16px;
-  }
-  .subtext {
-    display: none;
-  }
-  .greetingRow h1 {
-    font-size: 1.1rem;
-  }
-  .walletBar {
-    padding: 4px 8px;
-  }
-  .balanceValue {
-    font-size: 0.82rem;
-  }
-}
