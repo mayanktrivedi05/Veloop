@@ -204,9 +204,17 @@ export function ActivityModal({
           ) : (
             /* Full Activity List View (matching Screen 4) */
             <div className={styles.activityList}>
-              {activities.map((item) => {
-                const IconComp = ICON_MAP[item.id] || Sparkles;
-                const isCompleted = item.completed;
+              {[
+                { id: 'watch-earn', title: 'Watch & Earn', subtitle: 'Watch ads and earn', rewardXP: 50, color: '#8b5cf6', icon: Play },
+                { id: 'daily-tasks', title: 'Daily Missions', subtitle: 'Complete daily tasks', rewardXP: 30, color: '#22c55e', icon: ListChecks },
+                { id: 'refer-earn', title: 'Refer & Earn', subtitle: 'Invite friends & earn', rewardXP: 100, color: '#f97316', icon: Users },
+                { id: 'mini-games', title: 'Mini Games', subtitle: 'Play games & win', rewardXP: 75, color: '#3b82f6', icon: Gamepad2 },
+                { id: 'streak-bonus', title: 'Streak Bonus', subtitle: 'Maintain your streak', rewardXP: 25, color: '#ef4444', icon: Flame },
+                { id: 'xp-catcher', title: 'XP Catcher', subtitle: 'Catch orbs & coins', rewardXP: 10, color: '#0284c7', icon: Magnet, isGame: true },
+              ].map((item) => {
+                const activityData = activities.find(a => a.id === item.id) || item;
+                const IconComp = item.icon;
+                const isCompleted = activityData.completed;
 
                 return (
                   <div
@@ -214,20 +222,20 @@ export function ActivityModal({
                     className={`${styles.itemCard} ${isCompleted ? styles.itemDone : ''}`}
                     onClick={() => {
                       soundFx.playClick();
-                      if (item.isGame) {
+                      if (item.isGame || item.id === 'xp-catcher') {
                         onClose();
                         onOpenGame();
                       } else {
-                        setSelectedActivity(item);
+                        setSelectedActivity(activityData);
                       }
                     }}
                   >
                     <div 
                       className={styles.itemIconCircle}
                       style={{ 
-                        background: `${item.accentColor}20`, 
-                        borderColor: `${item.accentColor}40`,
-                        color: item.accentColor 
+                        background: `${item.color}20`, 
+                        borderColor: `${item.color}40`,
+                        color: item.color 
                       }}
                     >
                       {isCompleted ? <Check size={18} color="#10b981" /> : <IconComp size={18} />}
