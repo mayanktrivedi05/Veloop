@@ -97,14 +97,14 @@ export function useProgression() {
     });
 
     const newActivity = {
-      id: `act-${Date.now()}`,
-      title: `+${amount} XP`,
-      subtitle: sourceName,
+      id: `act-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`,
+      title: amount > 0 ? `+${amount} XP` : `+${earnedVEs} VEs`,
+      subtitle: `${sourceName}`,
       time: 'Just now',
-      type: earnedVEs > 0 ? 've' : 'xp',
+      type: amount > 0 ? 'xp' : 've',
       category: sourceName.toLowerCase().includes('game') ? 'game' : 'task',
-      amount: earnedVEs > 0 ? `+${amount} XP & +${earnedVEs} VEs` : `+${amount} XP`,
-      icon: earnedVEs > 0 ? 'Coins' : 'Sparkles',
+      amount: amount > 0 ? `+${amount} XP` : `+${earnedVEs} VEs`,
+      icon: sourceName.toLowerCase().includes('game') ? 'Gamepad2' : 'CheckCircle2',
       color: earnedVEs > 0 ? '#fbbf24' : '#38bdf8',
     };
 

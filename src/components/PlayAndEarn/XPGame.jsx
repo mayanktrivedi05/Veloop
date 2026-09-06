@@ -14,10 +14,10 @@ import {
 } from 'lucide-react';
 import { soundFx } from '../../utils/soundEffects';
 
-export function XPGame({ isOpen, onClose, onFinishGame, user, highScore = 92 }) {
-  const [gameState, setGameState] = useState('start');
-  const [score, setScore] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(20);
+export function XPGame({ isOpen, onClose, onFinishGame, user, highScore = 92, initialMode = 'start' }) {
+  const [gameState, setGameState] = useState(initialMode);
+  const [score, setScore] = useState(initialMode === 'result' ? 92 : 0);
+  const [timeLeft, setTimeLeft] = useState(18);
   const [multiplier, setMultiplier] = useState(1);
   const [multiplierTimer, setMultiplierTimer] = useState(0);
   const [catcherX, setCatcherX] = useState(50);
@@ -30,6 +30,18 @@ export function XPGame({ isOpen, onClose, onFinishGame, user, highScore = 92 }) 
   const gameStateRef = useRef(gameState);
   const scoreRef = useRef(score);
   const multiplierRef = useRef(multiplier);
+
+  useEffect(() => {
+    if (isOpen) {
+      setGameState(initialMode);
+      if (initialMode === 'result') {
+        setScore(92);
+      } else if (initialMode === 'playing') {
+        setScore(120);
+        setTimeLeft(18);
+      }
+    }
+  }, [isOpen, initialMode]);
 
   useEffect(() => {
     gameStateRef.current = gameState;
@@ -79,7 +91,9 @@ export function XPGame({ isOpen, onClose, onFinishGame, user, highScore = 92 }) 
       setTimeLeft((prev) => {
         if (prev <= 1) {
           clearInterval(timer);
-          endGame();
+          setTimeout(() => {
+            endGame();
+          }, 0);
           return 0;
         }
         return prev - 1;

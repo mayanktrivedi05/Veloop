@@ -20,12 +20,18 @@
 }
 
 .contentGrid {
-  display: grid;
-  grid-template-columns: auto 1fr 260px;
-  align-items: center;
-  gap: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   position: relative;
   z-index: 2;
+}
+
+.topInfoRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
 }
 
 /* Shield Badge */
@@ -33,12 +39,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .shieldContainer {
   position: relative;
-  width: 90px;
-  height: 100px;
+  width: 78px;
+  height: 86px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -84,7 +91,7 @@
 
 .levelBigNumber {
   font-family: var(--font-heading);
-  font-size: 2.2rem;
+  font-size: 1.85rem;
   font-weight: 900;
   line-height: 1;
   background: linear-gradient(180deg, #ffffff 0%, #fbbf24 70%, #d97706 100%);
@@ -94,38 +101,33 @@
   filter: drop-shadow(0 2px 6px rgba(245, 158, 11, 0.5));
 }
 
-/* Center Section */
-.progressionDetails {
+.xpTextGroup {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
   gap: 12px;
-}
-
-.headerInfo {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  flex: 1;
 }
 
 .titleWithInfo {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  align-items: flex-end;
+  text-align: right;
 }
 
 .currentXPText {
-  font-size: 1.8rem;
-  font-weight: 900;
-  letter-spacing: -0.02em;
+  font-size: 1.45rem;
+  font-weight: 800;
   color: #ffffff;
+  letter-spacing: -0.02em;
 }
 
 .toNextLevel {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--text-secondary);
+  font-size: 0.78rem;
+  color: #94a3b8;
+  margin-top: 2px;
 }
-
 .infoWrapper {
   position: relative;
 }

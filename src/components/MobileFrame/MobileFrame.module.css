@@ -1,0 +1,287 @@
+.showcaseWrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #080911;
+  color: #fff;
+}
+
+/* Top Toolbar */
+.topToolbar {
+  background: rgba(14, 16, 28, 0.95);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  position: sticky;
+  top: 0;
+  z-index: 500;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.toolbarBrand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brandTitle {
+  font-weight: 800;
+  font-size: 0.95rem;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #fff 0%, #fbbf24 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.specBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  color: var(--accent-gold);
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+}
+
+.screensNav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 2px 0;
+  scrollbar-width: none;
+}
+
+.screensNav::-webkit-scrollbar {
+  display: none;
+}
+
+.screenPill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #94a3b8;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: var(--transition-smooth);
+}
+
+.screenPill:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border-color: rgba(245, 158, 11, 0.3);
+}
+
+.pillActive {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(245, 158, 11, 0.08));
+  border-color: var(--accent-gold);
+  color: #fff;
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.25);
+}
+
+.tagBadge {
+  font-size: 0.6rem;
+  font-weight: 800;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 1px 5px;
+  border-radius: 4px;
+  color: var(--accent-gold-light);
+}
+
+.viewToggles {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-full);
+  padding: 2px;
+}
+
+.toggleBtn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  border-radius: var(--radius-full);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #94a3b8;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.toggleBtn:hover {
+  color: #fff;
+}
+
+.toggleActive {
+  background: #1e2338;
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* Viewport Container */
+.viewportContainer {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 30px 16px;
+  width: 100%;
+}
+
+.fluidMode {
+  padding: 0;
+}
+
+.fluidScreenBody {
+  width: 100%;
+}
+
+/* iPhone 15 Pro Titanium Frame */
+.iphoneBezel {
+  width: 390px;
+  height: 844px;
+  background: #0d0f1a;
+  border-radius: 50px;
+  border: 4px solid #33384a;
+  box-shadow: 
+    0 0 0 4px #1a1d2d,
+    0 25px 60px -10px rgba(0, 0, 0, 0.9),
+    0 0 40px rgba(245, 158, 11, 0.12);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+/* iPhone Top Status Bar */
+.phoneHeader {
+  height: 44px;
+  padding: 10px 24px 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(18, 20, 34, 0.98);
+  z-index: 100;
+  flex-shrink: 0;
+  color: #fff;
+}
+
+.timeText {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* Dynamic Island */
+.dynamicIsland {
+  width: 110px;
+  height: 28px;
+  background: #000;
+  border-radius: 20px;
+  position: absolute;
+  left: 50%;
+  top: 8px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+.islandCamera {
+  width: 10px;
+  height: 10px;
+  background: #0a0d18;
+  border-radius: 50%;
+  border: 1px solid #1a2035;
+}
+
+.islandSensor {
+  width: 7px;
+  height: 7px;
+  background: #0a0d18;
+  border-radius: 50%;
+}
+
+.statusIcons {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Phone Screen Body (Scrollable inside phone) */
+.phoneScreenBody {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+  scrollbar-width: none;
+}
+
+.phoneScreenBody::-webkit-scrollbar {
+  display: none;
+}
+
+/* Home Indicator Bar */
+.homeIndicatorBar {
+  height: 20px;
+  background: rgba(18, 20, 34, 0.98);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  z-index: 100;
+}
+
+.homeIndicator {
+  width: 130px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 3px;
+}
+
+/* Mobile Screen Breakpoint: On real mobile devices hide frame and show 100% fluid */
+@media (max-width: 600px) {
+  .topToolbar {
+    padding: 8px 12px;
+  }
+  .brandTitle {
+    display: none;
+  }
+  .viewToggles {
+    display: none;
+  }
+  .viewportContainer {
+    padding: 0;
+  }
+  .iphoneBezel {
+    width: 100%;
+    height: 100vh;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+  }
+  .phoneHeader {
+    display: none;
+  }
+  .homeIndicatorBar {
+    display: none;
+  }
+}

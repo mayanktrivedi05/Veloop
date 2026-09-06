@@ -13,20 +13,19 @@ export function LevelHero({ user, onOpenGame }) {
       <div className={styles.heroGlow}></div>
       
       <div className={styles.contentGrid}>
-        {/* Left: Prominent Level Shield */}
-        <div className={styles.levelBadgeSection}>
-          <div className={styles.shieldContainer}>
-            <div className={styles.shieldOuterGlow}></div>
-            <div className={styles.shieldShape}>
-              <span className={styles.badgeTopTag}>LEVEL</span>
-              <span className={styles.levelBigNumber}>0{user.currentLevel}</span>
+        {/* Top Row: Shield on left, XP text on right */}
+        <div className={styles.topInfoRow}>
+          <div className={styles.levelBadgeSection}>
+            <div className={styles.shieldContainer}>
+              <div className={styles.shieldOuterGlow}></div>
+              <div className={styles.shieldShape}>
+                <span className={styles.badgeTopTag}>LEVEL</span>
+                <span className={styles.levelBigNumber}>0{user.currentLevel}</span>
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Center: Progression and XP Bar */}
-        <div className={styles.progressionDetails}>
-          <div className={styles.headerInfo}>
+          <div className={styles.xpTextGroup}>
             <div className={styles.titleWithInfo}>
               <h2 className={styles.currentXPText}>
                 {user.currentXP.toLocaleString()} XP
@@ -47,7 +46,7 @@ export function LevelHero({ user, onOpenGame }) {
                 onMouseLeave={() => setShowTooltip(false)}
                 aria-label="Level information"
               >
-                <Info size={16} />
+                <Info size={15} />
               </button>
               {showTooltip && (
                 <div className={styles.infoTooltip}>
@@ -60,47 +59,23 @@ export function LevelHero({ user, onOpenGame }) {
               )}
             </div>
           </div>
-
-          {/* Highly Visual XP Progress Bar */}
-          <div className={styles.progressBarContainer}>
-            <div className={styles.progressTrack}>
-              <div 
-                className={styles.progressFill}
-                style={{ width: `${percentage}%` }}
-              >
-                <div className={styles.fillHeadGlow}></div>
-              </div>
-            </div>
-
-            <div className={styles.barFooter}>
-              <span className={styles.ratioCount}>
-                <strong>{user.currentXP.toLocaleString()}</strong> / {user.requiredXP.toLocaleString()} XP
-              </span>
-            </div>
-          </div>
         </div>
 
-        {/* Right: Quick Action CTA (Desktop/Tablet) */}
-        <div className={styles.ctaSection}>
-          <div className={styles.ctaBox}>
-            <div className={styles.ctaSparkle}>
-              <Sparkles size={16} />
-            </div>
-            <div className={styles.ctaContent}>
-              <span className={styles.ctaTag}>ACCELERATE PROGRESS</span>
-              <h4>Play XP Catcher</h4>
-              <p>Catch coins & score up to +50 XP in 20s!</p>
-            </div>
-            <button 
-              className={styles.playNowBtn} 
-              onClick={() => {
-                soundFx.playClick();
-                onOpenGame();
-              }}
+        {/* Bottom Full-Width Glowing Progress Bar */}
+        <div className={styles.progressBarContainer}>
+          <div className={styles.progressTrack}>
+            <div 
+              className={styles.progressFill}
+              style={{ width: `${percentage}%` }}
             >
-              <span>Play Now</span>
-              <ChevronRight size={15} />
-            </button>
+              <div className={styles.fillHeadGlow}></div>
+            </div>
+          </div>
+
+          <div className={styles.barFooter}>
+            <span className={styles.ratioCount}>
+              {user.currentXP.toLocaleString()} / {user.requiredXP.toLocaleString()} XP
+            </span>
           </div>
         </div>
       </div>
