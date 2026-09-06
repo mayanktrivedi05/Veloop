@@ -12,7 +12,6 @@ import { XPGame } from '../components/PlayAndEarn/XPGame';
 import { LevelUpModal } from '../components/LevelUpModal/LevelUpModal';
 import { ActivityModal } from '../components/ActivityModal/ActivityModal';
 import { BottomNav } from '../components/BottomNav/BottomNav';
-import { MobileFrame } from '../components/MobileFrame/MobileFrame';
 import { 
   LoadingSkeletonView, 
   ErrorStateView, 
@@ -46,203 +45,138 @@ export function LevelDashboard() {
     setSelectedActivity,
   } = useProgression();
 
-  const [activeScreen, setActiveScreen] = useState('screen1');
-  const [gameMode, setGameMode] = useState('start');
-  const [isPhoneFrame, setIsPhoneFrame] = useState(true);
-
-  const handleSelectScreen = (screenId) => {
-    setActiveScreen(screenId);
-
-    if (screenId === 'screen1') {
-      setIsGameOpen(false);
-      setIsActivityModalOpen(false);
-      setIsLevelUpModalOpen(false);
-      setActiveTab('home');
-    } else if (screenId === 'screen2') {
-      setIsActivityModalOpen(false);
-      setIsLevelUpModalOpen(false);
-      setGameMode('playing');
-      setIsGameOpen(true);
-    } else if (screenId === 'screen3') {
-      setIsActivityModalOpen(false);
-      setIsLevelUpModalOpen(false);
-      setGameMode('result');
-      setIsGameOpen(true);
-    } else if (screenId === 'screen4') {
-      setIsGameOpen(false);
-      setIsLevelUpModalOpen(false);
-      setSelectedActivity(null);
-      setIsActivityModalOpen(true);
-      setActiveTab('earn');
-    } else if (screenId === 'screen5') {
-      setIsGameOpen(false);
-      setIsActivityModalOpen(false);
-      setIsLevelUpModalOpen(true);
-      setActiveTab('rewards');
-    } else if (screenId === 'screen6') {
-      setIsGameOpen(false);
-      setIsActivityModalOpen(false);
-      setIsLevelUpModalOpen(false);
-      setActiveTab('wallet');
-    }
-  };
-
   return (
-    <MobileFrame
-      activeScreen={activeScreen}
-      onSelectScreen={handleSelectScreen}
-      isPhoneFrame={isPhoneFrame}
-      setIsPhoneFrame={setIsPhoneFrame}
-    >
-      <div className={styles.appContainer}>
-        <Header user={user} />
+    <div className={styles.appContainer}>
+      <Header user={user} />
 
-        {/* Main Page Body */}
-        <main className={styles.mainContent}>
-          {/* Floating Toast Notification */}
-          {toastMessage && (
-            <div className="toast-banner">
-              <Sparkles size={16} />
-              <span>{toastMessage.message}</span>
-            </div>
-          )}
+      {/* Main Page Body */}
+      <main className={styles.mainContent}>
+        {/* Floating Toast Notification */}
+        {toastMessage && (
+          <div className="toast-banner">
+            <Sparkles size={16} />
+            <span>{toastMessage.message}</span>
+          </div>
+        )}
 
-          {/* ---------------- DEMO / QA STATE SWITCHES ---------------- */}
-          {viewState === 'loading' && <LoadingSkeletonView />}
+        {/* ---------------- DEMO / QA STATE SWITCHES ---------------- */}
+        {viewState === 'loading' && <LoadingSkeletonView />}
 
-          {viewState === 'error' && (
-            <ErrorStateView onRetry={() => setViewState('normal')} />
-          )}
+        {viewState === 'error' && (
+          <ErrorStateView onRetry={() => setViewState('normal')} />
+        )}
 
-          {viewState === 'empty' && (
-            <EmptyActivityStateView 
-              onStartEarning={() => {
-                setViewState('normal');
-                setIsActivityModalOpen(true);
-              }} 
-            />
-          )}
+        {viewState === 'empty' && (
+          <EmptyActivityStateView 
+            onStartEarning={() => {
+              setViewState('normal');
+              setIsActivityModalOpen(true);
+            }} 
+          />
+        )}
 
-          {/* ---------------- LIVE NORMAL MODE ---------------- */}
-          {viewState === 'normal' && (
-            <div className={styles.dashboardGrid}>
-              {/* Top Row: Full-width Level Hero */}
-              <section className={styles.heroSection}>
-                <LevelHero 
-                  user={user} 
-                  onOpenGame={() => {
-                    setGameMode('playing');
-                    setIsGameOpen(true);
+        {/* ---------------- LIVE NORMAL MODE ---------------- */}
+        {viewState === 'normal' && (
+          <div className={styles.dashboardGrid}>
+            {/* Top Row: Full-width Level Hero */}
+            <section className={styles.heroSection}>
+              <LevelHero 
+                user={user} 
+                onOpenGame={() => setIsGameOpen(true)}
+              />
+            </section>
+
+            {/* Main Progression & Activity Grid */}
+            <div className={styles.layoutColumns}>
+              <div className={styles.boostArea}>
+                <TodayBoost user={user} />
+              </div>
+
+              <div className={styles.earnArea}>
+                <EarnMoreSection 
+                  activities={activities}
+                  onSelectActivity={(act) => {
+                    setSelectedActivity(act);
+                    setIsActivityModalOpen(true);
                   }}
+                  onOpenAllActivities={() => {
+                    setSelectedActivity(null);
+                    setIsActivityModalOpen(true);
+                  }}
+                  onOpenGame={() => setIsGameOpen(true)}
                 />
-              </section>
+              </div>
 
-              {/* Main Progression & Activity Grid */}
-              <div className={styles.layoutColumns}>
-                <div className={styles.boostArea}>
-                  <TodayBoost user={user} />
-                </div>
+              <div className={styles.rewardArea}>
+                <NextLevelReward 
+                  user={user}
+                  onOpenLevelModal={() => setIsLevelUpModalOpen(true)}
+                />
+              </div>
 
-                <div className={styles.earnArea}>
-                  <EarnMoreSection 
-                    activities={activities}
-                    onSelectActivity={(act) => {
-                      setSelectedActivity(act);
-                      setIsActivityModalOpen(true);
-                    }}
-                    onOpenAllActivities={() => {
-                      setSelectedActivity(null);
-                      setIsActivityModalOpen(true);
-                    }}
-                    onOpenGame={() => {
-                      setGameMode('playing');
-                      setIsGameOpen(true);
-                    }}
-                  />
-                </div>
+              <div className={styles.roadmapArea}>
+                <LevelRoadmap 
+                  levelTiers={levelTiers}
+                  currentLevel={user.currentLevel}
+                />
+              </div>
 
-                <div className={styles.rewardArea}>
-                  <NextLevelReward 
-                    user={user}
-                    onOpenLevelModal={() => setIsLevelUpModalOpen(true)}
-                  />
-                </div>
-
-                <div className={styles.roadmapArea}>
-                  <LevelRoadmap 
-                    levelTiers={levelTiers}
-                    currentLevel={user.currentLevel}
-                  />
-                </div>
-
-                <div className={styles.activityArea}>
-                  <RecentActivity 
-                    history={history}
-                    user={user}
-                  />
-                </div>
+              <div className={styles.activityArea}>
+                <RecentActivity 
+                  history={history}
+                  user={user}
+                />
               </div>
             </div>
-          )}
-        </main>
+          </div>
+        )}
+      </main>
 
-        {/* ---------------- MODALS & OVERLAYS ---------------- */}
-        {/* 1. XP Catcher Mini-Game */}
-        <XPGame 
-          isOpen={isGameOpen}
-          onClose={() => setIsGameOpen(false)}
-          onFinishGame={handleGameFinish}
-          user={user}
-          highScore={gameHighScore}
-          initialMode={gameMode}
-        />
+      {/* ---------------- MODALS & OVERLAYS ---------------- */}
+      {/* 1. XP Catcher Mini-Game */}
+      <XPGame 
+        isOpen={isGameOpen}
+        onClose={() => setIsGameOpen(false)}
+        onFinishGame={handleGameFinish}
+        user={user}
+        highScore={gameHighScore}
+      />
 
-        {/* 2. Level Up Celebration Modal */}
-        <LevelUpModal 
-          isOpen={isLevelUpModalOpen}
-          onClose={() => setIsLevelUpModalOpen(false)}
-          onClaim={claimLevelRewards}
-          levelData={levelUpData}
-          user={user}
-        />
+      {/* 2. Level Up Celebration Modal */}
+      <LevelUpModal 
+        isOpen={isLevelUpModalOpen}
+        onClose={() => setIsLevelUpModalOpen(false)}
+        onClaim={claimLevelRewards}
+        levelData={levelUpData}
+        user={user}
+      />
 
-        {/* 3. Earn & Level Up Modal */}
-        <ActivityModal 
-          isOpen={isActivityModalOpen}
-          onClose={() => {
-            setIsActivityModalOpen(false);
-            setSelectedActivity(null);
-          }}
-          activities={activities}
-          onCompleteActivity={completeActivity}
-          onOpenGame={() => {
-            setGameMode('playing');
-            setIsGameOpen(true);
-          }}
-          selectedActivity={selectedActivity}
-          setSelectedActivity={setSelectedActivity}
-        />
+      {/* 3. Earn & Level Up Modal */}
+      <ActivityModal 
+        isOpen={isActivityModalOpen}
+        onClose={() => {
+          setIsActivityModalOpen(false);
+          setSelectedActivity(null);
+        }}
+        activities={activities}
+        onCompleteActivity={completeActivity}
+        onOpenGame={() => setIsGameOpen(true)}
+        selectedActivity={selectedActivity}
+        setSelectedActivity={setSelectedActivity}
+      />
 
-        {/* Mobile Bottom Navigation */}
-        <BottomNav 
-          activeTab={activeTab}
-          onTabChange={(tab) => {
-            setActiveTab(tab);
-            if (tab === 'home') {
-              setActiveScreen('screen1');
-            } else if (tab === 'earn') {
-              setActiveScreen('screen4');
-              setIsActivityModalOpen(true);
-            } else if (tab === 'rewards') {
-              setActiveScreen('screen5');
-              setIsLevelUpModalOpen(true);
-            } else if (tab === 'wallet') {
-              setActiveScreen('screen6');
-              // scroll to activity area or trigger notification
-            }
-          }}
-        />
-      </div>
-    </MobileFrame>
+      {/* Mobile Bottom Navigation */}
+      <BottomNav 
+        activeTab={activeTab}
+        onTabChange={(tab) => {
+          setActiveTab(tab);
+          if (tab === 'earn') {
+            setIsActivityModalOpen(true);
+          } else if (tab === 'rewards') {
+            setIsLevelUpModalOpen(true);
+          }
+        }}
+      />
+    </div>
   );
 }
