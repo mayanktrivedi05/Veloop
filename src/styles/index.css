@@ -45,16 +45,31 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+html {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
 body {
   background-color: var(--bg-main);
   color: var(--text-primary);
   font-family: var(--font-body);
   min-height: 100vh;
+  width: 100%;
+  max-width: 100vw;
   overflow-x: hidden;
   background-image: 
     radial-gradient(circle at 20% 15%, rgba(56, 189, 248, 0.06) 0%, transparent 40%),
     radial-gradient(circle at 80% 40%, rgba(168, 85, 247, 0.06) 0%, transparent 50%),
     radial-gradient(circle at 50% 85%, rgba(245, 158, 11, 0.05) 0%, transparent 45%);
+}
+
+#root {
+  width: 100%;
+  max-width: 100vw;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
 /* Custom Scrollbars */

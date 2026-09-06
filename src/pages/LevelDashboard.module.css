@@ -1,68 +1,73 @@
 .appContainer {
   min-height: 100vh;
+  width: 100%;
+  max-width: 100vw;
   display: flex;
   flex-direction: column;
   background: var(--bg-main);
   padding-bottom: 85px;
+  overflow-x: hidden;
 }
 
 .mainContent {
   max-width: 1240px;
   width: 100%;
   margin: 0 auto;
-  padding: 20px 20px 40px 20px;
+  padding: 16px 20px 40px 20px;
   flex: 1;
+  min-width: 0;
 }
 
 .dashboardGrid {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 18px;
+  width: 100%;
+  min-width: 0;
 }
 
 .heroSection {
   width: 100%;
+  min-width: 0;
 }
 
 .layoutColumns {
   display: grid;
-  grid-template-columns: 1.35fr 1fr;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
   grid-template-areas:
     "boost reward"
     "earn activity"
     "roadmap activity";
-  gap: 20px;
+  gap: 18px;
   align-items: start;
+  width: 100%;
+  min-width: 0;
 }
 
-.boostArea { grid-area: boost; }
-.earnArea { grid-area: earn; }
-.rewardArea { grid-area: reward; }
-.roadmapArea { grid-area: roadmap; }
-.activityArea { grid-area: activity; }
+.boostArea { grid-area: boost; min-width: 0; width: 100%; }
+.earnArea { grid-area: earn; min-width: 0; width: 100%; }
+.rewardArea { grid-area: reward; min-width: 0; width: 100%; }
+.roadmapArea { grid-area: roadmap; min-width: 0; width: 100%; }
+.activityArea { grid-area: activity; min-width: 0; width: 100%; }
 
-@media (max-width: 1024px) {
+@media (max-width: 900px) {
   .layoutColumns {
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "boost"
-      "earn"
-      "reward"
-      "roadmap"
-      "activity";
+    display: flex;
+    flex-direction: column;
     gap: 16px;
+    width: 100%;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 600px) {
   .mainContent {
-    padding: 8px 14px 40px 14px;
+    padding: 6px 12px 35px 12px;
   }
   .dashboardGrid {
-    gap: 14px;
+    gap: 12px;
   }
   .layoutColumns {
-    gap: 14px;
+    gap: 12px;
   }
 }
 

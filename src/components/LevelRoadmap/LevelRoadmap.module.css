@@ -1,8 +1,11 @@
 .roadmapContainer {
-  padding: 20px 24px;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  padding: 16px 20px;
   background: rgba(22, 25, 40, 0.85);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: var(--radius-xl);
+  border-radius: var(--radius-lg);
   position: relative;
   overflow: hidden;
 }
@@ -11,7 +14,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 .roadmapTag {
@@ -29,7 +34,7 @@
 }
 
 .roadmapHeading {
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   font-weight: 800;
   color: #fff;
   margin-top: 2px;
@@ -47,10 +52,13 @@
 /* Scrollable Roadmap Container */
 .roadmapScroll {
   display: flex;
-  gap: 16px;
+  gap: 14px;
   overflow-x: auto;
-  padding: 16px 4px 20px 4px;
+  width: 100%;
+  max-width: 100%;
+  padding: 14px 4px 18px 4px;
   position: relative;
+  -webkit-overflow-scrolling: touch;
 }
 
 .roadmapScroll::-webkit-scrollbar {
