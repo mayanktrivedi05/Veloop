@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { INITIAL_USER, LEVEL_TIERS, EARN_ACTIVITIES, INITIAL_ACTIVITY_HISTORY } from '../data/mockData';
 import { soundFx } from '../utils/soundEffects';
 import confetti from 'canvas-confetti';
@@ -8,6 +8,11 @@ export function useProgression() {
   const [activities, setActivities] = useState(EARN_ACTIVITIES);
   const [history, setHistory] = useState(INITIAL_ACTIVITY_HISTORY);
   
+  // Theme state
+  const [currentTheme, setCurrentTheme] = useState(() => {
+    return localStorage.getItem('veloop_theme') || 'aurora';
+  });
+
   const [isGameOpen, setIsGameOpen] = useState(false);
   const [gameState, setGameState] = useState('start');
   const [gameScore, setGameScore] = useState(0);
@@ -17,9 +22,35 @@ export function useProgression() {
   const [levelUpData, setLevelUpData] = useState(null);
   const [activeTab, setActiveTab] = useState('home');
   const [isActivityModalOpen, setIsActivityModalOpen] = useState(false);
+  const [isLuckyWheelOpen, setIsLuckyWheelOpen] = useState(false);
   const [selectedActivity, setSelectedActivity] = useState(null);
   const [viewState, setViewState] = useState('normal');
   const [toastMessage, setToastMessage] = useState(null);
+  const [isMuted, setIsMuted] = useState(false);
+  const [isStreakClaimed, setIsStreakClaimed] = useState(false);
+
+  // Apply theme to document
+  useEffect(() => {
+    if (currentTheme === 'aurora') {
+      document.documentElement.removeAttribute('data-theme');
+    } else {
+      document.documentElement.setAttribute('data-theme', currentTheme);
+    }
+    localStorage.setItem('veloop_theme', currentTheme);
+  }, [currentTheme]);
+
+  const switchTheme = useCallback((themeName) => {
+    soundFx.playThemeSwitch();
+    setCurrentTheme(themeName);
+    showToast(`Theme switched to ${themeName.charAt(0).toUpperCase() + themeName.slice(1)}!`);
+  }, []);
+
+  const toggleSound = useCallback(() => {
+    const nextMute = !isMuted;
+    soundFx.muted = nextMute;
+    setIsMuted(nextMute);
+    if (!nextMute) soundFx.playClick();
+  }, [isMuted]);
 
   const showToast = useCallback((message, type = 'success') => {
     const id = Date.now();
@@ -34,22 +65,23 @@ export function useProgression() {
     setIsLevelUpModalOpen(true);
     try {
       confetti({
-        particleCount: 100,
-        spread: 70,
+        particleCount: 120,
+        spread: 80,
         origin: { y: 0.6 },
-        colors: ['#38bdf8', '#f59e0b', '#a855f7', '#10b981'],
+        colors: ['#38bdf8', '#f59e0b', '#a855f7', '#10b981', '#ec4899'],
       });
     } catch {
       // Confetti fallback
     }
   }, []);
 
-  const addXP = useCallback((amount, sourceName = 'Reward', earnedVEs = 0) => {
+  const addXP = useCallback((amount, sourceName = 'Reward', earnedVEs = 0, earnedGems = 0) => {
     setUser((prev) => {
       const newXP = prev.currentXP + amount;
       const newTodayXP = prev.todayXP + amount;
       const newVEs = prev.veCoins + earnedVEs;
       const newTodayVEs = prev.todayVEs + earnedVEs;
+      const newGems = prev.gems + earnedGems;
       const isLevelUp = newXP >= prev.requiredXP;
 
       if (isLevelUp) {
@@ -84,6 +116,7 @@ export function useProgression() {
           veCoins: newVEs,
           todayXP: newTodayXP,
           todayVEs: newTodayVEs,
+          gems: newGems,
         };
       }
 
@@ -93,6 +126,7 @@ export function useProgression() {
         todayXP: newTodayXP,
         veCoins: newVEs,
         todayVEs: newTodayVEs,
+        gems: newGems,
       };
     });
 
@@ -130,10 +164,46 @@ export function useProgression() {
     showToast(`Claimed +${act.rewardXP} XP from ${act.title}!`);
   };
 
+  const claimStreakBonus = useCallback(() => {
+    if (isStreakClaimed) return;
+    soundFx.playStreak();
+    setIsStreakClaimed(true);
+    addXP(50, '7-Day Streak Bonus', 10, 2);
+    try {
+      confetti({
+        particleCount: 80,
+        spread: 60,
+        origin: { y: 0.7 },
+        colors: ['#ef4444', '#f59e0b', '#ffd700'],
+      });
+    } catch {}
+    showToast('🔥 Streak Bonus Claimed: +50 XP, +10 VEs, +2 Gems!');
+  }, [isStreakClaimed, addXP, showToast]);
+
+  const handleHeroEnergyTap = useCallback(() => {
+    soundFx.playXP();
+    addXP(5, 'Energy Boost Tap', 0);
+    showToast('⚡ +5 XP Energy Boost Surge!');
+  }, [addXP, showToast]);
+
+  const handleRewardWon = useCallback((prize) => {
+    if (prize.type === 'xp') {
+      addXP(prize.value, 'Lucky Wheel Fortune');
+    } else if (prize.type === 've') {
+      addXP(0, 'Lucky Wheel Fortune', prize.value);
+    } else if (prize.type === 'gem') {
+      addXP(0, 'Lucky Wheel Fortune', 0, prize.value);
+    } else if (prize.type === 'chest') {
+      addXP(prize.xp, 'Ancient Vault Loot', prize.ves, prize.gems);
+    } else {
+      addXP(75, 'Mystery Prize Won', 20, 3);
+    }
+  }, [addXP]);
+
   const handleGameFinish = (finalScore) => {
     setGameScore(finalScore);
-    const xpReward = Math.max(15, Math.floor(finalScore * 0.35));
-    const veReward = Math.max(5, Math.floor(finalScore * 0.15));
+    const xpReward = Math.max(20, Math.floor(finalScore * 0.4));
+    const veReward = Math.max(5, Math.floor(finalScore * 0.2));
 
     setGameRewards({ xp: xpReward, ves: veReward });
 
@@ -162,6 +232,10 @@ export function useProgression() {
   return {
     user,
     setUser,
+    currentTheme,
+    switchTheme,
+    isMuted,
+    toggleSound,
     levelTiers: LEVEL_TIERS,
     activities,
     history,
@@ -188,7 +262,13 @@ export function useProgression() {
     showToast,
     isActivityModalOpen,
     setIsActivityModalOpen,
+    isLuckyWheelOpen,
+    setIsLuckyWheelOpen,
     selectedActivity,
     setSelectedActivity,
+    isStreakClaimed,
+    claimStreakBonus,
+    handleHeroEnergyTap,
+    handleRewardWon,
   };
 }

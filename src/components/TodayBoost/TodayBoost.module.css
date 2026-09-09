@@ -1,116 +1,181 @@
 .boostSection {
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  width: 100%;
-  min-width: 0;
+  gap: 16px;
+  box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.5);
+  transition: var(--transition-smooth);
+}
+
+.boostSection:hover {
+  border-color: var(--border-highlight);
 }
 
 .headerRow {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 .titleBadge {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 0.72rem;
+  font-size: 0.8rem;
   font-weight: 800;
-  letter-spacing: 0.08em;
-  color: var(--accent-gold-light);
+  color: #fff;
+  letter-spacing: 0.04em;
 }
 
 .zapIcon {
   color: var(--accent-gold);
 }
 
+.dailyMultiplierTag {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--accent-primary);
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid var(--border-highlight);
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+}
+
 .statsRow {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
-  width: 100%;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
 }
 
 .statCard {
-  background: rgba(22, 25, 40, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
-  padding: 14px 10px;
+  padding: 14px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 6px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  gap: 10px;
   transition: var(--transition-smooth);
+  position: relative;
 }
 
 .statCard:hover {
-  background: rgba(30, 35, 55, 0.95);
-  border-color: rgba(245, 158, 11, 0.3);
+  background: rgba(255, 255, 255, 0.07);
+  border-color: var(--border-highlight);
   transform: translateY(-2px);
 }
 
+.clickableCard {
+  cursor: pointer;
+}
+
+.statArrow {
+  position: absolute;
+  top: 14px;
+  right: 12px;
+  color: var(--text-muted);
+  transition: var(--transition-smooth);
+}
+
+.clickableCard:hover .statArrow {
+  color: var(--accent-primary);
+  transform: translateX(3px);
+}
+
 .iconCircle {
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .xpCircle {
-  background: rgba(168, 85, 247, 0.2);
-  color: #c084fc;
-  border: 1px solid rgba(168, 85, 247, 0.4);
+  background: rgba(56, 189, 248, 0.15);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  color: var(--accent-primary);
 }
 
 .tasksCircle {
-  background: rgba(245, 158, 11, 0.2);
-  color: #fbbf24;
-  border: 1px solid rgba(245, 158, 11, 0.4);
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  color: var(--accent-gold);
 }
 
 .streakCircle {
-  background: rgba(239, 68, 68, 0.2);
-  color: #f87171;
-  border: 1px solid rgba(239, 68, 68, 0.4);
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #ef4444;
+}
+
+.flameIcon {
+  animation: pulseGlow 2s infinite ease-in-out;
+}
+
+.statInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
 .statLabel {
-  font-size: 0.72rem;
-  font-weight: 600;
+  font-size: 0.74rem;
   color: var(--text-secondary);
-  white-space: nowrap;
+  font-weight: 600;
 }
 
 .statValue {
-  font-family: var(--font-heading);
-  font-size: 0.95rem;
+  font-size: 1.15rem;
   font-weight: 800;
-  color: #ffffff;
-  white-space: nowrap;
+  color: #fff;
+  font-family: var(--font-heading);
 }
 
-@media (max-width: 480px) {
+.claimStreakBtn {
+  margin-top: 4px;
+  background: linear-gradient(135deg, #ef4444 0%, #f97316 100%);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.35);
+}
+
+.claimStreakBtn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(239, 68, 68, 0.5);
+}
+
+.claimedBtn {
+  background: rgba(16, 185, 129, 0.2);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #34d399;
+  box-shadow: none;
+  cursor: default;
+}
+
+@media (max-width: 768px) {
   .statsRow {
-    gap: 8px;
+    grid-template-columns: 1fr;
+    gap: 10px;
   }
   .statCard {
-    padding: 10px 4px;
-  }
-  .iconCircle {
-    width: 30px;
-    height: 30px;
-  }
-  .statLabel {
-    font-size: 0.65rem;
-  }
-  .statValue {
-    font-size: 0.82rem;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
   }
 }
-

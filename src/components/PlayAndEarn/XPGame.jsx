@@ -10,16 +10,19 @@ import {
   ArrowLeft,
   Info,
   Share2,
-  Star
+  Star,
+  Zap,
+  Flame
 } from 'lucide-react';
 import { soundFx } from '../../utils/soundEffects';
 
 export function XPGame({ isOpen, onClose, onFinishGame, user, highScore = 92, initialMode = 'start' }) {
   const [gameState, setGameState] = useState(initialMode);
   const [score, setScore] = useState(initialMode === 'result' ? 92 : 0);
-  const [timeLeft, setTimeLeft] = useState(18);
+  const [timeLeft, setTimeLeft] = useState(20);
   const [multiplier, setMultiplier] = useState(1);
   const [multiplierTimer, setMultiplierTimer] = useState(0);
+  const [combo, setCombo] = useState(0);
   const [catcherX, setCatcherX] = useState(50);
   const [floatingTexts, setFloatingTexts] = useState([]);
   const [isMuted, setIsMuted] = useState(false);
@@ -30,6 +33,7 @@ export function XPGame({ isOpen, onClose, onFinishGame, user, highScore = 92, in
   const gameStateRef = useRef(gameState);
   const scoreRef = useRef(score);
   const multiplierRef = useRef(multiplier);
+  const comboRef = useRef(combo);
 
   useEffect(() => {
     if (isOpen) {
@@ -37,8 +41,8 @@ export function XPGame({ isOpen, onClose, onFinishGame, user, highScore = 92, in
       if (initialMode === 'result') {
         setScore(92);
       } else if (initialMode === 'playing') {
-        setScore(120);
-        setTimeLeft(18);
+        setScore(0);
+        setTimeLeft(20);
       }
     }
   }, [isOpen, initialMode]);
@@ -55,6 +59,10 @@ export function XPGame({ isOpen, onClose, onFinishGame, user, highScore = 92, in
     multiplierRef.current = multiplier;
   }, [multiplier]);
 
+  useEffect(() => {
+    comboRef.current = combo;
+  }, [combo]);
+
   const toggleSound = () => {
     soundFx.muted = !isMuted;
     setIsMuted(!isMuted);
@@ -65,7 +73,7 @@ export function XPGame({ isOpen, onClose, onFinishGame, user, highScore = 92, in
     setFloatingTexts((prev) => [...prev, { id, text, x, y, color }]);
     setTimeout(() => {
       setFloatingTexts((prev) => prev.filter((t) => t.id !== id));
-    }, 700);
+    }, 750);
   }, []);
 
   const endGame = useCallback(() => {
@@ -79,6 +87,7 @@ export function XPGame({ isOpen, onClose, onFinishGame, user, highScore = 92, in
     setTimeLeft(20);
     setMultiplier(1);
     setMultiplierTimer(0);
+    setCombo(0);
     itemsRef.current = [];
     setFloatingTexts([]);
     setGameState('playing');
@@ -162,14 +171,15 @@ export function XPGame({ isOpen, onClose, onFinishGame, user, highScore = 92, in
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       const now = Date.now();
-      if (now - lastSpawn > 320) {
+      if (now - lastSpawn > 300) {
         lastSpawn = now;
         const types = [
-          { type: 'xp', label: 'XP', color: '#a855f7', value: 10, radius: 17 },
+          { type: 'xp', label: 'XP', color: '#38bdf8', value: 10, radius: 17 },
           { type: 've', label: 'V', color: '#f59e0b', value: 15, radius: 15 },
           { type: 'gem', label: '💎', color: '#10b981', value: 20, radius: 16 },
-          { type: 'xp_big', label: 'XP', color: '#c084fc', value: 25, radius: 20 },
+          { type: 'xp_big', label: '⚡', color: '#a855f7', value: 30, radius: 20 },
           { type: 'mult', label: '2X', color: '#ec4899', value: 0, radius: 16, isMult: true },
+          { type: 'bomb', label: '💣', color: '#ef4444', value: -15, radius: 15, isBomb: true },
         ];
         const chosen = types[Math.floor(Math.random() * types.length)];
 
@@ -177,14 +187,14 @@ export function XPGame({ isOpen, onClose, onFinishGame, user, highScore = 92, in
           id: Math.random(),
           x: Math.random() * (canvas.width - 60) + 30,
           y: -20,
-          speed: Math.random() * 2.5 + 3.2,
+          speed: Math.random() * 2.8 + 3.4,
           ...chosen,
         });
       }
 
       // Basket position
-      const basketWidth = 84;
-      const basketHeight = 35;
+      const basketWidth = 90;
+      const basketHeight = 36;
       const basketX = (catcherX / 100) * canvas.width - basketWidth / 2;
       const basketY = canvas.height - 60;
 
@@ -193,23 +203,35 @@ export function XPGame({ isOpen, onClose, onFinishGame, user, highScore = 92, in
         item.y += item.speed;
 
         const inBasketX = item.x >= basketX - 10 && item.x <= basketX + basketWidth + 10;
-        const inBasketY = item.y >= basketY - 12 && item.y <= basketY + basketHeight;
+        const inBasketY = item.y >= basketY - 14 && item.y <= basketY + basketHeight;
 
         if (inBasketX && inBasketY) {
-          if (item.isMult) {
+          if (item.isBomb) {
+            setCombo(0);
+            setScore((s) => Math.max(0, s - 15));
+            soundFx.playClick();
+            addFloatingText('-15 XP 💣', item.x, item.y, '#ef4444');
+          } else if (item.isMult) {
             setMultiplier(2);
-            setMultiplierTimer(5);
+            setMultiplierTimer(6);
             soundFx.playMultiplier();
-            addFloatingText('2X ACTIVE!', item.x, item.y, '#ec4899');
+            addFloatingText('2X BOOST ACTIVE!', item.x, item.y, '#ec4899');
           } else {
-            const gained = item.value * multiplierRef.current;
+            const nextCombo = comboRef.current + 1;
+            setCombo(nextCombo);
+            const comboBonus = nextCombo > 3 ? 5 : 0;
+            const gained = (item.value + comboBonus) * multiplierRef.current;
             setScore((s) => s + gained);
+
             if (item.type === 've') {
               soundFx.playCoin();
               addFloatingText(`+${gained} VEs`, item.x, item.y, '#fbbf24');
+            } else if (item.type === 'gem') {
+              soundFx.playStreak();
+              addFloatingText(`+${gained} 💎`, item.x, item.y, '#10b981');
             } else {
               soundFx.playXP();
-              addFloatingText(`+${gained} XP`, item.x, item.y, '#c084fc');
+              addFloatingText(nextCombo > 3 ? `+${gained} XP (Combo!)` : `+${gained} XP`, item.x, item.y, '#38bdf8');
             }
           }
           return false;
@@ -217,7 +239,7 @@ export function XPGame({ isOpen, onClose, onFinishGame, user, highScore = 92, in
 
         // Draw item
         ctx.save();
-        ctx.shadowBlur = 12;
+        ctx.shadowBlur = 14;
         ctx.shadowColor = item.color;
         ctx.beginPath();
         ctx.arc(item.x, item.y, item.radius, 0, Math.PI * 2);
@@ -258,7 +280,7 @@ export function XPGame({ isOpen, onClose, onFinishGame, user, highScore = 92, in
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.gameCard}>
-        {/* ---------------- STATE 1: START SCREEN ---------------- */}
+        {/* STATE 1: START SCREEN */}
         {gameState === 'start' && (
           <div className={styles.startScreen}>
             <div className={styles.gameTopBar}>
@@ -273,7 +295,7 @@ export function XPGame({ isOpen, onClose, onFinishGame, user, highScore = 92, in
               </button>
 
               <div className={styles.gameHeaderTitle}>
-                <h3>XP CATCHER</h3>
+                <h3>XP CATCHER ARCADE</h3>
                 <span className={styles.infoBadge} title="Catch XP to level up!">
                   <Info size={14} />
                 </span>
@@ -291,7 +313,7 @@ export function XPGame({ isOpen, onClose, onFinishGame, user, highScore = 92, in
 
             <div className={styles.startBody}>
               <p className={styles.gameSubtitle}>
-                Catch XP orbs & coins. Score high for better rewards!
+                Catch falling XP orbs, coins & gems. Avoid bombs to score massive multipliers!
               </p>
 
               <div className={styles.startHeroGraphic}>
@@ -304,27 +326,27 @@ export function XPGame({ isOpen, onClose, onFinishGame, user, highScore = 92, in
               </div>
 
               <div className={styles.rulesList}>
-                <div className={styles.rulePill}>⏱️ 20 Seconds Fast Challenge</div>
+                <div className={styles.rulePill}>⏱️ 20s Lightning Challenge</div>
                 <div className={styles.rulePill}>🏆 High Score: <strong>{highScore} pts</strong></div>
-                <div className={styles.rulePill}>✨ Earn up to <strong>+50 XP</strong> & <strong>+15 VEs</strong></div>
+                <div className={styles.rulePill}>✨ Earn up to <strong>+80 XP</strong> & <strong>+25 VEs</strong></div>
               </div>
 
               <button className={styles.startBtn} onClick={handleStartGame}>
-                <span>Play Now</span>
+                <Zap size={18} />
+                <span>START ARCADE RUN</span>
                 <ChevronRight size={18} />
               </button>
             </div>
           </div>
         )}
 
-        {/* ---------------- STATE 2: ACTIVE GAMEPLAY (Screen 2) ---------------- */}
+        {/* STATE 2: ACTIVE GAMEPLAY */}
         {gameState === 'playing' && (
           <div 
             className={styles.playArena}
             onPointerMove={handlePointerMove}
             onTouchMove={handlePointerMove}
           >
-            {/* Screen 2 Top Bar */}
             <div className={styles.playHeaderBar}>
               <button 
                 className={styles.backBtn}
@@ -338,7 +360,9 @@ export function XPGame({ isOpen, onClose, onFinishGame, user, highScore = 92, in
 
               <div className={styles.gameHeaderTitle}>
                 <h3>XP CATCHER</h3>
-                <Info size={14} className={styles.infoBadge} />
+                {combo > 2 && (
+                  <span className={styles.comboPill}>🔥 {combo}X COMBO!</span>
+                )}
               </div>
 
               <div className={styles.timerPill}>
@@ -346,10 +370,6 @@ export function XPGame({ isOpen, onClose, onFinishGame, user, highScore = 92, in
                 <span>00:{timeLeft < 10 ? `0${timeLeft}` : timeLeft}</span>
               </div>
             </div>
-
-            <p className={styles.playSubtitle}>
-              Catch XP orbs & coins<br/>Score high for better rewards!
-            </p>
 
             {/* Canvas */}
             <canvas ref={canvasRef} className={styles.gameCanvas} />
@@ -365,7 +385,7 @@ export function XPGame({ isOpen, onClose, onFinishGame, user, highScore = 92, in
               </div>
             ))}
 
-            {/* Net / Basket at bottom */}
+            {/* Catcher Basket */}
             <div 
               className={styles.catcherNet}
               style={{ left: `${catcherX}%` }}
@@ -375,18 +395,14 @@ export function XPGame({ isOpen, onClose, onFinishGame, user, highScore = 92, in
               </div>
             </div>
 
-            {/* Bottom Screen 2 Status Bar */}
+            {/* Bottom Status Bar */}
             <div className={styles.playFooterBar}>
               <div className={styles.scoreContainer}>
-                <span className={styles.scoreLabel}>YOUR SCORE</span>
+                <span className={styles.scoreLabel}>SCORE</span>
                 <span className={styles.scoreValue}>{score}</span>
               </div>
 
               <div className={styles.footerBadges}>
-                <div className={styles.veBadge}>
-                  <span className={styles.veBadgeIcon}>V</span>
-                  <span>+5 VEs</span>
-                </div>
                 <div className={`${styles.multBadge} ${multiplier > 1 ? styles.multActive : ''}`}>
                   <span>⚡ 2X Multiplier</span>
                 </div>
@@ -395,7 +411,7 @@ export function XPGame({ isOpen, onClose, onFinishGame, user, highScore = 92, in
           </div>
         )}
 
-        {/* ---------------- STATE 3: RESULT SCREEN (Screen 3) ---------------- */}
+        {/* STATE 3: RESULT SCREEN */}
         {gameState === 'result' && (
           <div className={styles.resultScreen}>
             <div className={styles.resultTopBar}>
@@ -413,7 +429,7 @@ export function XPGame({ isOpen, onClose, onFinishGame, user, highScore = 92, in
               </button>
             </div>
 
-            {/* Shield Laurel Wreath Graphic */}
+            {/* Shield Graphic */}
             <div className={styles.resultHero}>
               <div className={styles.laurelContainer}>
                 <div className={styles.shieldGold}>
@@ -424,7 +440,7 @@ export function XPGame({ isOpen, onClose, onFinishGame, user, highScore = 92, in
               </div>
 
               <h2 className={styles.completeTitle}>CHALLENGE COMPLETE!</h2>
-              <span className={styles.completeSub}>Outstanding!</span>
+              <span className={styles.completeSub}>Outstanding Performance!</span>
             </div>
 
             {/* Score Box */}
@@ -432,37 +448,20 @@ export function XPGame({ isOpen, onClose, onFinishGame, user, highScore = 92, in
               <span className={styles.finalScoreLabel}>FINAL SCORE</span>
               <div className={styles.finalScoreRow}>
                 <span className={styles.bigScore}>{score}</span>
-                <span className={styles.newBestBadge}>New Best!</span>
+                {score >= highScore && <span className={styles.newBestBadge}>New Highscore!</span>}
               </div>
             </div>
 
             {/* Reward Cards */}
             <div className={styles.rewardCardsGrid}>
               <div className={styles.rewardCardItem}>
-                <span className={styles.rcValue}>+{Math.max(15, Math.floor(score * 0.35))} XP</span>
-                <span className={styles.rcLabel}>Experience</span>
+                <span className={styles.rcValue}>+{Math.max(20, Math.floor(score * 0.4))} XP</span>
+                <span className={styles.rcLabel}>Experience Gained</span>
               </div>
               <div className={styles.rewardCardItem}>
-                <span className={styles.rcValue}>+{Math.max(5, Math.floor(score * 0.15))} VEs</span>
-                <span className={styles.rcLabel}>Your Reward</span>
+                <span className={styles.rcValue}>+{Math.max(5, Math.floor(score * 0.2))} VEs</span>
+                <span className={styles.rcLabel}>Token Reward</span>
               </div>
-            </div>
-
-            {/* Level Progression Bar */}
-            <div className={styles.resultProgress}>
-              <div className={styles.progLabels}>
-                <span>Level 0{user.currentLevel}</span>
-                <span>Level 0{user.currentLevel + 1}</span>
-              </div>
-              <div className={styles.progTrack}>
-                <div 
-                  className={styles.progFill} 
-                  style={{ width: `${Math.min(100, (user.currentXP / user.requiredXP) * 100)}%` }}
-                ></div>
-              </div>
-              <span className={styles.progRatio}>
-                {user.currentXP.toLocaleString()} / {user.requiredXP.toLocaleString()} XP
-              </span>
             </div>
 
             {/* Buttons */}
@@ -472,7 +471,7 @@ export function XPGame({ isOpen, onClose, onFinishGame, user, highScore = 92, in
                 <span>Play Again</span>
               </button>
               <button className={styles.backDashBtn} onClick={onClose}>
-                <span>Back to Dashboard</span>
+                <span>Collect & Return</span>
               </button>
             </div>
           </div>
@@ -481,4 +480,3 @@ export function XPGame({ isOpen, onClose, onFinishGame, user, highScore = 92, in
     </div>
   );
 }
-

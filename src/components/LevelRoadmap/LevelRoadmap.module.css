@@ -1,92 +1,120 @@
 .roadmapContainer {
-  width: 100%;
-  max-width: 100%;
-  min-width: 0;
-  padding: 16px 20px;
-  background: rgba(22, 25, 40, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
-  position: relative;
-  overflow: hidden;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.5);
+  transition: var(--transition-smooth);
+}
+
+.roadmapContainer:hover {
+  border-color: var(--border-highlight);
 }
 
 .headerRow {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  justify-content: space-between;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 12px;
 }
 
 .roadmapTag {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 0.72rem;
+  font-size: 0.74rem;
   font-weight: 800;
-  letter-spacing: 0.08em;
-  color: var(--accent-cyan);
-}
-
-.trophyIcon {
-  color: var(--accent-gold);
+  color: var(--text-gold);
+  letter-spacing: 0.05em;
 }
 
 .roadmapHeading {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   font-weight: 800;
   color: #fff;
   margin-top: 2px;
 }
 
+.headerRightArea {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
 .levelStatusSummary {
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   color: var(--text-secondary);
 }
 
 .levelStatusSummary strong {
-  color: var(--accent-gold-light);
+  color: var(--accent-primary);
 }
 
-/* Scrollable Roadmap Container */
+.navArrows {
+  display: flex;
+  gap: 6px;
+}
+
+.arrowBtn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.arrowBtn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border-color: var(--border-highlight);
+}
+
+/* Scroll Area */
+.roadmapScrollWrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
 .roadmapScroll {
   display: flex;
   gap: 14px;
   overflow-x: auto;
-  width: 100%;
-  max-width: 100%;
-  padding: 14px 4px 18px 4px;
+  padding: 10px 4px 16px 4px;
   position: relative;
-  -webkit-overflow-scrolling: touch;
-}
-
-.roadmapScroll::-webkit-scrollbar {
-  height: 6px;
+  scrollbar-width: thin;
 }
 
 .trackLine {
   position: absolute;
-  top: 52px;
-  left: 30px;
-  right: 30px;
-  height: 3px;
-  background: rgba(255, 255, 255, 0.08);
+  top: 56px;
+  left: 20px;
+  right: 20px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-primary) 0%, var(--accent-gold) 60%, rgba(255, 255, 255, 0.1) 100%);
   z-index: 1;
 }
 
-/* Individual Node */
 .roadmapNode {
   flex: 0 0 160px;
-  background: rgba(16, 19, 32, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
-  padding: 14px 10px;
+  padding: 14px 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
-  gap: 8px;
+  gap: 10px;
   cursor: pointer;
   position: relative;
   z-index: 2;
@@ -94,125 +122,101 @@
 }
 
 .roadmapNode:hover {
-  transform: translateY(-4px);
-  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--border-highlight);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
 }
 
 .nodeSelected {
-  border-color: var(--accent-cyan) !important;
-  box-shadow: 0 0 20px rgba(56, 189, 248, 0.25);
+  border-color: var(--accent-primary);
+  background: rgba(56, 189, 248, 0.12);
+  box-shadow: 0 0 20px var(--accent-primary-glow);
 }
 
 .nodeStatusBadge {
-  min-height: 18px;
+  min-height: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .completedIcon {
-  color: var(--accent-emerald);
-}
-
-.currentPulse {
-  font-size: 0.58rem;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  background: #f59e0b;
-  color: #000;
-  padding: 2px 6px;
-  border-radius: var(--radius-full);
-  box-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
+  color: #10b981;
 }
 
 .lockIcon {
   color: var(--text-muted);
 }
 
+.currentPulse {
+  font-size: 0.6rem;
+  font-weight: 900;
+  color: #000;
+  background: var(--accent-gold);
+  padding: 2px 7px;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.05em;
+  box-shadow: 0 0 10px var(--accent-gold-glow);
+  animation: pulseGlow 2s infinite;
+}
+
 .nodeCircle {
-  width: 46px;
-  height: 46px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  background: #1e2238;
-  border: 2px solid rgba(255, 255, 255, 0.12);
+  background: var(--bg-main);
+  border: 2px solid var(--accent-primary);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   position: relative;
-  transition: var(--transition-smooth);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 }
 
 .nodeLvlNum {
-  font-size: 0.65rem;
-  font-weight: 800;
+  font-size: 0.68rem;
+  font-weight: 900;
   color: #fff;
+  line-height: 1;
 }
 
 .tierIcon {
-  color: var(--text-secondary);
-}
-
-/* Completed Node */
-.nodeCompleted .nodeCircle {
-  border-color: var(--accent-emerald);
-  background: rgba(16, 185, 129, 0.15);
-}
-.nodeCompleted .tierIcon {
-  color: var(--accent-emerald);
-}
-
-/* Current Node */
-.nodeCurrent {
-  border-color: rgba(245, 158, 11, 0.4);
-  background: linear-gradient(180deg, rgba(35, 39, 60, 0.9) 0%, rgba(20, 23, 38, 0.95) 100%);
-}
-.nodeCurrent .nodeCircle {
-  border-color: var(--accent-gold);
-  background: rgba(245, 158, 11, 0.2);
-  box-shadow: 0 0 15px rgba(245, 158, 11, 0.4);
-}
-.nodeCurrent .tierIcon {
-  color: var(--accent-gold);
-}
-
-/* Locked Node */
-.nodeLocked {
-  opacity: 0.7;
+  margin-top: 1px;
 }
 
 .nodeInfo {
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
   gap: 3px;
 }
 
 .tierName {
-  font-size: 0.75rem;
-  font-weight: 700;
+  font-size: 0.76rem;
+  font-weight: 800;
   color: #fff;
   white-space: nowrap;
 }
 
 .tierXP {
-  font-size: 0.68rem;
-  font-weight: 600;
-  color: var(--text-muted);
+  font-size: 0.7rem;
+  color: var(--text-secondary);
 }
 
 .rewardPillNode {
-  margin-top: 4px;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 4px;
-  font-size: 0.65rem;
-  font-weight: 700;
-  color: var(--accent-gold-light);
-  background: rgba(245, 158, 11, 0.1);
-  padding: 2px 6px;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 3px 8px;
   border-radius: var(--radius-full);
-  border: 1px solid rgba(245, 158, 11, 0.2);
+  font-size: 0.66rem;
+  font-weight: 700;
+  color: var(--text-gold);
+  margin-top: 4px;
 }
 
 .sparkleSmall {
@@ -221,93 +225,113 @@
 
 /* Detail Card */
 .detailCard {
-  margin-top: 14px;
-  background: rgba(15, 17, 28, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
-  padding: 14px 18px;
+  padding: 16px;
+  animation: popIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .detailContent {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   gap: 20px;
+  flex-wrap: wrap;
+}
+
+.detailLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  min-width: 250px;
 }
 
 .detailBadgeRow {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 4px;
   flex-wrap: wrap;
 }
 
 .detailLevelNumber {
-  font-size: 0.75rem;
-  font-weight: 800;
-  color: var(--accent-gold-light);
+  font-size: 0.72rem;
+  font-weight: 900;
+  color: var(--accent-primary);
+  background: rgba(56, 189, 248, 0.15);
+  padding: 2px 8px;
+  border-radius: var(--radius-xs);
 }
 
 .detailTitle {
-  font-size: 0.92rem;
+  font-size: 0.95rem;
   font-weight: 800;
-  color: #ffffff;
+  color: #fff;
 }
 
 .activeTag {
   font-size: 0.65rem;
   font-weight: 800;
-  background: rgba(245, 158, 11, 0.2);
-  color: var(--accent-gold-light);
-  padding: 2px 6px;
+  color: #000;
+  background: var(--accent-gold);
+  padding: 2px 7px;
   border-radius: var(--radius-full);
 }
 
 .completedTag {
   font-size: 0.65rem;
   font-weight: 800;
-  background: rgba(16, 185, 129, 0.2);
-  color: var(--accent-emerald);
-  padding: 2px 6px;
+  color: #34d399;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  padding: 2px 7px;
   border-radius: var(--radius-full);
 }
 
 .lockedTag {
   font-size: 0.65rem;
   font-weight: 800;
-  background: rgba(255, 255, 255, 0.08);
-  color: var(--text-secondary);
-  padding: 2px 6px;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.06);
+  padding: 2px 7px;
   border-radius: var(--radius-full);
 }
 
 .detailDescription {
   font-size: 0.78rem;
   color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.detailRight {
+  display: flex;
 }
 
 .perkList {
   display: flex;
-  gap: 14px;
-  align-items: center;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .perkItem {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 0.75rem;
-  color: #cbd5e1;
-  background: rgba(255, 255, 255, 0.04);
-  padding: 6px 12px;
+  font-size: 0.76rem;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 5px 10px;
   border-radius: var(--radius-sm);
-  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-@media (max-width: 768px) {
-  .detailContent {
+@media (max-width: 640px) {
+  .headerRow {
     flex-direction: column;
     align-items: flex-start;
+  }
+  .headerRightArea {
+    width: 100%;
+    justify-content: space-between;
   }
 }

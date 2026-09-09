@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './LevelDashboard.module.css';
 import { useProgression } from '../hooks/useProgression';
 import { Header } from '../components/Header/Header';
@@ -11,6 +11,7 @@ import { RecentActivity } from '../components/RecentActivity/RecentActivity';
 import { XPGame } from '../components/PlayAndEarn/XPGame';
 import { LevelUpModal } from '../components/LevelUpModal/LevelUpModal';
 import { ActivityModal } from '../components/ActivityModal/ActivityModal';
+import { LuckyWheelModal } from '../components/LuckyWheelModal/LuckyWheelModal';
 import { BottomNav } from '../components/BottomNav/BottomNav';
 import { 
   LoadingSkeletonView, 
@@ -22,6 +23,10 @@ import { Sparkles } from 'lucide-react';
 export function LevelDashboard() {
   const {
     user,
+    currentTheme,
+    switchTheme,
+    isMuted,
+    toggleSound,
     levelTiers,
     activities,
     history,
@@ -41,13 +46,27 @@ export function LevelDashboard() {
     toastMessage,
     isActivityModalOpen,
     setIsActivityModalOpen,
+    isLuckyWheelOpen,
+    setIsLuckyWheelOpen,
     selectedActivity,
     setSelectedActivity,
+    isStreakClaimed,
+    claimStreakBonus,
+    handleHeroEnergyTap,
+    handleRewardWon,
   } = useProgression();
 
   return (
     <div className={styles.appContainer}>
-      <Header user={user} />
+      <Header 
+        user={user} 
+        currentTheme={currentTheme}
+        onSwitchTheme={switchTheme}
+        isMuted={isMuted}
+        onToggleSound={toggleSound}
+        onOpenLuckyWheel={() => setIsLuckyWheelOpen(true)}
+        onOpenLevelUp={() => setIsLevelUpModalOpen(true)}
+      />
 
       {/* Main Page Body */}
       <main className={styles.mainContent}>
@@ -59,7 +78,7 @@ export function LevelDashboard() {
           </div>
         )}
 
-        {/* ---------------- DEMO / QA STATE SWITCHES ---------------- */}
+        {/* DEMO / QA STATE SWITCHES */}
         {viewState === 'loading' && <LoadingSkeletonView />}
 
         {viewState === 'error' && (
@@ -75,21 +94,35 @@ export function LevelDashboard() {
           />
         )}
 
-        {/* ---------------- LIVE NORMAL MODE ---------------- */}
+        {/* LIVE NORMAL MODE */}
         {viewState === 'normal' && (
           <div className={styles.dashboardGrid}>
-            {/* Top Row: Full-width Level Hero */}
+            {/* Top Row: Full-width Interactive Level Hero */}
             <section className={styles.heroSection}>
               <LevelHero 
                 user={user} 
                 onOpenGame={() => setIsGameOpen(true)}
+                onEnergyTap={handleHeroEnergyTap}
               />
             </section>
 
             {/* Main Progression & Activity Grid */}
             <div className={styles.layoutColumns}>
               <div className={styles.boostArea}>
-                <TodayBoost user={user} />
+                <TodayBoost 
+                  user={user} 
+                  isStreakClaimed={isStreakClaimed}
+                  onClaimStreak={claimStreakBonus}
+                  onOpenTasks={() => setIsActivityModalOpen(true)}
+                />
+              </div>
+
+              <div className={styles.rewardArea}>
+                <NextLevelReward 
+                  user={user}
+                  onOpenLevelModal={() => setIsLevelUpModalOpen(true)}
+                  onOpenLuckyWheel={() => setIsLuckyWheelOpen(true)}
+                />
               </div>
 
               <div className={styles.earnArea}>
@@ -104,20 +137,7 @@ export function LevelDashboard() {
                     setIsActivityModalOpen(true);
                   }}
                   onOpenGame={() => setIsGameOpen(true)}
-                />
-              </div>
-
-              <div className={styles.rewardArea}>
-                <NextLevelReward 
-                  user={user}
-                  onOpenLevelModal={() => setIsLevelUpModalOpen(true)}
-                />
-              </div>
-
-              <div className={styles.roadmapArea}>
-                <LevelRoadmap 
-                  levelTiers={levelTiers}
-                  currentLevel={user.currentLevel}
+                  onOpenLuckyWheel={() => setIsLuckyWheelOpen(true)}
                 />
               </div>
 
@@ -125,6 +145,13 @@ export function LevelDashboard() {
                 <RecentActivity 
                   history={history}
                   user={user}
+                />
+              </div>
+
+              <div className={styles.roadmapArea}>
+                <LevelRoadmap 
+                  levelTiers={levelTiers}
+                  currentLevel={user.currentLevel}
                 />
               </div>
             </div>
@@ -142,7 +169,15 @@ export function LevelDashboard() {
         highScore={gameHighScore}
       />
 
-      {/* 2. Level Up Celebration Modal */}
+      {/* 2. Lucky Fortune Wheel & Mystery Vault Modal */}
+      <LuckyWheelModal 
+        isOpen={isLuckyWheelOpen}
+        onClose={() => setIsLuckyWheelOpen(false)}
+        onRewardWon={handleRewardWon}
+        spinsLeft={user.spins || 2}
+      />
+
+      {/* 3. Level Up Celebration Modal */}
       <LevelUpModal 
         isOpen={isLevelUpModalOpen}
         onClose={() => setIsLevelUpModalOpen(false)}
@@ -151,7 +186,7 @@ export function LevelDashboard() {
         user={user}
       />
 
-      {/* 3. Earn & Level Up Modal */}
+      {/* 4. Earn & Level Up Modal */}
       <ActivityModal 
         isOpen={isActivityModalOpen}
         onClose={() => {
@@ -173,7 +208,12 @@ export function LevelDashboard() {
           if (tab === 'earn') {
             setIsActivityModalOpen(true);
           } else if (tab === 'rewards') {
-            setIsLevelUpModalOpen(true);
+            setIsLuckyWheelOpen(true);
+          } else if (tab === 'roadmap') {
+            const roadmapEl = document.querySelector(`.${styles.roadmapArea}`);
+            if (roadmapEl) {
+              roadmapEl.scrollIntoView({ behavior: 'smooth' });
+            }
           }
         }}
       />

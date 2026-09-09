@@ -9,7 +9,9 @@ import {
   Flame, 
   ArrowRight, 
   Sparkles,
-  Check
+  Check,
+  Zap,
+  Gift
 } from 'lucide-react';
 import { soundFx } from '../../utils/soundEffects';
 
@@ -22,16 +24,23 @@ const ICON_MAP = {
   'streak-bonus': Flame,
 };
 
-export function EarnMoreSection({ activities, onSelectActivity, onOpenAllActivities, onOpenGame }) {
+export function EarnMoreSection({ 
+  activities, 
+  onSelectActivity, 
+  onOpenAllActivities, 
+  onOpenGame,
+  onOpenLuckyWheel
+}) {
   return (
     <div className={styles.sectionContainer}>
       <div className={styles.sectionHeader}>
         <div>
           <div className={styles.titleBadge}>
-            <span>EARN MORE</span>
+            <Zap size={14} color="var(--accent-primary)" />
+            <span>EARN & QUEST HUB</span>
           </div>
           <p className={styles.subtext}>
-            Explore fun activities and earn exciting rewards.
+            Complete activities, play arcade games, and level up faster.
           </p>
         </div>
         <button 
@@ -42,7 +51,8 @@ export function EarnMoreSection({ activities, onSelectActivity, onOpenAllActivit
           }}
           aria-label="View all activities"
         >
-          <ArrowRight size={18} />
+          <span>All Quests</span>
+          <ArrowRight size={16} />
         </button>
       </div>
 
@@ -68,23 +78,45 @@ export function EarnMoreSection({ activities, onSelectActivity, onOpenAllActivit
                 className={styles.iconCircle}
                 style={{ 
                   background: `${item.accentColor}20`, 
-                  borderColor: `${item.accentColor}40`,
+                  borderColor: `${item.accentColor}50`,
                   color: item.accentColor 
                 }}
               >
                 {isCompleted ? <Check size={18} className={styles.checkIcon} /> : <IconComp size={18} />}
               </div>
 
-              <span className={styles.cardTitle}>{item.title}</span>
+              <div className={styles.cardDetails}>
+                <span className={styles.cardTitle}>{item.title}</span>
+                <span className={styles.cardRewardPill}>+{item.rewardXP} XP</span>
+              </div>
 
-              {isCompleted && (
+              {isCompleted ? (
                 <span className={styles.completedBadge}>Done</span>
+              ) : (
+                <span className={styles.readyBadge}>Start</span>
               )}
             </div>
           );
         })}
+
+        {/* Lucky Fortune Wheel Special Action Card */}
+        <div 
+          className={`${styles.activityCard} ${styles.luckyWheelCard}`}
+          onClick={() => {
+            soundFx.playStreak();
+            if (onOpenLuckyWheel) onOpenLuckyWheel();
+          }}
+        >
+          <div className={styles.iconCircleSpecial}>
+            <Gift size={18} color="#ffd700" />
+          </div>
+          <div className={styles.cardDetails}>
+            <span className={styles.cardTitle}>Lucky Spin</span>
+            <span className={styles.cardRewardPillGold}>Free Spin</span>
+          </div>
+          <span className={styles.spinActiveBadge}>Spin</span>
+        </div>
       </div>
     </div>
   );
 }
-

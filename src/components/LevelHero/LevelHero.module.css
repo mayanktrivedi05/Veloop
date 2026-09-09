@@ -1,20 +1,38 @@
 .heroCard {
   position: relative;
-  padding: 22px 24px;
+  padding: 24px 28px;
   overflow: visible;
   border-radius: var(--radius-lg);
-  background: linear-gradient(135deg, rgba(26, 29, 44, 0.95) 0%, rgba(18, 20, 32, 0.98) 100%);
-  border: 1px solid rgba(245, 158, 11, 0.3);
-  box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  background: var(--bg-panel-gradient);
+  border: 1px solid var(--border-gold);
+  box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: var(--transition-smooth);
+}
+
+.heroCard:hover {
+  border-color: var(--border-highlight);
+  box-shadow: 0 24px 50px -8px rgba(0, 0, 0, 0.8), 0 0 25px var(--accent-primary-glow);
 }
 
 .heroGlow {
   position: absolute;
   top: -40px;
-  left: 20%;
-  width: 300px;
-  height: 140px;
-  background: radial-gradient(circle, rgba(245, 158, 11, 0.12) 0%, transparent 70%);
+  left: 15%;
+  width: 350px;
+  height: 160px;
+  background: radial-gradient(circle, var(--accent-gold-glow) 0%, transparent 70%);
+  filter: blur(45px);
+  pointer-events: none;
+  animation: pulseGlow 4s ease-in-out infinite;
+}
+
+.heroSecondaryGlow {
+  position: absolute;
+  bottom: -30px;
+  right: 10%;
+  width: 280px;
+  height: 120px;
+  background: radial-gradient(circle, var(--accent-primary-glow) 0%, transparent 70%);
   filter: blur(40px);
   pointer-events: none;
 }
@@ -22,7 +40,7 @@
 .contentGrid {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 18px;
   position: relative;
   z-index: 2;
 }
@@ -31,44 +49,56 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
 /* Shield Badge */
 .levelBadgeSection {
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 16px;
   flex-shrink: 0;
 }
 
 .shieldContainer {
   position: relative;
-  width: 78px;
-  height: 86px;
+  width: 82px;
+  height: 92px;
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+  transition: var(--transition-bounce);
+}
+
+.shieldContainer:hover {
+  transform: scale(1.08) translateY(-2px);
+}
+
+.shieldContainer:active {
+  transform: scale(0.95);
 }
 
 .shieldOuterGlow {
   position: absolute;
-  inset: -6px;
-  background: radial-gradient(circle, rgba(245, 158, 11, 0.35) 0%, transparent 70%);
-  filter: blur(10px);
+  inset: -8px;
+  background: radial-gradient(circle, var(--accent-gold-glow) 0%, transparent 70%);
+  filter: blur(12px);
+  animation: pulseGlow 3s infinite;
 }
 
 .shieldShape {
   width: 100%;
   height: 100%;
-  background: linear-gradient(180deg, #24283b 0%, #121420 100%);
+  background: linear-gradient(180deg, #1c223a 0%, #0d101d 100%);
   clip-path: polygon(50% 0%, 100% 15%, 100% 80%, 50% 100%, 0% 80%, 0% 15%);
-  border: 2px solid #f59e0b;
+  border: 2px solid var(--accent-gold);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  box-shadow: inset 0 0 15px rgba(245, 158, 11, 0.25);
+  box-shadow: inset 0 0 20px var(--accent-gold-glow);
   position: relative;
 }
 
@@ -77,30 +107,79 @@
   position: absolute;
   inset: 3px;
   clip-path: polygon(50% 0%, 100% 15%, 100% 80%, 50% 100%, 0% 80%, 0% 15%);
-  border: 1px dashed rgba(245, 158, 11, 0.4);
+  border: 1px dashed rgba(255, 215, 0, 0.4);
   pointer-events: none;
 }
 
 .badgeTopTag {
-  font-size: 0.55rem;
-  letter-spacing: 0.1em;
-  color: #94a3b8;
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+  color: var(--text-secondary);
   font-weight: 800;
-  margin-top: 2px;
+  margin-top: 1px;
 }
 
 .levelBigNumber {
   font-family: var(--font-heading);
-  font-size: 1.85rem;
+  font-size: 2rem;
   font-weight: 900;
   line-height: 1;
-  background: linear-gradient(180deg, #ffffff 0%, #fbbf24 70%, #d97706 100%);
+  background: linear-gradient(180deg, #ffffff 0%, var(--accent-gold-light) 60%, var(--accent-gold) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin: 2px 0;
-  filter: drop-shadow(0 2px 6px rgba(245, 158, 11, 0.5));
+  filter: drop-shadow(0 2px 8px var(--accent-gold-glow));
 }
 
+.shieldTapHint {
+  font-size: 0.5rem;
+  font-weight: 800;
+  color: var(--accent-primary);
+  letter-spacing: 0.04em;
+  margin-top: 1px;
+}
+
+.particleBurst {
+  position: absolute;
+  color: #ffd700;
+  font-weight: 900;
+  font-size: 0.82rem;
+  pointer-events: none;
+  animation: particleBurst 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+  white-space: nowrap;
+}
+
+.tierRankBadge {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.tierTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tierName {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+
+.tierPercentile {
+  font-size: 0.75rem;
+  color: var(--accent-gold-light);
+  font-weight: 700;
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  display: inline-block;
+}
+
+/* XP Texts */
 .xpTextGroup {
   display: flex;
   align-items: center;
@@ -114,71 +193,106 @@
   flex-direction: column;
   align-items: flex-end;
   text-align: right;
+  gap: 2px;
+}
+
+.xpAmountRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .currentXPText {
-  font-size: 1.45rem;
-  font-weight: 800;
+  font-size: 1.6rem;
+  font-weight: 900;
   color: #ffffff;
   letter-spacing: -0.02em;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.xpPercentPill {
+  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: var(--radius-full);
+  box-shadow: 0 2px 8px var(--accent-primary-glow);
 }
 
 .toNextLevel {
-  font-size: 0.78rem;
-  color: #94a3b8;
-  margin-top: 2px;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
 }
+
 .infoWrapper {
   position: relative;
 }
 
 .infoBtn {
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.08);
   color: var(--text-secondary);
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 1px solid var(--border-subtle);
 }
 
 .infoBtn:hover {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.15);
   color: var(--accent-gold);
+  border-color: var(--accent-gold);
 }
 
 .infoTooltip {
   position: absolute;
-  top: calc(100% + 8px);
+  top: calc(100% + 10px);
   right: 0;
-  width: 250px;
-  background: #1c2032;
-  border: 1px solid rgba(245, 158, 11, 0.3);
+  width: 270px;
+  background: var(--bg-panel-gradient);
+  border: 1px solid var(--border-gold);
   border-radius: var(--radius-md);
-  padding: 12px;
-  font-size: 0.75rem;
-  color: #cbd5e1;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
-  z-index: 150;
-  line-height: 1.4;
+  padding: 14px;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+  z-index: 200;
+  line-height: 1.45;
+  animation: popIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(16px);
 }
 
 .infoTooltip strong {
   display: block;
   color: #fff;
-  margin-bottom: 4px;
+  margin-bottom: 5px;
+  font-size: 0.84rem;
+}
+
+.tooltipRewardHint {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border-subtle);
+  color: var(--text-gold);
+  font-weight: 700;
+  font-size: 0.74rem;
 }
 
 .tooltipArrow {
   position: absolute;
-  top: -5px;
-  right: 10px;
+  top: -6px;
+  right: 12px;
   width: 10px;
   height: 10px;
-  background: #1c2032;
-  border-top: 1px solid rgba(245, 158, 11, 0.3);
-  border-left: 1px solid rgba(245, 158, 11, 0.3);
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-gold);
+  border-left: 1px solid var(--border-gold);
   transform: rotate(45deg);
 }
 
@@ -186,26 +300,28 @@
 .progressBarContainer {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
+  margin-top: 4px;
 }
 
 .progressTrack {
-  height: 12px;
-  background: rgba(10, 12, 20, 0.85);
+  height: 14px;
+  background: rgba(6, 8, 16, 0.9);
   border-radius: var(--radius-full);
   padding: 2px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-subtle);
   position: relative;
   overflow: hidden;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.8);
 }
 
 .progressFill {
   height: 100%;
   border-radius: var(--radius-full);
-  background: linear-gradient(90deg, #f59e0b 0%, #fbbf24 100%);
+  background: linear-gradient(90deg, var(--accent-primary) 0%, var(--accent-gold) 70%, var(--accent-gold-light) 100%);
   position: relative;
   transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 0 12px rgba(245, 158, 11, 0.6);
+  box-shadow: 0 0 16px var(--accent-gold-glow);
 }
 
 .fillHeadGlow {
@@ -213,121 +329,82 @@
   right: 0;
   top: 0;
   bottom: 0;
-  width: 6px;
+  width: 8px;
   background: #fff;
   border-radius: var(--radius-full);
-  box-shadow: 0 0 8px #fff;
+  box-shadow: 0 0 10px #fff;
+}
+
+.fillShineLaser {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  animation: laserShimmer 2s infinite;
 }
 
 .barFooter {
   display: flex;
-  justify-content: flex-start;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .ratioCount {
-  font-size: 0.78rem;
+  font-size: 0.84rem;
   color: var(--text-secondary);
 }
 
 .ratioCount strong {
   color: #fff;
+  font-weight: 800;
 }
 
-/* CTA Box */
-.ctaSection {
+.quickBoosterAction {
   display: flex;
 }
 
-.ctaBox {
-  background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(168, 85, 247, 0.08) 100%);
-  border: 1px solid rgba(245, 158, 11, 0.25);
-  border-radius: var(--radius-md);
-  padding: 14px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  position: relative;
-  width: 100%;
-}
-
-.ctaSparkle {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  color: var(--accent-gold);
-}
-
-.ctaTag {
-  font-size: 0.6rem;
-  letter-spacing: 0.08em;
-  font-weight: 800;
-  color: var(--accent-gold-light);
-}
-
-.ctaContent h4 {
-  font-size: 0.92rem;
-  font-weight: 800;
-  color: #fff;
-}
-
-.ctaContent p {
-  font-size: 0.72rem;
-  color: #94a3b8;
-  line-height: 1.25;
-}
-
-.playNowBtn {
-  margin-top: 4px;
-  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-  color: #000;
-  font-size: 0.78rem;
-  font-weight: 800;
-  padding: 6px 12px;
-  border-radius: var(--radius-sm);
+.quickPlayBtn {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 4px;
-  box-shadow: 0 3px 10px rgba(245, 158, 11, 0.3);
+  gap: 6px;
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.15) 0%, rgba(168, 85, 247, 0.15) 100%);
+  border: 1px solid var(--border-highlight);
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.76rem;
+  font-weight: 800;
+  color: var(--accent-primary);
+  transition: var(--transition-smooth);
 }
 
-.playNowBtn:hover {
-  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+.quickPlayBtn:hover {
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.3) 0%, rgba(168, 85, 247, 0.3) 100%);
   transform: translateY(-1px);
+  box-shadow: 0 0 12px var(--accent-primary-glow);
 }
 
-@media (max-width: 900px) {
-  .contentGrid {
-    grid-template-columns: auto 1fr;
-  }
-  .ctaSection {
-    display: none;
-  }
-}
-
-@media (max-width: 640px) {
+@media (max-width: 680px) {
   .heroCard {
     padding: 16px;
   }
-  .contentGrid {
-    grid-template-columns: auto 1fr;
-    gap: 16px;
+  .topInfoRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
   }
-  .shieldContainer {
-    width: 76px;
-    height: 84px;
+  .xpTextGroup {
+    width: 100%;
+    justify-content: space-between;
   }
-  .levelBigNumber {
-    font-size: 1.8rem;
+  .titleWithInfo {
+    align-items: flex-start;
+    text-align: left;
   }
   .currentXPText {
-    font-size: 1.4rem;
+    font-size: 1.35rem;
   }
-  .toNextLevel {
-    font-size: 0.78rem;
-  }
-  .ratioCount {
-    font-size: 0.72rem;
+  .barFooter {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
   }
 }
-

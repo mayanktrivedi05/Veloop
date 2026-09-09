@@ -11,10 +11,11 @@ import {
   Flame, 
   ChevronRight, 
   Check, 
-  Sparkles,
-  Copy,
-  Zap,
-  BarChart2
+  Sparkles, 
+  Copy, 
+  Zap, 
+  BarChart2,
+  Gift
 } from 'lucide-react';
 import { soundFx } from '../../utils/soundEffects';
 
@@ -65,8 +66,8 @@ export function ActivityModal({
   };
 
   return (
-    <div className={styles.modalOverlay}>
-      <div className={styles.modalCard}>
+    <div className={styles.modalOverlay} onClick={onClose}>
+      <div className={styles.modalCard} onClick={(e) => e.stopPropagation()}>
         {/* Header */}
         <div className={styles.modalHeader}>
           <button 
@@ -85,7 +86,7 @@ export function ActivityModal({
 
           <div className={styles.headerText}>
             <h3>EARN & LEVEL UP</h3>
-            <p>Complete activities. Earn XP.<br />Climb levels. Get rewards.</p>
+            <p>Complete missions, earn XP, and unlock VIP perks</p>
           </div>
 
           <button className={styles.closeBtn} onClick={onClose}>
@@ -106,7 +107,7 @@ export function ActivityModal({
                   color: selectedActivity.accentColor 
                 }}
               >
-                <Zap size={30} />
+                <Zap size={32} />
               </div>
 
               <h4>{selectedActivity.title}</h4>
@@ -128,11 +129,11 @@ export function ActivityModal({
                 <div className={styles.interactiveBox}>
                   {adPlaying ? (
                     <div className={styles.adSimBox}>
-                      <span className={styles.adTag}>Playing Sponsor Video...</span>
+                      <span className={styles.adTag}>Playing Sponsor Video Stream...</span>
                       <div className={styles.adTrack}>
                         <div className={styles.adFill} style={{ width: `${adProgress}%` }}></div>
                       </div>
-                      <span className={styles.adPercent}>{adProgress}%</span>
+                      <span className={styles.adPercent}>{adProgress}% Completed</span>
                     </div>
                   ) : (
                     <button 
@@ -141,7 +142,7 @@ export function ActivityModal({
                       disabled={selectedActivity.completed}
                     >
                       <Play size={18} fill="#fff" />
-                      <span>{selectedActivity.completed ? 'Completed for today' : 'Watch 15s Video (+50 XP)'}</span>
+                      <span>{selectedActivity.completed ? 'Completed for Today' : 'Watch 15s Video (+50 XP)'}</span>
                     </button>
                   )}
                 </div>
@@ -149,7 +150,7 @@ export function ActivityModal({
 
               {selectedActivity.type === 'referral' && (
                 <div className={styles.referralBox}>
-                  <p className={styles.referralHint}>Share your unique link with friends:</p>
+                  <p className={styles.referralHint}>Share your unique link with friends to earn +100 XP each:</p>
                   <div className={styles.linkCopyRow}>
                     <input 
                       type="text" 
@@ -174,7 +175,7 @@ export function ActivityModal({
 
               {selectedActivity.type === 'game' && (
                 <div className={styles.interactiveBox}>
-                  <p className={styles.gameHint}>Play the rapid 20-second XP Catcher mini-game to score high and earn instant rewards!</p>
+                  <p className={styles.gameHint}>Play the rapid 20-second XP Catcher arcade game to score high and earn instant rewards!</p>
                   <button 
                     className={styles.actionBtnPrimary}
                     onClick={() => {
@@ -183,7 +184,7 @@ export function ActivityModal({
                     }}
                   >
                     <Gamepad2 size={18} />
-                    <span>Launch XP Catcher</span>
+                    <span>Launch XP Catcher Arcade</span>
                   </button>
                 </div>
               )}
@@ -202,7 +203,7 @@ export function ActivityModal({
               )}
             </div>
           ) : (
-            /* Full Activity List View (matching Screen 4) */
+            /* Full Activity List View */
             <div className={styles.activityList}>
               {[
                 { id: 'watch-earn', title: 'Watch & Earn', subtitle: 'Watch ads and earn', rewardXP: 50, color: '#8b5cf6', icon: Play },
@@ -234,7 +235,7 @@ export function ActivityModal({
                       className={styles.itemIconCircle}
                       style={{ 
                         background: `${item.color}20`, 
-                        borderColor: `${item.color}40`,
+                        borderColor: `${item.color}50`,
                         color: item.color 
                       }}
                     >
@@ -255,17 +256,16 @@ export function ActivityModal({
           )}
         </div>
 
-        {/* Motivational Footer (Screen 4) */}
+        {/* Motivational Footer */}
         <div className={styles.modalFooter}>
           <span className={styles.footerText}>
-            Keep going! You're doing great!
+            ⚡ Keep going! You are close to Level 06!
           </span>
           <div className={styles.signalIcon}>
-            <BarChart2 size={18} color="#f59e0b" />
+            <BarChart2 size={18} color="var(--accent-gold)" />
           </div>
         </div>
       </div>
     </div>
   );
 }
-
