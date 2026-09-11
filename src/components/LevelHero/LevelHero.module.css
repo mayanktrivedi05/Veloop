@@ -1,46 +1,46 @@
 .heroCard {
   position: relative;
-  padding: 24px 28px;
+  padding: 22px 24px;
   overflow: visible;
   border-radius: var(--radius-lg);
   background: var(--bg-panel-gradient);
   border: 1px solid var(--border-gold);
-  box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.08);
   transition: var(--transition-smooth);
 }
 
 .heroCard:hover {
-  border-color: var(--border-highlight);
-  box-shadow: 0 24px 50px -8px rgba(0, 0, 0, 0.8), 0 0 25px var(--accent-primary-glow);
+  border-color: var(--border-gold-bright);
+  box-shadow: 0 20px 48px -8px rgba(0, 0, 0, 0.8), 0 0 20px var(--accent-gold-glow);
 }
 
 .heroGlow {
   position: absolute;
-  top: -40px;
+  top: -30px;
   left: 15%;
-  width: 350px;
-  height: 160px;
+  width: 300px;
+  height: 120px;
   background: radial-gradient(circle, var(--accent-gold-glow) 0%, transparent 70%);
-  filter: blur(45px);
+  filter: blur(35px);
   pointer-events: none;
   animation: pulseGlow 4s ease-in-out infinite;
 }
 
 .heroSecondaryGlow {
   position: absolute;
-  bottom: -30px;
+  bottom: -20px;
   right: 10%;
-  width: 280px;
-  height: 120px;
+  width: 220px;
+  height: 90px;
   background: radial-gradient(circle, var(--accent-primary-glow) 0%, transparent 70%);
-  filter: blur(40px);
+  filter: blur(30px);
   pointer-events: none;
 }
 
 .contentGrid {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 16px;
   position: relative;
   z-index: 2;
 }
@@ -49,7 +49,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
+  gap: 16px;
   flex-wrap: wrap;
 }
 
@@ -57,14 +57,14 @@
 .levelBadgeSection {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
   flex-shrink: 0;
 }
 
 .shieldContainer {
   position: relative;
-  width: 82px;
-  height: 92px;
+  width: 80px;
+  height: 88px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -73,32 +73,31 @@
 }
 
 .shieldContainer:hover {
-  transform: scale(1.08) translateY(-2px);
+  transform: scale(1.06) translateY(-2px);
 }
 
 .shieldContainer:active {
-  transform: scale(0.95);
+  transform: scale(0.96);
 }
 
 .shieldOuterGlow {
   position: absolute;
-  inset: -8px;
+  inset: -6px;
   background: radial-gradient(circle, var(--accent-gold-glow) 0%, transparent 70%);
-  filter: blur(12px);
-  animation: pulseGlow 3s infinite;
+  filter: blur(10px);
 }
 
 .shieldShape {
   width: 100%;
   height: 100%;
-  background: linear-gradient(180deg, #1c223a 0%, #0d101d 100%);
+  background: linear-gradient(180deg, #1e2438 0%, #0d101a 100%);
   clip-path: polygon(50% 0%, 100% 15%, 100% 80%, 50% 100%, 0% 80%, 0% 15%);
   border: 2px solid var(--accent-gold);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  box-shadow: inset 0 0 20px var(--accent-gold-glow);
+  box-shadow: inset 0 0 16px var(--accent-gold-subtle);
   position: relative;
 }
 
@@ -107,27 +106,27 @@
   position: absolute;
   inset: 3px;
   clip-path: polygon(50% 0%, 100% 15%, 100% 80%, 50% 100%, 0% 80%, 0% 15%);
-  border: 1px dashed rgba(255, 215, 0, 0.4);
+  border: 1px dashed rgba(255, 215, 0, 0.45);
   pointer-events: none;
 }
 
 .badgeTopTag {
   font-size: 0.58rem;
   letter-spacing: 0.12em;
-  color: var(--text-secondary);
+  color: #94a3b8;
   font-weight: 800;
   margin-top: 1px;
 }
 
 .levelBigNumber {
   font-family: var(--font-heading);
-  font-size: 2rem;
+  font-size: 1.95rem;
   font-weight: 900;
   line-height: 1;
-  background: linear-gradient(180deg, #ffffff 0%, var(--accent-gold-light) 60%, var(--accent-gold) 100%);
+  background: linear-gradient(180deg, #ffffff 0%, #fbbf24 60%, #f59e0b 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 2px 8px var(--accent-gold-glow));
+  filter: drop-shadow(0 2px 6px rgba(245, 158, 11, 0.4));
 }
 
 .shieldTapHint {

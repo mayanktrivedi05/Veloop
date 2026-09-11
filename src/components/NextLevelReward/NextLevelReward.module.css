@@ -1,32 +1,49 @@
 .rewardCard {
   background: var(--bg-card);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   border: 1px solid var(--border-gold);
   border-radius: var(--radius-lg);
-  padding: 22px;
+  padding: 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: 20px;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  box-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 215, 0, 0.15);
   transition: var(--transition-smooth);
+}
+
+.rewardCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.08), transparent);
+  transform: skewX(-25deg);
+  transition: left 0.75s ease;
+  pointer-events: none;
+}
+
+.rewardCard:hover::before {
+  left: 150%;
 }
 
 .rewardCard:hover {
   border-color: var(--accent-gold);
-  box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.7), 0 0 25px var(--accent-gold-glow);
+  box-shadow: 0 20px 48px -10px rgba(0, 0, 0, 0.85), 0 0 24px var(--accent-gold-glow);
   transform: translateY(-2px);
 }
 
 .cardAuraGlow {
   position: absolute;
-  top: -30px;
-  right: -30px;
-  width: 220px;
-  height: 220px;
+  top: -40px;
+  right: -40px;
+  width: 240px;
+  height: 240px;
   background: radial-gradient(circle, var(--accent-gold-glow) 0%, transparent 70%);
   filter: blur(35px);
   pointer-events: none;
@@ -45,34 +62,36 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   font-weight: 800;
   color: var(--text-gold);
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .rewardTitle {
-  font-size: 1.25rem;
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
   font-weight: 900;
-  color: #fff;
   letter-spacing: -0.01em;
-  background: linear-gradient(135deg, #ffffff 0%, var(--accent-gold-light) 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #ffd700 60%, #f59e0b 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  text-shadow: 0 2px 10px rgba(245, 158, 11, 0.2);
 }
 
 .rewardSubtext {
-  font-size: 0.76rem;
+  font-size: 0.8rem;
   color: var(--text-secondary);
-  line-height: 1.4;
-  max-width: 320px;
+  line-height: 1.45;
+  max-width: 360px;
 }
 
 .actionButtonsRow {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-top: 6px;
+  gap: 12px;
+  margin-top: 8px;
   flex-wrap: wrap;
 }
 
@@ -80,50 +99,59 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: linear-gradient(135deg, var(--accent-gold) 0%, #d97706 100%);
-  color: #121420;
-  font-size: 0.78rem;
-  font-weight: 800;
-  padding: 8px 14px;
+  background: var(--gold-btn-gradient);
+  color: #0b0c10;
+  font-size: 0.8rem;
+  font-weight: 850;
+  letter-spacing: 0.02em;
+  padding: 9px 16px;
   border-radius: var(--radius-sm);
-  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 16px rgba(245, 158, 11, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  transition: var(--transition-fast);
 }
 
 .viewRewardsBtn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.6);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(245, 158, 11, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  filter: brightness(1.05);
 }
 
 .vaultWheelBtn {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid var(--border-subtle);
-  color: var(--text-primary);
-  font-size: 0.78rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-gold);
+  color: var(--text-gold);
+  font-size: 0.8rem;
   font-weight: 800;
-  padding: 8px 14px;
+  padding: 9px 16px;
   border-radius: var(--radius-sm);
+  transition: var(--transition-fast);
 }
 
 .vaultWheelBtn:hover {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: var(--accent-primary);
-  color: var(--accent-primary);
-  transform: translateY(-1px);
+  background: rgba(245, 158, 11, 0.12);
+  border-color: var(--accent-gold);
+  color: #fff;
+  box-shadow: 0 4px 14px var(--accent-gold-glow);
+  transform: translateY(-2px);
 }
 
 /* 3D Chest Graphic */
 .rightCol {
   position: relative;
   z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .chestWrapper {
   position: relative;
-  width: 90px;
-  height: 90px;
+  width: 96px;
+  height: 96px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -132,75 +160,80 @@
 }
 
 .chestWrapper:hover {
-  transform: scale(1.1) rotate(-3deg);
+  transform: scale(1.12) rotate(-3deg);
 }
 
 .chestGlow {
   position: absolute;
-  inset: -10px;
+  inset: -12px;
   background: radial-gradient(circle, var(--accent-gold-glow) 0%, transparent 70%);
-  filter: blur(15px);
+  filter: blur(16px);
   animation: pulseGlow 2.5s infinite;
 }
 
 .chestGraphic {
   position: relative;
-  width: 60px;
-  height: 52px;
+  width: 66px;
+  height: 58px;
+  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.6));
 }
 
 .chestLid {
-  width: 60px;
-  height: 22px;
-  background: linear-gradient(180deg, #f59e0b 0%, #b45309 100%);
-  border-radius: 12px 12px 0 0;
-  border: 2px solid #fbbf24;
+  width: 66px;
+  height: 24px;
+  background: linear-gradient(180deg, #ffd700 0%, #d97706 60%, #92400e 100%);
+  border-radius: 14px 14px 0 0;
+  border: 2px solid #fde047;
+  border-bottom: 2px solid #78350f;
   position: relative;
+  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.4);
 }
 
 .chestBody {
-  width: 60px;
-  height: 30px;
-  background: linear-gradient(180deg, #d97706 0%, #78350f 100%);
-  border-radius: 0 0 8px 8px;
-  border: 2px solid #f59e0b;
+  width: 66px;
+  height: 34px;
+  background: linear-gradient(180deg, #b45309 0%, #78350f 60%, #451a03 100%);
+  border-radius: 0 0 10px 10px;
+  border: 2px solid #d97706;
   border-top: none;
   position: relative;
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.5);
 }
 
 .chestLock {
   position: absolute;
-  top: -4px;
+  top: -5px;
   left: 50%;
   transform: translateX(-50%);
-  width: 14px;
-  height: 14px;
-  background: #fbbf24;
+  width: 16px;
+  height: 16px;
+  background: radial-gradient(circle at 35% 35%, #fffbeb 0%, #f59e0b 60%, #78350f 100%);
   border-radius: 50%;
-  border: 2px solid #fff;
-  box-shadow: 0 0 8px #fbbf24;
+  border: 2px solid #fef08a;
+  box-shadow: 0 0 10px #fbbf24;
 }
 
 .crystal {
   position: absolute;
-  font-size: 1.1rem;
+  font-size: 1.15rem;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.5));
 }
 
 .crystal1 {
-  top: -15px;
-  left: -8px;
-  animation: floatAnim 2.5s infinite ease-in-out;
+  top: -16px;
+  left: -10px;
+  animation: floatAnim 2.6s infinite ease-in-out;
 }
 
 .crystal2 {
-  top: -20px;
-  right: -5px;
-  animation: floatAnim 3s infinite ease-in-out 0.5s;
+  top: -22px;
+  right: -6px;
+  animation: floatAnim 3.2s infinite ease-in-out 0.5s;
 }
 
 .crystal3 {
-  bottom: -8px;
-  right: -10px;
+  bottom: -6px;
+  right: -12px;
   animation: floatAnim 2.8s infinite ease-in-out 1s;
 }
 
@@ -208,9 +241,21 @@
   .rewardCard {
     flex-direction: column-reverse;
     align-items: flex-start;
-    padding: 16px;
+    padding: 18px;
+    gap: 16px;
   }
   .rightCol {
     align-self: center;
+  }
+  .rewardTitle {
+    font-size: 1.2rem;
+  }
+  .actionButtonsRow {
+    width: 100%;
+  }
+  .viewRewardsBtn,
+  .vaultWheelBtn {
+    flex: 1;
+    justify-content: center;
   }
 }

@@ -237,20 +237,37 @@ export function XPGame({ isOpen, onClose, onFinishGame, user, highScore = 92, in
           return false;
         }
 
-        // Draw item
+        // Draw clean, balanced, crisp item
         ctx.save();
-        ctx.shadowBlur = 14;
-        ctx.shadowColor = item.color;
+        ctx.shadowBlur = 6;
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.4)';
+        
+        // Base Circle
         ctx.beginPath();
         ctx.arc(item.x, item.y, item.radius, 0, Math.PI * 2);
-        ctx.fillStyle = item.color;
+        
+        // Subtle radial gradient for depth
+        const grad = ctx.createRadialGradient(
+          item.x - item.radius * 0.3, 
+          item.y - item.radius * 0.3, 
+          item.radius * 0.1, 
+          item.x, 
+          item.y, 
+          item.radius
+        );
+        grad.addColorStop(0, '#ffffff');
+        grad.addColorStop(0.3, item.color);
+        grad.addColorStop(1, item.color);
+        ctx.fillStyle = grad;
         ctx.fill();
 
-        ctx.lineWidth = 2;
-        ctx.strokeStyle = '#ffffff';
+        // Crisp 1.5px metallic stroke
+        ctx.shadowBlur = 0;
+        ctx.lineWidth = 1.5;
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.85)';
         ctx.stroke();
 
-        ctx.shadowBlur = 0;
+        // Label
         ctx.fillStyle = '#ffffff';
         ctx.font = 'bold 11px Outfit, sans-serif';
         ctx.textAlign = 'center';

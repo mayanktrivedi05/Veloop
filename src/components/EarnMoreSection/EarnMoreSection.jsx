@@ -36,11 +36,10 @@ export function EarnMoreSection({
       <div className={styles.sectionHeader}>
         <div>
           <div className={styles.titleBadge}>
-            <Zap size={14} color="var(--accent-primary)" />
-            <span>EARN & QUEST HUB</span>
+            <span>EARN MORE</span>
           </div>
           <p className={styles.subtext}>
-            Complete activities, play arcade games, and level up faster.
+            Explore fun activities and earn exciting rewards.
           </p>
         </div>
         <button 
@@ -51,8 +50,7 @@ export function EarnMoreSection({
           }}
           aria-label="View all activities"
         >
-          <span>All Quests</span>
-          <ArrowRight size={16} />
+          <ArrowRight size={18} />
         </button>
       </div>
 
@@ -85,37 +83,14 @@ export function EarnMoreSection({
                 {isCompleted ? <Check size={18} className={styles.checkIcon} /> : <IconComp size={18} />}
               </div>
 
-              <div className={styles.cardDetails}>
-                <span className={styles.cardTitle}>{item.title}</span>
-                <span className={styles.cardRewardPill}>+{item.rewardXP} XP</span>
-              </div>
+              <span className={styles.cardTitle}>{item.title}</span>
 
-              {isCompleted ? (
+              {isCompleted && (
                 <span className={styles.completedBadge}>Done</span>
-              ) : (
-                <span className={styles.readyBadge}>Start</span>
               )}
             </div>
           );
         })}
-
-        {/* Lucky Fortune Wheel Special Action Card */}
-        <div 
-          className={`${styles.activityCard} ${styles.luckyWheelCard}`}
-          onClick={() => {
-            soundFx.playStreak();
-            if (onOpenLuckyWheel) onOpenLuckyWheel();
-          }}
-        >
-          <div className={styles.iconCircleSpecial}>
-            <Gift size={18} color="#ffd700" />
-          </div>
-          <div className={styles.cardDetails}>
-            <span className={styles.cardTitle}>Lucky Spin</span>
-            <span className={styles.cardRewardPillGold}>Free Spin</span>
-          </div>
-          <span className={styles.spinActiveBadge}>Spin</span>
-        </div>
       </div>
     </div>
   );

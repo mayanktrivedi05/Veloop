@@ -50,26 +50,30 @@
 
 .statsRow {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
 }
 
 .statCard {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--border-subtle);
+  background: rgba(22, 26, 42, 0.9);
+  border: 1px solid var(--border-card);
   border-radius: var(--radius-md);
-  padding: 14px;
+  padding: 14px 10px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
   transition: var(--transition-smooth);
   position: relative;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 }
 
 .statCard:hover {
-  background: rgba(255, 255, 255, 0.07);
-  border-color: var(--border-highlight);
+  background: rgba(30, 36, 58, 0.95);
+  border-color: var(--border-gold);
   transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.6);
 }
 
 .clickableCard {
@@ -78,43 +82,43 @@
 
 .statArrow {
   position: absolute;
-  top: 14px;
-  right: 12px;
+  top: 10px;
+  right: 10px;
   color: var(--text-muted);
   transition: var(--transition-smooth);
 }
 
 .clickableCard:hover .statArrow {
-  color: var(--accent-primary);
-  transform: translateX(3px);
+  color: var(--accent-gold);
+  transform: translateX(2px);
 }
 
 .iconCircle {
-  width: 38px;
-  height: 38px;
-  border-radius: var(--radius-sm);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35);
 }
 
 .xpCircle {
-  background: rgba(56, 189, 248, 0.15);
-  border: 1px solid rgba(56, 189, 248, 0.3);
-  color: var(--accent-primary);
+  background: rgba(168, 85, 247, 0.18);
+  border: 1px solid rgba(168, 85, 247, 0.35);
+  color: #c084fc;
 }
 
 .tasksCircle {
-  background: rgba(245, 158, 11, 0.15);
-  border: 1px solid rgba(245, 158, 11, 0.3);
-  color: var(--accent-gold);
+  background: rgba(245, 158, 11, 0.18);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  color: #fbbf24;
 }
 
 .streakCircle {
-  background: rgba(239, 68, 68, 0.15);
-  border: 1px solid rgba(239, 68, 68, 0.3);
-  color: #ef4444;
+  background: rgba(239, 68, 68, 0.18);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #f87171;
 }
 
 .flameIcon {
@@ -124,58 +128,75 @@
 .statInfo {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 2px;
+  width: 100%;
 }
 
 .statLabel {
-  font-size: 0.74rem;
+  font-size: 0.72rem;
   color: var(--text-secondary);
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .statValue {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   font-weight: 800;
   color: #fff;
   font-family: var(--font-heading);
+  white-space: nowrap;
 }
 
 .claimStreakBtn {
-  margin-top: 4px;
+  margin-top: 2px;
   background: linear-gradient(135deg, #ef4444 0%, #f97316 100%);
   color: #fff;
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 800;
-  padding: 6px 10px;
+  padding: 4px 8px;
   border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 4px;
-  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.35);
+  box-shadow: 0 3px 10px rgba(239, 68, 68, 0.35);
+  width: 100%;
 }
 
 .claimStreakBtn:hover:not(:disabled) {
   transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(239, 68, 68, 0.5);
+  box-shadow: 0 5px 14px rgba(239, 68, 68, 0.5);
 }
 
 .claimedBtn {
-  background: rgba(16, 185, 129, 0.2);
-  border: 1px solid rgba(16, 185, 129, 0.4);
+  background: rgba(16, 185, 129, 0.18);
+  border: 1px solid rgba(16, 185, 129, 0.35);
   color: #34d399;
   box-shadow: none;
   cursor: default;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 600px) {
+  .boostSection {
+    padding: 14px;
+    gap: 12px;
+  }
   .statsRow {
-    grid-template-columns: 1fr;
-    gap: 10px;
+    gap: 8px;
   }
   .statCard {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+    padding: 10px 4px;
+    gap: 6px;
+  }
+  .iconCircle {
+    width: 32px;
+    height: 32px;
+  }
+  .statLabel {
+    font-size: 0.65rem;
+  }
+  .statValue {
+    font-size: 0.88rem;
   }
 }

@@ -1,19 +1,19 @@
 .activityContainer {
   background: var(--bg-card);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
-  padding: 22px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.5);
+  gap: 18px;
+  box-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.05);
   transition: var(--transition-smooth);
 }
 
 .activityContainer:hover {
-  border-color: var(--border-highlight);
+  border-color: var(--border-gold);
 }
 
 .headerRow {
@@ -21,7 +21,7 @@
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 12px;
 }
 
 .headerTitleGroup {
@@ -40,34 +40,41 @@
 }
 
 .titleText {
-  font-size: 0.82rem;
-  font-weight: 800;
+  font-family: var(--font-heading);
+  font-size: 0.88rem;
+  font-weight: 850;
   color: #fff;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 .filterBar {
   display: flex;
   gap: 4px;
-  background: rgba(0, 0, 0, 0.35);
+  background: rgba(0, 0, 0, 0.45);
   padding: 3px;
   border-radius: var(--radius-full);
   border: 1px solid var(--border-subtle);
 }
 
 .filterPill {
-  font-size: 0.7rem;
-  font-weight: 700;
-  padding: 4px 10px;
+  font-size: 0.72rem;
+  font-weight: 750;
+  padding: 5px 12px;
   border-radius: var(--radius-full);
   color: var(--text-secondary);
   transition: var(--transition-fast);
 }
 
-.filterPillActive {
-  background: var(--accent-primary);
+.filterPill:hover {
   color: #fff;
-  box-shadow: 0 2px 8px var(--accent-primary-glow);
+}
+
+.filterPillActive {
+  background: var(--gold-btn-gradient);
+  color: #0b0c10;
+  font-weight: 850;
+  box-shadow: 0 2px 10px rgba(245, 158, 11, 0.4);
 }
 
 /* Activity List */
@@ -81,22 +88,22 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 10px 12px;
+  padding: 12px 14px;
   border-radius: var(--radius-md);
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid transparent;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid var(--border-subtle);
   transition: var(--transition-smooth);
 }
 
 .activityRow:hover {
-  background: rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.06);
   border-color: var(--border-highlight);
-  transform: translateX(2px);
+  transform: translateX(3px);
 }
 
 .iconCircle {
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   border-radius: var(--radius-sm);
   border: 1px solid;
   display: flex;
@@ -120,8 +127,8 @@
 }
 
 .activityTitle {
-  font-size: 0.8rem;
-  font-weight: 700;
+  font-size: 0.82rem;
+  font-weight: 750;
   color: #fff;
   white-space: nowrap;
   overflow: hidden;
@@ -129,17 +136,23 @@
 }
 
 .activityTime {
-  font-size: 0.68rem;
+  font-size: 0.7rem;
   color: var(--text-muted);
 }
 
 .activityAmount {
-  font-size: 0.78rem;
-  font-weight: 800;
+  font-size: 0.8rem;
+  font-weight: 850;
 }
 
 .arrowIcon {
   color: var(--text-muted);
+  transition: transform 0.2s ease;
+}
+
+.activityRow:hover .arrowIcon {
+  transform: translateX(3px);
+  color: #fff;
 }
 
 .emptyState {
@@ -148,63 +161,66 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 24px;
+  padding: 28px;
   color: var(--text-secondary);
-  font-size: 0.8rem;
+  font-size: 0.82rem;
 }
 
 /* Today's Summary Footer */
 .summaryFooter {
-  background: rgba(0, 0, 0, 0.3);
-  border: 1px solid var(--border-subtle);
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--border-gold);
   border-radius: var(--radius-md);
-  padding: 12px 14px;
+  padding: 14px 16px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
 .summaryTitle {
-  font-size: 0.74rem;
-  font-weight: 800;
+  font-size: 0.76rem;
+  font-weight: 850;
   color: var(--text-gold);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .summaryStats {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  gap: 12px;
 }
 
 .summaryItem {
   display: flex;
   align-items: center;
-  gap: 8px;
-  background: rgba(255, 255, 255, 0.04);
-  padding: 8px 10px;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  padding: 10px 12px;
   border-radius: var(--radius-sm);
 }
 
 .xpCircle,
 .veCircle {
-  width: 26px;
-  height: 26px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.65rem;
+  font-size: 0.68rem;
   font-weight: 900;
 }
 
 .xpCircle {
-  background: rgba(56, 189, 248, 0.2);
+  background: rgba(56, 189, 248, 0.18);
   color: var(--accent-primary);
   border: 1px solid var(--accent-primary);
 }
 
 .veCircle {
-  background: rgba(245, 158, 11, 0.2);
+  background: rgba(245, 158, 11, 0.18);
   color: var(--accent-gold);
   border: 1px solid var(--accent-gold);
 }
@@ -215,12 +231,23 @@
 }
 
 .summaryValue {
-  font-size: 0.84rem;
-  font-weight: 800;
+  font-family: var(--font-heading);
+  font-size: 0.92rem;
+  font-weight: 850;
   color: #fff;
 }
 
 .summarySub {
-  font-size: 0.65rem;
+  font-size: 0.68rem;
   color: var(--text-secondary);
+}
+
+@media (max-width: 480px) {
+  .activityContainer {
+    padding: 18px;
+  }
+  .filterPill {
+    padding: 4px 8px;
+    font-size: 0.68rem;
+  }
 }
