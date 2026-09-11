@@ -1,18 +1,18 @@
 .questHubSection {
-  background: linear-gradient(180deg, #07112e 0%, #04091c 100%);
-  border: 1px solid rgba(56, 189, 248, 0.35);
+  background: var(--bg-panel-gradient);
+  border: 1px solid var(--border-highlight);
   border-radius: var(--radius-lg);
   padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 16px;
-  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(37, 99, 235, 0.15);
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.8), var(--glow-card-blue);
   transition: var(--transition-smooth);
   width: 100%;
 }
 
 .questHubSection:hover {
-  border-color: rgba(56, 189, 248, 0.55);
+  border-color: var(--accent-primary);
 }
 
 .sectionHeader {
@@ -39,30 +39,30 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: rgba(14, 38, 86, 0.8);
-  border: 1.5px solid #38bdf8;
+  background: var(--bg-card-inner);
+  border: 1.5px solid var(--accent-primary);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+  box-shadow: 0 0 10px var(--accent-primary-glow);
 }
 
 .headerTitle {
   font-family: var(--font-heading);
   font-size: 1.05rem;
   font-weight: 900;
-  color: #ffffff;
+  color: var(--text-primary);
   letter-spacing: 0.04em;
 }
 
 .cyanHighlight {
-  color: #38bdf8;
-  text-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+  color: var(--accent-primary);
+  text-shadow: 0 0 10px var(--accent-primary-glow);
 }
 
 .subtext {
   font-size: 0.76rem;
-  color: #94a3b8;
+  color: var(--text-secondary);
   max-width: 380px;
   line-height: 1.4;
 }
@@ -71,20 +71,20 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: rgba(14, 38, 86, 0.7);
-  border: 1px solid rgba(56, 189, 248, 0.5);
-  color: #38bdf8;
+  background: var(--bg-card-inner);
+  border: 1px solid var(--border-highlight);
+  color: var(--accent-primary);
   font-size: 0.76rem;
   font-weight: 850;
   padding: 6px 14px;
   border-radius: var(--radius-full);
-  box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
+  box-shadow: 0 0 10px var(--accent-primary-glow);
   transition: var(--transition-fast);
 }
 
 .allQuestsBtn:hover {
-  background: rgba(37, 99, 235, 0.35);
-  border-color: #38bdf8;
+  background: var(--bg-card-hover);
+  border-color: var(--accent-primary);
   color: #ffffff;
   transform: translateY(-1px);
 }
@@ -97,8 +97,8 @@
 }
 
 .questRowCard {
-  background: rgba(7, 16, 42, 0.75);
-  border: 1px solid rgba(37, 99, 235, 0.3);
+  background: var(--bg-card-inner);
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
   padding: 12px 16px;
   display: flex;
@@ -109,8 +109,8 @@
 }
 
 .questRowCard:hover {
-  background: rgba(14, 28, 68, 0.9);
-  border-color: rgba(56, 189, 248, 0.5);
+  background: var(--bg-card-hover);
+  border-color: var(--accent-primary);
   transform: translateX(3px);
 }
 

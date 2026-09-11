@@ -2,16 +2,16 @@
   position: relative;
   padding: 22px 20px;
   border-radius: var(--radius-lg);
-  background: linear-gradient(135deg, #07112e 0%, #04091c 70%, #0a1738 100%);
-  border: 1px solid rgba(56, 189, 248, 0.35);
-  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.8), 0 0 24px rgba(37, 99, 235, 0.2);
+  background: var(--bg-panel-gradient);
+  border: 1px solid var(--border-highlight);
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.8), var(--glow-card-blue);
   overflow: hidden;
   transition: var(--transition-smooth);
 }
 
 .heroCard:hover {
-  border-color: rgba(56, 189, 248, 0.6);
-  box-shadow: 0 20px 48px -10px rgba(0, 0, 0, 0.9), 0 0 30px rgba(56, 189, 248, 0.35);
+  border-color: var(--accent-primary);
+  box-shadow: 0 20px 48px -10px rgba(0, 0, 0, 0.9), 0 0 30px var(--accent-primary-glow);
 }
 
 /* Golden Mountain & Light Beams Background */
@@ -21,10 +21,11 @@
   right: -20px;
   width: 260px;
   height: 260px;
-  background: linear-gradient(135deg, transparent 40%, rgba(245, 158, 11, 0.18) 70%, rgba(255, 215, 0, 0.3) 100%);
+  background: linear-gradient(135deg, transparent 40%, var(--accent-gold-glow) 70%, var(--accent-gold-bright) 100%);
+  opacity: 0.25;
   transform: rotate(-15deg);
   pointer-events: none;
-  filter: blur(15px);
+  filter: blur(18px);
 }
 
 .mountainGraphic {
@@ -33,7 +34,7 @@
   bottom: 0;
   width: 240px;
   height: 180px;
-  background: radial-gradient(circle at 100% 100%, rgba(245, 158, 11, 0.15) 0%, rgba(56, 189, 248, 0.08) 50%, transparent 80%);
+  background: radial-gradient(circle at 100% 100%, var(--accent-gold-glow) 0%, var(--accent-primary-glow) 50%, transparent 80%);
   pointer-events: none;
 }
 

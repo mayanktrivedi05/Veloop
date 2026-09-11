@@ -1,7 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap');
-
+/* ---------------- THEME 1: COSMIC (DEFAULT) ---------------- */
+[data-theme='aurora'],
 :root {
-  /* Exact Reference Color System - Midnight Navy & Electric Cyan & Royal Gold */
   --bg-main: #020617;
   --bg-canvas: #03071e;
   --bg-card: #060f2a;
@@ -15,8 +14,11 @@
   --border-neon-blue: rgba(56, 189, 248, 0.45);
   --border-neon-gold: rgba(245, 158, 11, 0.55);
   --border-subtle: rgba(30, 58, 138, 0.4);
+  --border-highlight: rgba(56, 189, 248, 0.45);
+  --border-gold: rgba(245, 158, 11, 0.55);
 
   --accent-primary: #38bdf8;
+  --accent-primary-glow: rgba(56, 189, 248, 0.35);
   --accent-cyan-bright: #00f0ff;
   --accent-blue: #2563eb;
   --accent-blue-deep: #1d4ed8;
@@ -29,6 +31,7 @@
   --accent-gold: #f59e0b;
   --accent-gold-light: #fbbf24;
   --accent-gold-bright: #ffd700;
+  --accent-gold-glow: rgba(255, 215, 0, 0.4);
   
   --gold-metallic: linear-gradient(180deg, #fffbeb 0%, #ffd700 45%, #f59e0b 100%);
   --gold-btn-gradient: linear-gradient(180deg, #ffd700 0%, #f59e0b 60%, #d97706 100%);
@@ -43,133 +46,165 @@
   --text-gold-bright: #ffd700;
   --text-cyan: #38bdf8;
 
-  --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono: 'Space Grotesk', monospace;
-
   --glow-card-blue: 0 0 20px rgba(37, 99, 235, 0.25);
   --glow-card-gold: 0 0 24px rgba(245, 158, 11, 0.35);
   --glow-cyan-pill: 0 0 12px rgba(56, 189, 248, 0.4);
-
-  --radius-xs: 6px;
-  --radius-sm: 10px;
-  --radius-md: 14px;
-  --radius-lg: 22px;
-  --radius-xl: 30px;
-  --radius-full: 9999px;
-
-  --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-smooth: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  --transition-bounce: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 /* ---------------- THEME 2: ROYAL GOLD & ONYX ---------------- */
 [data-theme='gold'] {
-  --bg-main: #0a0a0f;
-  --bg-secondary: #141310;
-  --bg-card: rgba(23, 20, 15, 0.82);
-  --bg-card-hover: rgba(36, 31, 20, 0.95);
-  --bg-glass: rgba(18, 16, 12, 0.9);
-  --bg-panel-gradient: linear-gradient(135deg, rgba(35, 28, 16, 0.85) 0%, rgba(16, 14, 10, 0.98) 100%);
+  --bg-main: #0a0804;
+  --bg-canvas: #120e06;
+  --bg-card: #181308;
+  --bg-card-alt: #221a0a;
+  --bg-card-inner: rgba(38, 28, 10, 0.7);
+  --bg-glass: rgba(18, 14, 6, 0.92);
+  --bg-panel-gradient: linear-gradient(180deg, #2a200a 0%, #120e06 100%);
 
-  --border-subtle: rgba(245, 158, 11, 0.15);
-  --border-highlight: rgba(251, 191, 36, 0.45);
-  --border-focus: rgba(245, 158, 11, 0.8);
-  --border-gold: rgba(245, 158, 11, 0.6);
+  --border-card-blue: #d97706;
+  --border-card-cyan: #f59e0b;
+  --border-neon-blue: rgba(251, 191, 36, 0.45);
+  --border-neon-gold: rgba(255, 215, 0, 0.65);
+  --border-subtle: rgba(245, 158, 11, 0.35);
+  --border-highlight: rgba(251, 191, 36, 0.55);
+  --border-gold: rgba(255, 215, 0, 0.65);
 
-  --accent-primary: #f59e0b;
-  --accent-primary-glow: rgba(245, 158, 11, 0.5);
-  --accent-secondary: #fbbf24;
-  --accent-secondary-glow: rgba(251, 191, 36, 0.4);
+  --accent-primary: #fbbf24;
+  --accent-primary-glow: rgba(251, 191, 36, 0.4);
+  --accent-cyan-bright: #fde047;
+  --accent-blue: #d97706;
+  --accent-blue-deep: #b45309;
+  --accent-secondary: #f59e0b;
+  --accent-purple: #ea580c;
+  --accent-magenta: #f97316;
+  --accent-orange: #f59e0b;
+  --accent-red: #dc2626;
+
   --accent-gold: #ffd700;
   --accent-gold-light: #fef08a;
+  --accent-gold-bright: #ffffff;
   --accent-gold-glow: rgba(255, 215, 0, 0.5);
-  --accent-emerald: #10b981;
-  --accent-emerald-glow: rgba(16, 185, 129, 0.4);
-  --accent-rose: #f43f5e;
-  --accent-cyan: #38bdf8;
+
+  --gold-metallic: linear-gradient(180deg, #ffffff 0%, #ffd700 50%, #d97706 100%);
+  --gold-btn-gradient: linear-gradient(180deg, #ffd700 0%, #f59e0b 60%, #d97706 100%);
+  --purple-btn-gradient: linear-gradient(90deg, #b45309 0%, #d97706 50%, #f59e0b 100%);
+  --orange-btn-gradient: linear-gradient(90deg, #d97706 0%, #ea580c 100%);
+  --blue-btn-gradient: linear-gradient(90deg, #b45309 0%, #f59e0b 100%);
 
   --text-primary: #fffdfa;
-  --text-secondary: #c7b99c;
-  --text-muted: #857a66;
+  --text-secondary: #d4c5a9;
+  --text-muted: #8c7e68;
   --text-gold: #ffd700;
+  --text-gold-bright: #ffffff;
   --text-cyan: #fbbf24;
 
-  --glow-cyan: 0 0 30px rgba(251, 191, 36, 0.35);
-  --glow-gold: 0 0 35px rgba(255, 215, 0, 0.45);
-  --glow-purple: 0 0 30px rgba(245, 158, 11, 0.35);
+  --glow-card-blue: 0 0 20px rgba(245, 158, 11, 0.3);
+  --glow-card-gold: 0 0 28px rgba(255, 215, 0, 0.45);
+  --glow-cyan-pill: 0 0 14px rgba(251, 191, 36, 0.45);
 }
 
 /* ---------------- THEME 3: CYBER SYNTHWAVE / NEON ---------------- */
 [data-theme='synthwave'] {
-  --bg-main: #0d071a;
-  --bg-secondary: #170b2e;
-  --bg-card: rgba(28, 14, 52, 0.8);
-  --bg-card-hover: rgba(43, 20, 80, 0.92);
-  --bg-glass: rgba(20, 10, 38, 0.88);
-  --bg-panel-gradient: linear-gradient(135deg, rgba(38, 16, 74, 0.85) 0%, rgba(16, 8, 32, 0.98) 100%);
+  --bg-main: #0c051a;
+  --bg-canvas: #130828;
+  --bg-card: #1c0b38;
+  --bg-card-alt: #26104c;
+  --bg-card-inner: rgba(42, 16, 76, 0.7);
+  --bg-glass: rgba(16, 7, 34, 0.92);
+  --bg-panel-gradient: linear-gradient(180deg, #2c1056 0%, #100624 100%);
 
-  --border-subtle: rgba(236, 72, 153, 0.18);
-  --border-highlight: rgba(236, 72, 153, 0.45);
-  --border-focus: rgba(168, 85, 247, 0.8);
-  --border-gold: rgba(236, 72, 153, 0.5);
+  --border-card-blue: #9333ea;
+  --border-card-cyan: #ec4899;
+  --border-neon-blue: rgba(236, 72, 153, 0.45);
+  --border-neon-gold: rgba(168, 85, 247, 0.6);
+  --border-subtle: rgba(168, 85, 247, 0.35);
+  --border-highlight: rgba(236, 72, 153, 0.55);
+  --border-gold: rgba(236, 72, 153, 0.6);
 
   --accent-primary: #ec4899;
-  --accent-primary-glow: rgba(236, 72, 153, 0.5);
-  --accent-secondary: #a855f7;
-  --accent-secondary-glow: rgba(168, 85, 247, 0.5);
+  --accent-primary-glow: rgba(236, 72, 153, 0.45);
+  --accent-cyan-bright: #f472b6;
+  --accent-blue: #a855f7;
+  --accent-blue-deep: #7e22ce;
+  --accent-secondary: #c084fc;
+  --accent-purple: #c084fc;
+  --accent-magenta: #f43f5e;
+  --accent-orange: #fb7185;
+  --accent-red: #e11d48;
+
   --accent-gold: #06b6d4;
   --accent-gold-light: #67e8f9;
+  --accent-gold-bright: #a5f3fc;
   --accent-gold-glow: rgba(6, 182, 212, 0.5);
-  --accent-emerald: #10b981;
-  --accent-rose: #f43f5e;
-  --accent-cyan: #f43f5e;
+
+  --gold-metallic: linear-gradient(180deg, #fdf2f8 0%, #ec4899 50%, #a855f7 100%);
+  --gold-btn-gradient: linear-gradient(180deg, #f472b6 0%, #ec4899 60%, #c026d3 100%);
+  --purple-btn-gradient: linear-gradient(90deg, #a855f7 0%, #ec4899 50%, #f43f5e 100%);
+  --orange-btn-gradient: linear-gradient(90deg, #ec4899 0%, #f43f5e 100%);
+  --blue-btn-gradient: linear-gradient(90deg, #7e22ce 0%, #a855f7 100%);
 
   --text-primary: #fdf2f8;
   --text-secondary: #d8b4e2;
-  --text-muted: #866099;
+  --text-muted: #8e629e;
   --text-gold: #f472b6;
+  --text-gold-bright: #ffffff;
   --text-cyan: #38bdf8;
 
-  --glow-cyan: 0 0 35px rgba(236, 72, 153, 0.4);
-  --glow-gold: 0 0 35px rgba(6, 182, 212, 0.4);
-  --glow-purple: 0 0 35px rgba(168, 85, 247, 0.45);
+  --glow-card-blue: 0 0 20px rgba(168, 85, 247, 0.35);
+  --glow-card-gold: 0 0 28px rgba(236, 72, 153, 0.45);
+  --glow-cyan-pill: 0 0 14px rgba(236, 72, 153, 0.45);
 }
 
 /* ---------------- THEME 4: EMERALD MATRIX ---------------- */
 [data-theme='emerald'] {
-  --bg-main: #061412;
-  --bg-secondary: #0a1f1b;
-  --bg-card: rgba(10, 31, 27, 0.82);
-  --bg-card-hover: rgba(15, 48, 41, 0.92);
-  --bg-glass: rgba(8, 24, 21, 0.88);
-  --bg-panel-gradient: linear-gradient(135deg, rgba(14, 44, 38, 0.85) 0%, rgba(6, 20, 18, 0.98) 100%);
+  --bg-main: #03140e;
+  --bg-canvas: #061c14;
+  --bg-card: #09281d;
+  --bg-card-alt: #0d3829;
+  --bg-card-inner: rgba(14, 52, 38, 0.7);
+  --bg-glass: rgba(5, 22, 16, 0.92);
+  --bg-panel-gradient: linear-gradient(180deg, #104230 0%, #051810 100%);
 
-  --border-subtle: rgba(16, 185, 129, 0.16);
-  --border-highlight: rgba(52, 211, 153, 0.45);
-  --border-focus: rgba(16, 185, 129, 0.8);
-  --border-gold: rgba(234, 179, 8, 0.5);
+  --border-card-blue: #059669;
+  --border-card-cyan: #10b981;
+  --border-neon-blue: rgba(16, 185, 129, 0.45);
+  --border-neon-gold: rgba(52, 211, 153, 0.6);
+  --border-subtle: rgba(16, 185, 129, 0.35);
+  --border-highlight: rgba(52, 211, 153, 0.55);
+  --border-gold: rgba(52, 211, 153, 0.6);
 
   --accent-primary: #10b981;
-  --accent-primary-glow: rgba(16, 185, 129, 0.5);
-  --accent-secondary: #34d399;
-  --accent-secondary-glow: rgba(52, 211, 153, 0.45);
-  --accent-gold: #a3e635;
-  --accent-gold-light: #bef264;
-  --accent-gold-glow: rgba(163, 230, 53, 0.45);
-  --accent-emerald: #10b981;
-  --accent-rose: #f43f5e;
-  --accent-cyan: #38bdf8;
+  --accent-primary-glow: rgba(16, 185, 129, 0.45);
+  --accent-cyan-bright: #34d399;
+  --accent-blue: #059669;
+  --accent-blue-deep: #047857;
+  --accent-secondary: #6ee7b7;
+  --accent-purple: #10b981;
+  --accent-magenta: #14b8a6;
+  --accent-orange: #84cc16;
+  --accent-red: #ef4444;
+
+  --accent-gold: #bef264;
+  --accent-gold-light: #d9f99d;
+  --accent-gold-bright: #ecfccb;
+  --accent-gold-glow: rgba(190, 242, 100, 0.45);
+
+  --gold-metallic: linear-gradient(180deg, #f0fdf4 0%, #10b981 50%, #047857 100%);
+  --gold-btn-gradient: linear-gradient(180deg, #34d399 0%, #10b981 60%, #059669 100%);
+  --purple-btn-gradient: linear-gradient(90deg, #059669 0%, #10b981 50%, #34d399 100%);
+  --orange-btn-gradient: linear-gradient(90deg, #10b981 0%, #84cc16 100%);
+  --blue-btn-gradient: linear-gradient(90deg, #047857 0%, #10b981 100%);
 
   --text-primary: #ecfdf5;
   --text-secondary: #a7f3d0;
-  --text-muted: #4b7a6c;
+  --text-muted: #538874;
   --text-gold: #bef264;
+  --text-gold-bright: #ffffff;
   --text-cyan: #34d399;
 
-  --glow-cyan: 0 0 35px rgba(16, 185, 129, 0.4);
-  --glow-gold: 0 0 35px rgba(163, 230, 53, 0.4);
-  --glow-purple: 0 0 35px rgba(52, 211, 153, 0.45);
+  --glow-card-blue: 0 0 20px rgba(16, 185, 129, 0.35);
+  --glow-card-gold: 0 0 28px rgba(52, 211, 153, 0.45);
+  --glow-cyan-pill: 0 0 14px rgba(16, 185, 129, 0.45);
 }
 
 * {

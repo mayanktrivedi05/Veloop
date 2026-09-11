@@ -3,16 +3,17 @@
   align-items: center;
   justify-content: space-between;
   padding: 12px 20px;
-  background: rgba(3, 7, 24, 0.85);
+  background: var(--bg-glass);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(30, 58, 138, 0.3);
+  border-bottom: 1px solid var(--border-subtle);
   position: sticky;
   top: 0;
   z-index: 1000;
   width: 100%;
   max-width: 100vw;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .menuToggle {
@@ -22,14 +23,14 @@
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  background: rgba(14, 28, 64, 0.7);
-  border: 1px solid rgba(56, 189, 248, 0.25);
-  color: #fff;
+  background: var(--bg-card-inner);
+  border: 1px solid var(--border-highlight);
+  color: var(--text-primary);
   transition: var(--transition-fast);
 }
 
 .menuToggle:hover {
-  background: rgba(30, 64, 175, 0.5);
+  background: var(--bg-card-hover);
   border-color: var(--accent-primary);
   transform: scale(1.05);
 }
@@ -44,8 +45,8 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  background: rgba(10, 20, 48, 0.8);
-  border: 1px solid rgba(245, 158, 11, 0.4);
+  background: var(--bg-card-inner);
+  border: 1px solid var(--border-gold);
   padding: 6px 12px;
   border-radius: var(--radius-full);
   cursor: pointer;
@@ -54,8 +55,8 @@
 }
 
 .balanceItemVE:hover {
-  background: rgba(245, 158, 11, 0.15);
-  border-color: var(--accent-gold);
+  background: var(--bg-card-hover);
+  border-color: var(--accent-gold-light);
   transform: translateY(-1px);
 }
 
@@ -63,42 +64,42 @@
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #ffd700 0%, #f59e0b 100%);
+  background: var(--gold-btn-gradient);
   color: #000;
   font-weight: 900;
   font-size: 0.65rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 6px rgba(255, 215, 0, 0.6);
+  box-shadow: 0 0 6px var(--accent-gold-glow);
 }
 
 .balanceItemGem {
   display: flex;
   align-items: center;
   gap: 6px;
-  background: rgba(10, 20, 48, 0.8);
-  border: 1px solid rgba(56, 189, 248, 0.4);
+  background: var(--bg-card-inner);
+  border: 1px solid var(--border-highlight);
   padding: 6px 12px;
   border-radius: var(--radius-full);
   cursor: pointer;
-  box-shadow: 0 0 10px rgba(56, 189, 248, 0.15);
+  box-shadow: 0 0 10px var(--accent-primary-glow);
   transition: var(--transition-fast);
 }
 
 .balanceItemGem:hover {
-  background: rgba(56, 189, 248, 0.15);
+  background: var(--bg-card-hover);
   border-color: var(--accent-primary);
   transform: translateY(-1px);
 }
 
 .gemIcon {
-  color: #38bdf8;
-  filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.6));
+  color: var(--accent-primary);
+  filter: drop-shadow(0 0 6px var(--accent-primary-glow));
 }
 
 .balanceValue {
-  color: #fff;
+  color: var(--text-primary);
   font-family: var(--font-heading);
   font-weight: 800;
   font-size: 0.82rem;
@@ -115,9 +116,9 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: rgba(14, 28, 64, 0.7);
-  border: 1px solid rgba(56, 189, 248, 0.25);
-  color: #38bdf8;
+  background: var(--bg-card-inner);
+  border: 1px solid var(--border-highlight);
+  color: var(--accent-primary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -126,9 +127,9 @@
 }
 
 .iconCircleBtn:hover {
-  background: rgba(30, 64, 175, 0.5);
+  background: var(--bg-card-hover);
   border-color: var(--accent-primary);
-  color: #fff;
+  color: var(--text-primary);
   transform: scale(1.05);
 }
 
@@ -139,14 +140,14 @@
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: #ef4444;
+  background: var(--accent-red);
   color: #fff;
   font-size: 0.62rem;
   font-weight: 900;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid #020617;
+  border: 2px solid var(--bg-main);
   box-shadow: 0 0 8px rgba(239, 68, 68, 0.8);
 }
 
@@ -155,9 +156,9 @@
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
-  border: 2px solid #38bdf8;
-  box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+  background: var(--bg-panel-gradient);
+  border: 2px solid var(--accent-primary);
+  box-shadow: 0 0 12px var(--accent-primary-glow);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -170,7 +171,7 @@
 .crownAvatarWrapper:hover {
   transform: scale(1.08);
   border-color: var(--accent-gold);
-  box-shadow: 0 0 16px rgba(255, 215, 0, 0.5);
+  box-shadow: 0 0 16px var(--accent-gold-glow);
 }
 
 .crownIconTop {
@@ -183,7 +184,7 @@
   font-family: var(--font-heading);
   font-size: 0.6rem;
   font-weight: 900;
-  color: #ffd700;
+  color: var(--accent-gold-bright);
   background: rgba(0, 0, 0, 0.6);
   padding: 0 4px;
   border-radius: 4px;
@@ -208,7 +209,7 @@
 .greetingTitle {
   font-size: 1.35rem;
   font-weight: 800;
-  color: #fff;
+  color: var(--text-primary);
   line-height: 1.25;
 }
 
@@ -216,18 +217,18 @@
   font-family: var(--font-heading);
   font-size: 1.75rem;
   font-weight: 900;
-  background: linear-gradient(180deg, #fffbeb 0%, #ffd700 45%, #f59e0b 100%);
+  background: var(--gold-metallic);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  filter: drop-shadow(0 2px 8px rgba(245, 158, 11, 0.3));
+  filter: drop-shadow(0 2px 8px var(--accent-gold-glow));
 }
 
 .subtext {
   font-size: 0.78rem;
-  color: #94a3b8;
+  color: var(--text-secondary);
   max-width: 420px;
   line-height: 1.4;
 }
@@ -236,20 +237,20 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: rgba(14, 28, 64, 0.6);
-  border: 1px solid rgba(245, 158, 11, 0.4);
-  color: #fff;
+  background: var(--bg-card-inner);
+  border: 1px solid var(--border-gold);
+  color: var(--text-primary);
   font-size: 0.76rem;
   font-weight: 800;
   padding: 6px 14px;
   border-radius: var(--radius-full);
-  box-shadow: 0 0 10px rgba(245, 158, 11, 0.15);
+  box-shadow: 0 0 10px var(--accent-gold-glow);
   transition: var(--transition-fast);
 }
 
 .themePillBtn:hover {
-  background: rgba(245, 158, 11, 0.15);
-  border-color: var(--accent-gold);
+  background: var(--bg-card-hover);
+  border-color: var(--accent-gold-light);
   transform: translateY(-1px);
 }
 
@@ -268,7 +269,7 @@
   top: calc(100% + 10px);
   right: 0;
   width: 260px;
-  background: var(--bg-panel-gradient);
+  background: var(--bg-card-alt);
   border: 1px solid var(--border-highlight);
   border-radius: var(--radius-md);
   padding: 14px;
@@ -290,7 +291,7 @@
 .notifHeader h4 {
   font-size: 0.9rem;
   font-weight: 800;
-  color: #fff;
+  color: var(--text-primary);
 }
 
 .markRead {
@@ -325,7 +326,7 @@
 .notifTitle {
   font-size: 0.78rem;
   font-weight: 700;
-  color: #fff;
+  color: var(--text-primary);
 }
 
 .notifTime {
@@ -337,22 +338,25 @@
 .drawerOverlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   z-index: 2000;
   animation: fadeIn 0.2s ease;
 }
 
 .drawerContent {
-  width: 290px;
+  width: 295px;
   height: 100%;
-  background: #04091c;
-  border-right: 1px solid var(--border-blue-neon);
+  background: var(--bg-card-alt);
+  border-right: 1px solid var(--border-highlight);
   padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 20px;
   overflow-y: auto;
+  box-shadow: 10px 0 35px rgba(0, 0, 0, 0.6);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .drawerHeader {
@@ -372,12 +376,13 @@
   height: 44px;
   border-radius: 50%;
   border: 2px solid var(--accent-primary);
+  box-shadow: 0 0 10px var(--accent-primary-glow);
 }
 
 .drawerUserName {
   font-size: 0.95rem;
   font-weight: 800;
-  color: #fff;
+  color: var(--text-primary);
 }
 
 .drawerUserHandle {
@@ -389,11 +394,18 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--bg-card-inner);
+  border: 1px solid var(--border-subtle);
   color: var(--text-primary);
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: var(--transition-fast);
+}
+
+.drawerCloseBtn:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--accent-primary);
 }
 
 .drawerBalances {
@@ -403,7 +415,7 @@
 }
 
 .drawerBalanceCard {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--bg-card-inner);
   border: 1px solid var(--border-subtle);
   padding: 10px;
   border-radius: var(--radius-sm);
@@ -420,7 +432,7 @@
 .drawerBalVal {
   font-size: 0.95rem;
   font-weight: 800;
-  color: #fff;
+  color: var(--text-primary);
 }
 
 .drawerThemeSection {
@@ -450,15 +462,24 @@
   gap: 4px;
   padding: 8px 4px;
   border-radius: var(--radius-sm);
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--bg-card-inner);
   border: 1px solid var(--border-subtle);
   color: var(--text-primary);
   font-size: 0.7rem;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.drawerThemeCard:hover {
+  border-color: var(--accent-primary);
+  background: var(--bg-card-hover);
 }
 
 .drawerThemeActive {
-  border-color: var(--accent-primary);
-  background: rgba(56, 189, 248, 0.15);
+  border-color: var(--accent-gold);
+  background: var(--accent-gold-glow);
+  box-shadow: 0 0 10px var(--accent-gold-glow);
+  color: var(--accent-gold-bright);
 }
 
 .drawerNav {
@@ -473,7 +494,8 @@
   gap: 12px;
   padding: 10px 12px;
   border-radius: var(--radius-sm);
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--bg-card-inner);
+  border: 1px solid var(--border-subtle);
   font-size: 0.84rem;
   font-weight: 700;
   color: var(--text-primary);
@@ -482,7 +504,8 @@
 }
 
 .drawerNavItem:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--bg-card-hover);
+  border-color: var(--accent-primary);
 }
 
 @media (max-width: 600px) {
