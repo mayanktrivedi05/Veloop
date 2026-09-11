@@ -1,93 +1,145 @@
 import React from 'react';
 import styles from './EarnMoreSection.module.css';
 import { 
-  Play, 
-  ListChecks, 
-  Users, 
-  Magnet, 
   Gamepad2, 
-  Flame, 
-  ArrowRight, 
-  Sparkles,
-  Check,
-  Zap,
-  Gift
+  Calendar, 
+  Users, 
+  Rocket, 
+  Zap, 
+  ChevronRight, 
+  ClipboardList,
+  Check
 } from 'lucide-react';
 import { soundFx } from '../../utils/soundEffects';
 
-const ICON_MAP = {
-  'watch-earn': Play,
-  'daily-tasks': ListChecks,
-  'refer-earn': Users,
-  'xp-catcher': Magnet,
-  'mini-games': Gamepad2,
-  'streak-bonus': Flame,
-};
+const QUEST_ITEMS = [
+  {
+    id: 'watch-earn',
+    title: 'Watch & Earn',
+    rewardXP: 50,
+    icon: Gamepad2,
+    squircleClass: styles.purpleSquircle,
+    btnClass: styles.blueBtn,
+    iconColor: '#c084fc'
+  },
+  {
+    id: 'daily-tasks',
+    title: 'Daily Tasks',
+    rewardXP: 30,
+    icon: Calendar,
+    squircleClass: styles.goldSquircle,
+    btnClass: styles.goldBtn,
+    iconColor: '#fbbf24'
+  },
+  {
+    id: 'refer-earn',
+    title: 'Refer & Earn',
+    rewardXP: 100,
+    icon: Users,
+    squircleClass: styles.orangeSquircle,
+    btnClass: styles.orangeBtn,
+    iconColor: '#f97316'
+  },
+  {
+    id: 'xp-catcher',
+    title: 'XP Catcher',
+    rewardXP: 10,
+    icon: Rocket,
+    squircleClass: styles.cyanSquircle,
+    btnClass: styles.cyanBtn,
+    iconColor: '#38bdf8',
+    isGame: true
+  },
+  {
+    id: 'mini-games',
+    title: 'Mini Games',
+    rewardXP: 75,
+    icon: Gamepad2,
+    squircleClass: styles.magentaSquircle,
+    btnClass: styles.magentaBtn,
+    iconColor: '#ec4899',
+    isGame: true
+  }
+];
 
 export function EarnMoreSection({ 
   activities, 
   onSelectActivity, 
   onOpenAllActivities, 
-  onOpenGame,
-  onOpenLuckyWheel
+  onOpenGame 
 }) {
   return (
-    <div className={styles.sectionContainer}>
+    <div className={styles.questHubSection}>
+      {/* Header with Lightning Icon & All Quests Pill */}
       <div className={styles.sectionHeader}>
-        <div>
-          <div className={styles.titleBadge}>
-            <span>EARN MORE</span>
+        <div className={styles.headerLeftCol}>
+          <div className={styles.titleRow}>
+            <div className={styles.cyanLightningCircle}>
+              <Zap size={16} fill="#38bdf8" color="#38bdf8" />
+            </div>
+            <h3 className={styles.headerTitle}>
+              EARN & <span className={styles.cyanHighlight}>QUEST HUB</span>
+            </h3>
           </div>
           <p className={styles.subtext}>
-            Explore fun activities and earn exciting rewards.
+            Complete activities, play arcade games, and level up faster.
           </p>
         </div>
+
         <button 
-          className={styles.viewAllBtn} 
+          className={styles.allQuestsBtn}
           onClick={() => {
             soundFx.playClick();
             onOpenAllActivities();
           }}
-          aria-label="View all activities"
         >
-          <ArrowRight size={18} />
+          <ClipboardList size={14} />
+          <span>All Quests</span>
+          <ChevronRight size={14} />
         </button>
       </div>
 
-      <div className={styles.activitiesGrid}>
-        {activities.map((item) => {
-          const IconComp = ICON_MAP[item.id] || Sparkles;
-          const isCompleted = item.completed;
+      {/* Stacked Mission List */}
+      <div className={styles.questList}>
+        {QUEST_ITEMS.map((quest) => {
+          const activityData = activities.find(a => a.id === quest.id);
+          const isCompleted = activityData?.completed;
+          const IconComp = quest.icon;
 
           return (
-            <div
-              key={item.id}
-              className={`${styles.activityCard} ${isCompleted ? styles.cardCompleted : ''}`}
+            <div 
+              key={quest.id}
+              className={`${styles.questRowCard} ${isCompleted ? styles.questCompleted : ''}`}
               onClick={() => {
                 soundFx.playClick();
-                if (item.isGame) {
+                if (quest.isGame) {
                   onOpenGame();
+                } else if (activityData) {
+                  onSelectActivity(activityData);
                 } else {
-                  onSelectActivity(item);
+                  onSelectActivity(quest);
                 }
               }}
             >
-              <div 
-                className={styles.iconCircle}
-                style={{ 
-                  background: `${item.accentColor}20`, 
-                  borderColor: `${item.accentColor}50`,
-                  color: item.accentColor 
-                }}
-              >
-                {isCompleted ? <Check size={18} className={styles.checkIcon} /> : <IconComp size={18} />}
+              {/* Left Squircle */}
+              <div className={`${styles.squircleIcon} ${quest.squircleClass}`}>
+                {isCompleted ? <Check size={20} color="#10b981" /> : <IconComp size={20} color={quest.iconColor} />}
               </div>
 
-              <span className={styles.cardTitle}>{item.title}</span>
+              {/* Title & XP Badge */}
+              <div className={styles.questDetailsCol}>
+                <span className={styles.questTitle}>{quest.title}</span>
+                <div className={styles.xpRewardPill}>
+                  <span className={styles.xpBadgeLabel}>XP</span>
+                  <span className={styles.xpAmountText}>+{quest.rewardXP} XP</span>
+                </div>
+              </div>
 
-              {isCompleted && (
-                <span className={styles.completedBadge}>Done</span>
-              )}
+              {/* Start Button */}
+              <button className={`${styles.startBtn} ${quest.btnClass}`}>
+                <span>{isCompleted ? 'Done' : 'Start'}</span>
+                <ChevronRight size={14} />
+              </button>
             </div>
           );
         })}
@@ -95,3 +147,4 @@ export function EarnMoreSection({
     </div>
   );
 }
+

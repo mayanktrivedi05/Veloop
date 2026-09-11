@@ -4,6 +4,7 @@ import { useProgression } from '../hooks/useProgression';
 import { Header } from '../components/Header/Header';
 import { LevelHero } from '../components/LevelHero/LevelHero';
 import { TodayBoost } from '../components/TodayBoost/TodayBoost';
+import { CollectRewardsBanner } from '../components/CollectRewardsBanner/CollectRewardsBanner';
 import { EarnMoreSection } from '../components/EarnMoreSection/EarnMoreSection';
 import { NextLevelReward } from '../components/NextLevelReward/NextLevelReward';
 import { LevelRoadmap } from '../components/LevelRoadmap/LevelRoadmap';
@@ -97,17 +98,19 @@ export function LevelDashboard() {
         {/* LIVE NORMAL MODE */}
         {viewState === 'normal' && (
           <div className={styles.dashboardGrid}>
-            {/* Top Row: Full-width Interactive Level Hero */}
+            {/* Top Row: Full-width Platinum Master Level Hero */}
             <section className={styles.heroSection}>
               <LevelHero 
                 user={user} 
                 onOpenGame={() => setIsGameOpen(true)}
                 onEnergyTap={handleHeroEnergyTap}
+                onOpenLevelUp={() => setIsLevelUpModalOpen(true)}
               />
             </section>
 
             {/* Main Progression & Activity Grid */}
             <div className={styles.layoutColumns}>
+              {/* Left Column in Desktop (or Stacked in Mobile) */}
               <div className={styles.boostArea}>
                 <TodayBoost 
                   user={user} 
@@ -117,6 +120,14 @@ export function LevelDashboard() {
                 />
               </div>
 
+              {/* Collect Rewards Banner (Matching bottom of Screenshot 1) */}
+              <div className={styles.collectBannerArea}>
+                <CollectRewardsBanner 
+                  onOpenRewards={() => setIsLuckyWheelOpen(true)}
+                />
+              </div>
+
+              {/* Level 05 Rewards Vault (Top of Screenshot 2) */}
               <div className={styles.rewardArea}>
                 <NextLevelReward 
                   user={user}
@@ -125,6 +136,7 @@ export function LevelDashboard() {
                 />
               </div>
 
+              {/* EARN & QUEST HUB (Screenshot 2) */}
               <div className={styles.earnArea}>
                 <EarnMoreSection 
                   activities={activities}
@@ -137,10 +149,10 @@ export function LevelDashboard() {
                     setIsActivityModalOpen(true);
                   }}
                   onOpenGame={() => setIsGameOpen(true)}
-                  onOpenLuckyWheel={() => setIsLuckyWheelOpen(true)}
                 />
               </div>
 
+              {/* Live Activity Feed */}
               <div className={styles.activityArea}>
                 <RecentActivity 
                   history={history}
@@ -148,6 +160,7 @@ export function LevelDashboard() {
                 />
               </div>
 
+              {/* Level Roadmap Timeline */}
               <div className={styles.roadmapArea}>
                 <LevelRoadmap 
                   levelTiers={levelTiers}

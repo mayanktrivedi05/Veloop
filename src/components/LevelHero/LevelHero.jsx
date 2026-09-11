@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import styles from './LevelHero.module.css';
-import { Info, Sparkles, Zap, ChevronRight, Award, Trophy, Flame } from 'lucide-react';
+import { Sparkles, Zap, ChevronRight, Trophy, ChevronUp } from 'lucide-react';
 import { soundFx } from '../../utils/soundEffects';
 
-export function LevelHero({ user, onOpenGame, onEnergyTap }) {
-  const [showTooltip, setShowTooltip] = useState(false);
+export function LevelHero({ user, onOpenGame, onEnergyTap, onOpenLevelUp }) {
   const [bursts, setBursts] = useState([]);
   const percentage = Math.min(100, Math.round((user.currentXP / user.requiredXP) * 100));
+  const remainingXP = Math.max(0, user.requiredXP - user.currentXP);
   const nextLvlNumber = user.currentLevel + 1;
 
   const handleShieldClick = (e) => {
@@ -29,123 +29,106 @@ export function LevelHero({ user, onOpenGame, onEnergyTap }) {
 
   return (
     <div className={styles.heroCard}>
-      {/* Ambient background glows */}
-      <div className={styles.heroGlow}></div>
-      <div className={styles.heroSecondaryGlow}></div>
-      
-      <div className={styles.contentGrid}>
-        {/* Top Info Row */}
-        <div className={styles.topInfoRow}>
-          {/* Interactive 3D Shield Badge */}
-          <div className={styles.levelBadgeSection}>
-            <div 
-              className={styles.shieldContainer}
-              onClick={handleShieldClick}
-              title="Click to boost energy!"
-            >
-              <div className={styles.shieldOuterGlow}></div>
-              <div className={styles.shieldShape}>
-                <span className={styles.badgeTopTag}>LEVEL</span>
-                <span className={styles.levelBigNumber}>0{user.currentLevel}</span>
-                <span className={styles.shieldTapHint}>TAP +5 XP</span>
-              </div>
+      {/* Golden Mountain & Light Beams Background */}
+      <div className={styles.goldenBeams}></div>
+      <div className={styles.mountainGraphic}></div>
 
-              {/* Floating burst particles */}
-              {bursts.map((b) => (
-                <div 
-                  key={b.id} 
-                  className={styles.particleBurst}
-                  style={{ left: b.x, top: b.y }}
-                >
-                  ⚡ +5 XP
-                </div>
-              ))}
+      <div className={styles.cardContent}>
+        {/* Top Section: Shield & Rank Details */}
+        <div className={styles.headerRow}>
+          {/* 3D Gold Winged Crest */}
+          <div 
+            className={styles.shieldWrapper}
+            onClick={handleShieldClick}
+            title="Tap to boost XP!"
+          >
+            <div className={styles.shieldCrown}>👑</div>
+            <div className={styles.wingLeft}>🪽</div>
+            <div className={styles.wingRight}>🪽</div>
+
+            <div className={styles.shieldBody}>
+              <span className={styles.shieldLevelTag}>LEVEL</span>
+              <span className={styles.shieldLevelNum}>0{user.currentLevel || 5}</span>
+              <span className={styles.shieldTapTag}>TAP & XP</span>
             </div>
 
-            <div className={styles.tierRankBadge}>
-              <div className={styles.tierTitleRow}>
-                <Trophy size={14} color="var(--accent-gold)" />
-                <span className={styles.tierName}>Platinum Master</span>
+            {/* Click Burst Particles */}
+            {bursts.map((b) => (
+              <div 
+                key={b.id} 
+                className={styles.particleBurst}
+                style={{ left: b.x, top: b.y }}
+              >
+                ⚡ +5 XP
               </div>
-              <span className={styles.tierPercentile}>🔥 Top 5% VeLooper</span>
-            </div>
+            ))}
           </div>
 
-          {/* Right: XP Status & Tooltip */}
-          <div className={styles.xpTextGroup}>
-            <div className={styles.titleWithInfo}>
-              <div className={styles.xpAmountRow}>
-                <h2 className={styles.currentXPText}>
-                  {user.currentXP.toLocaleString()} XP
-                </h2>
-                <span className={styles.xpPercentPill}>{percentage}%</span>
-              </div>
-              <span className={styles.toNextLevel}>
-                {(user.requiredXP - user.currentXP).toLocaleString()} XP to reach Level 0{nextLvlNumber}
-              </span>
+          {/* Rank Title & Tier Pill */}
+          <div className={styles.rankDetailsCol}>
+            <div className={styles.rankTitleRow}>
+              <span className={styles.trophyIcon}>🏆</span>
+              <h2 className={styles.rankTitle}>Platinum Master</h2>
             </div>
-
-            <div className={styles.infoWrapper}>
-              <button 
-                className={styles.infoBtn}
-                onClick={() => {
-                  soundFx.playClick();
-                  setShowTooltip(!showTooltip);
-                }}
-                onMouseEnter={() => setShowTooltip(true)}
-                onMouseLeave={() => setShowTooltip(false)}
-                aria-label="Level information"
-              >
-                <Info size={16} />
-              </button>
-              {showTooltip && (
-                <div className={styles.infoTooltip}>
-                  <div className={styles.tooltipArrow}></div>
-                  <strong>How Level Progression Works</strong>
-                  <p>
-                    Earn XP by completing daily tasks, playing the XP Catcher mini-game, maintaining streaks, and spinning the Fortune Wheel!
-                  </p>
-                  <div className={styles.tooltipRewardHint}>
-                    <Sparkles size={13} color="var(--accent-gold)" />
-                    <span>L0{nextLvlNumber} Unlocks: +500 VEs, +25 Gems & 2X Multiplier</span>
-                  </div>
-                </div>
-              )}
+            <div className={styles.tierPercentileBadge}>
+              <span className={styles.flameIcon}>🔥</span>
+              <span>Top 5% VeLooper</span>
             </div>
           </div>
         </div>
 
-        {/* Full-Width Glowing Progress Bar */}
-        <div className={styles.progressBarContainer}>
+        {/* XP Status & Percentage Row */}
+        <div className={styles.xpStatusSection}>
+          <div className={styles.xpAmountRow}>
+            <h3 className={styles.xpNumberText}>
+              {user.currentXP.toLocaleString()} XP
+            </h3>
+            <span className={styles.xpPercentPill}>{percentage}%</span>
+          </div>
+
+          <div className={styles.xpSubtextRow}>
+            <span className={styles.toNextLevelText}>
+              {remainingXP.toLocaleString()} XP to reach Level 0{nextLvlNumber}
+            </span>
+            <button 
+              className={styles.expandCircleBtn}
+              onClick={() => {
+                soundFx.playClick();
+                if (onOpenLevelUp) onOpenLevelUp();
+              }}
+              title="View Level Roadmap"
+            >
+              <ChevronUp size={16} />
+            </button>
+          </div>
+        </div>
+
+        {/* Progress Bar with Glowing Bulb Tip */}
+        <div className={styles.progressBarWrapper}>
           <div className={styles.progressTrack}>
             <div 
               className={styles.progressFill}
               style={{ width: `${percentage}%` }}
             >
-              <div className={styles.fillHeadGlow}></div>
-              <div className={styles.fillShineLaser}></div>
-            </div>
-          </div>
-
-          <div className={styles.barFooter}>
-            <div className={styles.ratioCount}>
-              <strong>{user.currentXP.toLocaleString()}</strong> / {user.requiredXP.toLocaleString()} XP
-            </div>
-            <div className={styles.quickBoosterAction}>
-              <button 
-                className={styles.quickPlayBtn}
-                onClick={() => {
-                  soundFx.playClick();
-                  onOpenGame();
-                }}
-              >
-                <Zap size={13} />
-                <span>Play Mini-Game (+50 XP)</span>
-              </button>
+              <div className={styles.progressGlowingBulb}></div>
             </div>
           </div>
         </div>
+
+        {/* Full-Width Play Mini-Game CTA Button */}
+        <button 
+          className={styles.playMiniGameBtn}
+          onClick={() => {
+            soundFx.playClick();
+            onOpenGame();
+          }}
+        >
+          <Zap size={16} fill="#fff" />
+          <span>Play Mini-Game (+50 XP)</span>
+          <ChevronRight size={16} />
+        </button>
       </div>
     </div>
   );
 }
+

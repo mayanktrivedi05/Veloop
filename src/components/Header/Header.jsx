@@ -44,137 +44,61 @@ export function Header({
   return (
     <>
       <header className={styles.headerContainer}>
-        {/* Left Side: Logo & User Greeting */}
-        <div className={styles.leftSection}>
-          <button 
-            className={styles.menuToggle} 
+        {/* Left Side: Hamburger Menu */}
+        <button 
+          className={styles.menuToggle} 
+          onClick={() => {
+            soundFx.playClick();
+            setMobileMenuOpen(!mobileMenuOpen);
+          }}
+          aria-label="Toggle Navigation"
+        >
+          {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+        </button>
+
+        {/* Currency Stat Pills */}
+        <div className={styles.walletBar}>
+          <div 
+            className={styles.balanceItemVE} 
+            title="VeLoop Coins"
             onClick={() => {
-              soundFx.playClick();
-              setMobileMenuOpen(!mobileMenuOpen);
+              soundFx.playCoin();
+              if (onOpenLuckyWheel) onOpenLuckyWheel();
             }}
-            aria-label="Toggle Navigation"
           >
-            {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
-          </button>
-          
-          <div className={styles.desktopGreeting}>
-            <div className={styles.greetingRow}>
-              <h1>Good Morning, {user.name}! 🖐</h1>
-              <span className={styles.verifiedPill}>
-                <Sparkles size={12} /> PRO TIER
-              </span>
-            </div>
-            <p className={styles.subtext}>
-              Level up your journey and unlock epic rewards every day.
-            </p>
+            <div className={styles.veIconCircle}>V</div>
+            <span className={styles.balanceValue}>{user.veCoins || 485} VEs</span>
+          </div>
+
+          <div 
+            className={styles.balanceItemGem} 
+            title="Gems"
+            onClick={() => {
+              soundFx.playCoin();
+              if (onOpenLuckyWheel) onOpenLuckyWheel();
+            }}
+          >
+            <Gem size={15} className={styles.gemIcon} />
+            <span className={styles.balanceValue}>{user.gems || 45}</span>
           </div>
         </div>
 
-        {/* Right Side Controls & Balances */}
+        {/* Right Action Icons */}
         <div className={styles.rightSection}>
-          {/* Wallet Bar */}
-          <div className={styles.walletBar}>
-            <div 
-              className={styles.balanceItem} 
-              title="VeLoop Coins - Click to earn"
-              onClick={() => {
-                soundFx.playCoin();
-                if (onOpenLuckyWheel) onOpenLuckyWheel();
-              }}
-            >
-              <div className={styles.veIcon}>V</div>
-              <span className={styles.balanceValue}>{user.veCoins.toLocaleString()}</span>
-              <span className={styles.currencyLabel}>VEs</span>
-            </div>
-
-            <div 
-              className={styles.balanceItem} 
-              title="Gems - Vault Currency"
-              onClick={() => {
-                soundFx.playCoin();
-                if (onOpenLuckyWheel) onOpenLuckyWheel();
-              }}
-            >
-              <Gem size={15} className={styles.gemIcon} />
-              <span className={styles.balanceValue}>{user.gems}</span>
-            </div>
-          </div>
-
-          {/* Quick Spin Wheel Launcher */}
+          {/* Audio Sound Toggle */}
           <button 
-            className={styles.luckyWheelPill}
-            onClick={() => {
-              soundFx.playStreak();
-              if (onOpenLuckyWheel) onOpenLuckyWheel();
-            }}
-            title="Open Lucky Fortune Wheel"
-          >
-            <Sparkles size={14} className={styles.luckySparkleIcon} />
-            <span>Lucky Spin</span>
-            <span className={styles.spinBadgeCount}>{user.spins || 2}</span>
-          </button>
-
-          {/* Theme Selector Dropdown */}
-          <div className={styles.controlWrapper}>
-            <button 
-              className={styles.themeSelectorBtn}
-              onClick={() => {
-                soundFx.playClick();
-                setThemeDropdownOpen(!themeDropdownOpen);
-                setNotificationsOpen(false);
-              }}
-              title="Change Theme"
-            >
-              <span className={styles.themeIconEmoji}>{currentThemeObj.icon}</span>
-              <Palette size={15} />
-            </button>
-
-            {themeDropdownOpen && (
-              <div className={styles.themeDropdown}>
-                <div className={styles.dropdownHeader}>
-                  <h4>Select Theme</h4>
-                  <span className={styles.themeSubtext}>Live Dynamic Colors</span>
-                </div>
-                <div className={styles.themeList}>
-                  {THEMES.map((theme) => {
-                    const isSelected = currentTheme === theme.id;
-                    return (
-                      <button
-                        key={theme.id}
-                        className={`${styles.themeOption} ${isSelected ? styles.themeSelected : ''}`}
-                        onClick={() => {
-                          onSwitchTheme(theme.id);
-                          setThemeDropdownOpen(false);
-                        }}
-                      >
-                        <span className={styles.themeEmojiBig}>{theme.icon}</span>
-                        <div className={styles.themeInfo}>
-                          <span className={styles.themeName}>{theme.name}</span>
-                          <span className={styles.themeColorDot} style={{ background: theme.color }}></span>
-                        </div>
-                        {isSelected && <Check size={16} color={theme.color} />}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* Audio Mute / Unmute Toggle */}
-          <button 
-            className={styles.iconBtn}
+            className={styles.iconCircleBtn}
             onClick={onToggleSound}
-            title={isMuted ? 'Unmute Game Sounds' : 'Mute Sounds'}
+            title={isMuted ? 'Unmute Sound' : 'Mute Sound'}
             aria-label="Toggle Audio"
           >
-            {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} color="var(--accent-primary)" />}
+            {isMuted ? <VolumeX size={17} /> : <Volume2 size={17} />}
           </button>
 
           {/* Notification Bell */}
           <div className={styles.controlWrapper}>
             <button 
-              className={styles.iconBtn} 
+              className={styles.iconCircleBtn} 
               onClick={() => {
                 soundFx.playClick();
                 setNotificationsOpen(!notificationsOpen);
@@ -182,7 +106,7 @@ export function Header({
               }}
               aria-label="Notifications"
             >
-              <Bell size={18} />
+              <Bell size={17} />
               {!readNotifs && <span className={styles.notifBadge}>2</span>}
             </button>
 
@@ -220,43 +144,46 @@ export function Header({
             )}
           </div>
 
-          {/* User Avatar */}
+          {/* Crown Level Avatar */}
           <div 
-            className={styles.avatarWrapper}
+            className={styles.crownAvatarWrapper}
             onClick={() => {
               soundFx.playClick();
               if (onOpenLevelUp) onOpenLevelUp();
             }}
             title="View Level Status"
           >
-            <img 
-              src={user.avatar} 
-              alt={user.name} 
-              className={styles.userAvatar} 
-            />
-            <span className={styles.lvlPill}>L{user.currentLevel}</span>
+            <span className={styles.crownIconTop}>👑</span>
+            <span className={styles.lvlBadgeText}>L{user.currentLevel || 5}</span>
           </div>
         </div>
       </header>
 
-      {/* Mobile Greeting Banner */}
-      <div className={styles.mobileGreetingBanner}>
-        <div className={styles.mobileGreetingRow}>
-          <h2>Good Morning, {user.name}! 🖐</h2>
-          <button 
-            className={styles.mobileThemeQuickBtn}
-            onClick={() => {
-              const themeKeys = ['aurora', 'gold', 'synthwave', 'emerald'];
-              const nextIndex = (themeKeys.indexOf(currentTheme) + 1) % themeKeys.length;
-              onSwitchTheme(themeKeys[nextIndex]);
-            }}
-          >
-            {currentThemeObj.icon} Theme
-          </button>
+      {/* Greeting & Theme Row */}
+      <div className={styles.greetingHeader}>
+        <div className={styles.greetingTextCol}>
+          <h1 className={styles.greetingTitle}>
+            Good Morning, <br className={styles.mobileBreak} />
+            <span className={styles.goldUsername}>VeLooper! 👑</span>
+          </h1>
+          <p className={styles.subtext}>
+            Level up your journey and unlock epic rewards every day.
+          </p>
         </div>
-        <p className={styles.mobileSubtext}>
-          Level up your journey and unlock epic rewards every day.
-        </p>
+
+        <button 
+          className={styles.themePillBtn}
+          onClick={() => {
+            soundFx.playClick();
+            const themeKeys = ['aurora', 'gold', 'synthwave', 'emerald'];
+            const nextIndex = (themeKeys.indexOf(currentTheme) + 1) % themeKeys.length;
+            onSwitchTheme(themeKeys[nextIndex]);
+          }}
+          title="Toggle Color Theme"
+        >
+          <span>👑</span>
+          <span>Theme</span>
+        </button>
       </div>
 
       {/* Mobile Drawer */}

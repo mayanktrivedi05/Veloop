@@ -14,7 +14,7 @@
   max-width: 1240px;
   width: 100%;
   margin: 0 auto;
-  padding: 20px 24px 50px 24px;
+  padding: 16px 20px 50px 20px;
   flex: 1;
   min-width: 0;
 }
@@ -22,7 +22,7 @@
 .dashboardGrid {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 18px;
   width: 100%;
   min-width: 0;
 }
@@ -37,32 +37,33 @@
   grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
   grid-template-areas:
     "boost reward"
-    "earn activity"
-    "roadmap roadmap";
-  gap: 20px;
+    "banner earn"
+    "activity roadmap";
+  gap: 18px;
   align-items: start;
   width: 100%;
   min-width: 0;
 }
 
 .boostArea { grid-area: boost; min-width: 0; width: 100%; }
-.earnArea { grid-area: earn; min-width: 0; width: 100%; }
+.collectBannerArea { grid-area: banner; min-width: 0; width: 100%; }
 .rewardArea { grid-area: reward; min-width: 0; width: 100%; }
-.roadmapArea { grid-area: roadmap; min-width: 0; width: 100%; }
+.earnArea { grid-area: earn; min-width: 0; width: 100%; }
 .activityArea { grid-area: activity; min-width: 0; width: 100%; }
+.roadmapArea { grid-area: roadmap; min-width: 0; width: 100%; }
 
 @media (max-width: 960px) {
   .layoutColumns {
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 16px;
     width: 100%;
   }
 }
 
 @media (max-width: 600px) {
   .mainContent {
-    padding: 8px 14px 40px 14px;
+    padding: 6px 12px 40px 12px;
   }
   .dashboardGrid {
     gap: 14px;
@@ -71,3 +72,4 @@
     gap: 14px;
   }
 }
+

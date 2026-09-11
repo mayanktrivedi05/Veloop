@@ -1,139 +1,143 @@
 .heroCard {
   position: relative;
-  padding: 22px 24px;
-  overflow: visible;
+  padding: 22px 20px;
   border-radius: var(--radius-lg);
-  background: var(--bg-panel-gradient);
-  border: 1px solid var(--border-gold);
-  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  background: linear-gradient(135deg, #07112e 0%, #04091c 70%, #0a1738 100%);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.8), 0 0 24px rgba(37, 99, 235, 0.2);
+  overflow: hidden;
   transition: var(--transition-smooth);
 }
 
 .heroCard:hover {
-  border-color: var(--border-gold-bright);
-  box-shadow: 0 20px 48px -8px rgba(0, 0, 0, 0.8), 0 0 20px var(--accent-gold-glow);
+  border-color: rgba(56, 189, 248, 0.6);
+  box-shadow: 0 20px 48px -10px rgba(0, 0, 0, 0.9), 0 0 30px rgba(56, 189, 248, 0.35);
 }
 
-.heroGlow {
+/* Golden Mountain & Light Beams Background */
+.goldenBeams {
   position: absolute;
-  top: -30px;
-  left: 15%;
-  width: 300px;
-  height: 120px;
-  background: radial-gradient(circle, var(--accent-gold-glow) 0%, transparent 70%);
-  filter: blur(35px);
+  top: -40px;
+  right: -20px;
+  width: 260px;
+  height: 260px;
+  background: linear-gradient(135deg, transparent 40%, rgba(245, 158, 11, 0.18) 70%, rgba(255, 215, 0, 0.3) 100%);
+  transform: rotate(-15deg);
   pointer-events: none;
-  animation: pulseGlow 4s ease-in-out infinite;
+  filter: blur(15px);
 }
 
-.heroSecondaryGlow {
+.mountainGraphic {
   position: absolute;
-  bottom: -20px;
-  right: 10%;
-  width: 220px;
-  height: 90px;
-  background: radial-gradient(circle, var(--accent-primary-glow) 0%, transparent 70%);
-  filter: blur(30px);
+  right: 0;
+  bottom: 0;
+  width: 240px;
+  height: 180px;
+  background: radial-gradient(circle at 100% 100%, rgba(245, 158, 11, 0.15) 0%, rgba(56, 189, 248, 0.08) 50%, transparent 80%);
   pointer-events: none;
 }
 
-.contentGrid {
+.cardContent {
+  position: relative;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   gap: 16px;
-  position: relative;
-  z-index: 2;
 }
 
-.topInfoRow {
+/* Header Row: Winged Crest + Rank Details */
+.headerRow {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 16px;
-  flex-wrap: wrap;
 }
 
-/* Shield Badge */
-.levelBadgeSection {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  flex-shrink: 0;
-}
-
-.shieldContainer {
+/* 3D Gold Winged Shield Crest */
+.shieldWrapper {
   position: relative;
-  width: 80px;
-  height: 88px;
+  width: 90px;
+  height: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  flex-shrink: 0;
   transition: var(--transition-bounce);
 }
 
-.shieldContainer:hover {
-  transform: scale(1.06) translateY(-2px);
+.shieldWrapper:hover {
+  transform: scale(1.08) translateY(-2px);
 }
 
-.shieldContainer:active {
-  transform: scale(0.96);
-}
-
-.shieldOuterGlow {
+.shieldCrown {
   position: absolute;
-  inset: -6px;
-  background: radial-gradient(circle, var(--accent-gold-glow) 0%, transparent 70%);
-  filter: blur(10px);
+  top: -6px;
+  font-size: 1.4rem;
+  z-index: 4;
+  filter: drop-shadow(0 2px 8px rgba(255, 215, 0, 0.7));
+  animation: floatAnim 3s infinite ease-in-out;
 }
 
-.shieldShape {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(180deg, #1e2438 0%, #0d101a 100%);
+.wingLeft,
+.wingRight {
+  position: absolute;
+  font-size: 1.8rem;
+  top: 24px;
+  z-index: 1;
+  filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.6));
+}
+
+.wingLeft {
+  left: -20px;
+  transform: scaleX(-1);
+}
+
+.wingRight {
+  right: -20px;
+}
+
+.shieldBody {
+  width: 72px;
+  height: 78px;
+  background: linear-gradient(180deg, #182346 0%, #0b1024 100%);
   clip-path: polygon(50% 0%, 100% 15%, 100% 80%, 50% 100%, 0% 80%, 0% 15%);
-  border: 2px solid var(--accent-gold);
+  border: 2.5px solid #ffd700;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  box-shadow: inset 0 0 16px var(--accent-gold-subtle);
+  z-index: 3;
+  box-shadow: inset 0 0 16px rgba(255, 215, 0, 0.4), 0 8px 20px rgba(0, 0, 0, 0.7);
   position: relative;
 }
 
-.shieldShape::before {
-  content: '';
-  position: absolute;
-  inset: 3px;
-  clip-path: polygon(50% 0%, 100% 15%, 100% 80%, 50% 100%, 0% 80%, 0% 15%);
-  border: 1px dashed rgba(255, 215, 0, 0.45);
-  pointer-events: none;
+.shieldLevelTag {
+  font-size: 0.55rem;
+  font-weight: 900;
+  color: #cbd5e1;
+  letter-spacing: 0.1em;
+  margin-top: 2px;
 }
 
-.badgeTopTag {
-  font-size: 0.58rem;
-  letter-spacing: 0.12em;
-  color: #94a3b8;
-  font-weight: 800;
-  margin-top: 1px;
-}
-
-.levelBigNumber {
+.shieldLevelNum {
   font-family: var(--font-heading);
-  font-size: 1.95rem;
+  font-size: 1.85rem;
   font-weight: 900;
   line-height: 1;
-  background: linear-gradient(180deg, #ffffff 0%, #fbbf24 60%, #f59e0b 100%);
+  background: linear-gradient(180deg, #ffffff 0%, #ffd700 50%, #f59e0b 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 2px 6px rgba(245, 158, 11, 0.4));
+  filter: drop-shadow(0 2px 6px rgba(245, 158, 11, 0.5));
 }
 
-.shieldTapHint {
+.shieldTapTag {
   font-size: 0.5rem;
-  font-weight: 800;
-  color: var(--accent-primary);
-  letter-spacing: 0.04em;
+  font-weight: 900;
+  color: var(--accent-gold);
+  letter-spacing: 0.05em;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 1px 4px;
+  border-radius: 3px;
   margin-top: 1px;
 }
 
@@ -141,269 +145,186 @@
   position: absolute;
   color: #ffd700;
   font-weight: 900;
-  font-size: 0.82rem;
+  font-size: 0.85rem;
   pointer-events: none;
   animation: particleBurst 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.9);
   white-space: nowrap;
+  z-index: 10;
 }
 
-.tierRankBadge {
+/* Rank Details */
+.rankDetailsCol {
   display: flex;
   flex-direction: column;
-  gap: 3px;
-}
-
-.tierTitleRow {
-  display: flex;
-  align-items: center;
   gap: 6px;
-}
-
-.tierName {
-  font-size: 1.05rem;
-  font-weight: 800;
-  color: #fff;
-  letter-spacing: -0.01em;
-}
-
-.tierPercentile {
-  font-size: 0.75rem;
-  color: var(--accent-gold-light);
-  font-weight: 700;
-  background: rgba(245, 158, 11, 0.12);
-  border: 1px solid rgba(245, 158, 11, 0.25);
-  padding: 2px 8px;
-  border-radius: var(--radius-full);
-  display: inline-block;
-}
-
-/* XP Texts */
-.xpTextGroup {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 12px;
   flex: 1;
 }
 
-.titleWithInfo {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  text-align: right;
-  gap: 2px;
-}
-
-.xpAmountRow {
+.rankTitleRow {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.currentXPText {
-  font-size: 1.6rem;
+.trophyIcon {
+  font-size: 1.15rem;
+}
+
+.rankTitle {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
   font-weight: 900;
   color: #ffffff;
-  letter-spacing: -0.02em;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  letter-spacing: -0.01em;
+}
+
+.tierPercentileBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  color: #fbbf24;
+  font-size: 0.76rem;
+  font-weight: 800;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  width: fit-content;
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.15);
+}
+
+.flameIcon {
+  font-size: 0.85rem;
+}
+
+/* XP Status Section */
+.xpStatusSection {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.xpAmountRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.xpNumberText {
+  font-family: var(--font-heading);
+  font-size: 1.7rem;
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: -0.01em;
 }
 
 .xpPercentPill {
-  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
-  color: #fff;
-  font-size: 0.72rem;
-  font-weight: 800;
-  padding: 2px 7px;
-  border-radius: var(--radius-full);
-  box-shadow: 0 2px 8px var(--accent-primary-glow);
-}
-
-.toNextLevel {
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-}
-
-.infoWrapper {
-  position: relative;
-}
-
-.infoBtn {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
-  color: var(--text-secondary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid var(--border-subtle);
-}
-
-.infoBtn:hover {
-  background: rgba(255, 255, 255, 0.15);
-  color: var(--accent-gold);
-  border-color: var(--accent-gold);
-}
-
-.infoTooltip {
-  position: absolute;
-  top: calc(100% + 10px);
-  right: 0;
-  width: 270px;
-  background: var(--bg-panel-gradient);
-  border: 1px solid var(--border-gold);
-  border-radius: var(--radius-md);
-  padding: 14px;
-  font-size: 0.78rem;
-  color: var(--text-secondary);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
-  z-index: 200;
-  line-height: 1.45;
-  animation: popIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  backdrop-filter: blur(16px);
-}
-
-.infoTooltip strong {
-  display: block;
-  color: #fff;
-  margin-bottom: 5px;
-  font-size: 0.84rem;
-}
-
-.tooltipRewardHint {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-top: 8px;
-  padding-top: 8px;
-  border-top: 1px solid var(--border-subtle);
-  color: var(--text-gold);
-  font-weight: 700;
+  background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+  color: #ffffff;
+  font-family: var(--font-heading);
   font-size: 0.74rem;
-}
-
-.tooltipArrow {
-  position: absolute;
-  top: -6px;
-  right: 12px;
-  width: 10px;
-  height: 10px;
-  background: var(--bg-secondary);
-  border-top: 1px solid var(--border-gold);
-  border-left: 1px solid var(--border-gold);
-  transform: rotate(45deg);
-}
-
-/* Progress Track */
-.progressBarContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-top: 4px;
-}
-
-.progressTrack {
-  height: 14px;
-  background: rgba(6, 8, 16, 0.9);
+  font-weight: 900;
+  padding: 3px 10px;
   border-radius: var(--radius-full);
-  padding: 2px;
-  border: 1px solid var(--border-subtle);
-  position: relative;
-  overflow: hidden;
-  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.4);
 }
 
-.progressFill {
-  height: 100%;
-  border-radius: var(--radius-full);
-  background: linear-gradient(90deg, var(--accent-primary) 0%, var(--accent-gold) 70%, var(--accent-gold-light) 100%);
-  position: relative;
-  transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 0 16px var(--accent-gold-glow);
-}
-
-.fillHeadGlow {
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 8px;
-  background: #fff;
-  border-radius: var(--radius-full);
-  box-shadow: 0 0 10px #fff;
-}
-
-.fillShineLaser {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-  animation: laserShimmer 2s infinite;
-}
-
-.barFooter {
+.xpSubtextRow {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.ratioCount {
-  font-size: 0.84rem;
-  color: var(--text-secondary);
+.toNextLevelText {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  font-weight: 600;
 }
 
-.ratioCount strong {
-  color: #fff;
-  font-weight: 800;
-}
-
-.quickBoosterAction {
-  display: flex;
-}
-
-.quickPlayBtn {
+.expandCircleBtn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(14, 28, 64, 0.7);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  color: #38bdf8;
   display: flex;
   align-items: center;
-  gap: 6px;
-  background: linear-gradient(135deg, rgba(56, 189, 248, 0.15) 0%, rgba(168, 85, 247, 0.15) 100%);
-  border: 1px solid var(--border-highlight);
-  padding: 5px 12px;
+  justify-content: center;
+  transition: var(--transition-fast);
+}
+
+.expandCircleBtn:hover {
+  background: rgba(30, 64, 175, 0.5);
+  color: #fff;
+  transform: scale(1.1);
+}
+
+/* Progress Bar */
+.progressBarWrapper {
+  width: 100%;
+}
+
+.progressTrack {
+  height: 12px;
+  background: rgba(5, 10, 26, 0.9);
+  border: 1px solid rgba(30, 58, 138, 0.4);
   border-radius: var(--radius-full);
-  font-size: 0.76rem;
-  font-weight: 800;
-  color: var(--accent-primary);
-  transition: var(--transition-smooth);
+  padding: 2px;
+  position: relative;
+  overflow: visible;
 }
 
-.quickPlayBtn:hover {
-  background: linear-gradient(135deg, rgba(56, 189, 248, 0.3) 0%, rgba(168, 85, 247, 0.3) 100%);
-  transform: translateY(-1px);
-  box-shadow: 0 0 12px var(--accent-primary-glow);
+.progressFill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  background: linear-gradient(90deg, #38bdf8 0%, #a855f7 50%, #ffd700 100%);
+  position: relative;
+  transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.4);
 }
 
-@media (max-width: 680px) {
-  .heroCard {
-    padding: 16px;
-  }
-  .topInfoRow {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-  }
-  .xpTextGroup {
-    width: 100%;
-    justify-content: space-between;
-  }
-  .titleWithInfo {
-    align-items: flex-start;
-    text-align: left;
-  }
-  .currentXPText {
-    font-size: 1.35rem;
-  }
-  .barFooter {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-  }
+.progressGlowingBulb {
+  position: absolute;
+  right: -4px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 10px #ffd700, 0 0 20px #f59e0b;
+  border: 2px solid #ffd700;
 }
+
+/* Play Mini-Game CTA Button */
+.playMiniGameBtn {
+  width: 100%;
+  background: linear-gradient(90deg, #2563eb 0%, #7c3aed 50%, #9333ea 100%);
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-size: 0.94rem;
+  font-weight: 850;
+  letter-spacing: 0.02em;
+  padding: 13px 18px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 6px 20px rgba(124, 58, 237, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  transition: var(--transition-fast);
+}
+
+.playMiniGameBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(124, 58, 237, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  filter: brightness(1.08);
+}
+
+.playMiniGameBtn:active {
+  transform: translateY(0);
+}
+
