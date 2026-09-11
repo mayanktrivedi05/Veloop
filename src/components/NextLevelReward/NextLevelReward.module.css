@@ -1,145 +1,147 @@
-.rewardCard {
-  background: var(--bg-card);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid var(--border-gold);
+.vaultRewardCard {
+  position: relative;
+  background: linear-gradient(135deg, #09173d 0%, #050d24 70%, #0d1e48 100%);
+  border: 1.5px solid #f59e0b;
   border-radius: var(--radius-lg);
-  padding: 24px;
+  padding: 22px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
-  position: relative;
+  gap: 16px;
   overflow: hidden;
-  box-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 215, 0, 0.15);
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.8), 0 0 24px rgba(245, 158, 11, 0.35);
   transition: var(--transition-smooth);
 }
 
-.rewardCard::before {
-  content: '';
+.vaultRewardCard:hover {
+  border-color: #ffd700;
+  box-shadow: 0 20px 48px -10px rgba(0, 0, 0, 0.9), 0 0 32px rgba(255, 215, 0, 0.45);
+}
+
+/* Crown Aura Behind Chest */
+.crownAuraBg {
   position: absolute;
-  top: 0;
-  left: -100%;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.08), transparent);
-  transform: skewX(-25deg);
-  transition: left 0.75s ease;
+  top: 10px;
+  right: 25px;
+  font-size: 5.5rem;
+  color: #ffd700;
+  opacity: 0.18;
+  filter: blur(2px);
   pointer-events: none;
+  animation: floatAnim 4s infinite ease-in-out;
 }
 
-.rewardCard:hover::before {
-  left: 150%;
-}
-
-.rewardCard:hover {
-  border-color: var(--accent-gold);
-  box-shadow: 0 20px 48px -10px rgba(0, 0, 0, 0.85), 0 0 24px var(--accent-gold-glow);
-  transform: translateY(-2px);
-}
-
-.cardAuraGlow {
+.goldGlowRadial {
   position: absolute;
-  top: -40px;
-  right: -40px;
-  width: 240px;
-  height: 240px;
-  background: radial-gradient(circle, var(--accent-gold-glow) 0%, transparent 70%);
-  filter: blur(35px);
+  top: -30px;
+  right: -30px;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.25) 0%, transparent 70%);
+  filter: blur(30px);
   pointer-events: none;
 }
 
 .leftCol {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  flex: 1;
   position: relative;
   z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
 }
 
-.rewardTag {
+.vaultTagRow {
   display: inline-flex;
   align-items: center;
   gap: 6px;
+}
+
+.crownTagIcon {
+  font-size: 0.85rem;
+}
+
+.vaultTagText {
   font-size: 0.72rem;
-  font-weight: 800;
-  color: var(--text-gold);
+  font-weight: 850;
+  color: #fbbf24;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
-.rewardTitle {
+.vaultHeading {
   font-family: var(--font-heading);
-  font-size: 1.35rem;
+  font-size: 1.45rem;
   font-weight: 900;
-  letter-spacing: -0.01em;
-  background: linear-gradient(135deg, #ffffff 0%, #ffd700 60%, #f59e0b 100%);
+  background: linear-gradient(180deg, #ffffff 0%, #ffd700 50%, #f59e0b 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-shadow: 0 2px 10px rgba(245, 158, 11, 0.2);
+  filter: drop-shadow(0 2px 8px rgba(245, 158, 11, 0.3));
+  letter-spacing: -0.01em;
 }
 
-.rewardSubtext {
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-  line-height: 1.45;
-  max-width: 360px;
+.vaultSubtext {
+  font-size: 0.78rem;
+  color: #94a3b8;
+  line-height: 1.4;
+  max-width: 320px;
 }
 
-.actionButtonsRow {
+.buttonsRow {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   margin-top: 8px;
   flex-wrap: wrap;
 }
 
-.viewRewardsBtn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: var(--gold-btn-gradient);
-  color: #0b0c10;
+.viewPerksBtn {
+  background: linear-gradient(180deg, #ffd700 0%, #f59e0b 60%, #d97706 100%);
+  color: #050b1d;
+  font-family: var(--font-heading);
   font-size: 0.8rem;
   font-weight: 850;
-  letter-spacing: 0.02em;
-  padding: 9px 16px;
-  border-radius: var(--radius-sm);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 4px 16px rgba(245, 158, 11, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.5);
-  transition: var(--transition-fast);
-}
-
-.viewRewardsBtn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(245, 158, 11, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.7);
-  filter: brightness(1.05);
-}
-
-.vaultWheelBtn {
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255, 255, 255, 0.35);
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--border-gold);
-  color: var(--text-gold);
-  font-size: 0.8rem;
-  font-weight: 800;
-  padding: 9px 16px;
-  border-radius: var(--radius-sm);
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.5);
   transition: var(--transition-fast);
+  white-space: nowrap;
 }
 
-.vaultWheelBtn:hover {
-  background: rgba(245, 158, 11, 0.12);
-  border-color: var(--accent-gold);
-  color: #fff;
-  box-shadow: 0 4px 14px var(--accent-gold-glow);
+.viewPerksBtn:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.6);
+  filter: brightness(1.08);
+}
+
+.luckyVaultBtn {
+  background: rgba(10, 22, 54, 0.8);
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-weight: 800;
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.15);
+  transition: var(--transition-fast);
+  white-space: nowrap;
+}
+
+.luckyVaultBtn:hover {
+  background: rgba(30, 64, 175, 0.4);
+  border-color: #38bdf8;
   transform: translateY(-2px);
 }
 
-/* 3D Chest Graphic */
+/* Right Column: 3D Gold Treasure Chest */
 .rightCol {
   position: relative;
   z-index: 2;
@@ -148,10 +150,10 @@
   justify-content: center;
 }
 
-.chestWrapper {
+.chestContainer {
   position: relative;
-  width: 96px;
-  height: 96px;
+  width: 95px;
+  height: 90px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -159,86 +161,116 @@
   transition: var(--transition-bounce);
 }
 
-.chestWrapper:hover {
-  transform: scale(1.12) rotate(-3deg);
+.chestContainer:hover {
+  transform: scale(1.12) rotate(-2deg);
 }
 
-.chestGlow {
+.floatingParticles {
   position: absolute;
-  inset: -12px;
-  background: radial-gradient(circle, var(--accent-gold-glow) 0%, transparent 70%);
-  filter: blur(16px);
-  animation: pulseGlow 2.5s infinite;
+  inset: -10px;
+  pointer-events: none;
 }
 
-.chestGraphic {
-  position: relative;
-  width: 66px;
-  height: 58px;
-  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.6));
-}
-
-.chestLid {
-  width: 66px;
-  height: 24px;
-  background: linear-gradient(180deg, #ffd700 0%, #d97706 60%, #92400e 100%);
-  border-radius: 14px 14px 0 0;
-  border: 2px solid #fde047;
-  border-bottom: 2px solid #78350f;
-  position: relative;
-  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.4);
-}
-
-.chestBody {
-  width: 66px;
-  height: 34px;
-  background: linear-gradient(180deg, #b45309 0%, #78350f 60%, #451a03 100%);
-  border-radius: 0 0 10px 10px;
-  border: 2px solid #d97706;
-  border-top: none;
-  position: relative;
-  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.5);
-}
-
-.chestLock {
+.gem, .coin, .sparkle {
   position: absolute;
-  top: -5px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 16px;
-  height: 16px;
-  background: radial-gradient(circle at 35% 35%, #fffbeb 0%, #f59e0b 60%, #78350f 100%);
-  border-radius: 50%;
-  border: 2px solid #fef08a;
-  box-shadow: 0 0 10px #fbbf24;
-}
-
-.crystal {
-  position: absolute;
-  font-size: 1.15rem;
   filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.5));
 }
 
-.crystal1 {
-  top: -16px;
-  left: -10px;
+.gem1 {
+  top: -6px;
+  left: 10px;
+  font-size: 1.1rem;
   animation: floatAnim 2.6s infinite ease-in-out;
 }
 
-.crystal2 {
-  top: -22px;
-  right: -6px;
-  animation: floatAnim 3.2s infinite ease-in-out 0.5s;
+.gem2 {
+  bottom: -4px;
+  right: -8px;
+  font-size: 1.2rem;
+  animation: floatAnim 3s infinite ease-in-out 0.4s;
 }
 
-.crystal3 {
-  bottom: -6px;
-  right: -12px;
-  animation: floatAnim 2.8s infinite ease-in-out 1s;
+.coin1 {
+  top: -10px;
+  right: 12px;
+  font-size: 1.05rem;
+  animation: floatAnim 2.8s infinite ease-in-out 0.8s;
 }
 
-@media (max-width: 640px) {
-  .rewardCard {
+.coin2 {
+  bottom: -2px;
+  left: -8px;
+  font-size: 1.05rem;
+  animation: floatAnim 3.2s infinite ease-in-out 1.2s;
+}
+
+.sparkle1 {
+  top: 14px;
+  left: -12px;
+  font-size: 1rem;
+  animation: floatAnim 2.4s infinite ease-in-out;
+}
+
+/* 3D Chest Visual */
+.chestGraphicBox {
+  position: relative;
+  width: 68px;
+  height: 60px;
+}
+
+.chestLidOpen {
+  width: 68px;
+  height: 24px;
+  background: linear-gradient(180deg, #ffd700 0%, #d97706 60%, #92400e 100%);
+  border-radius: 14px 14px 0 0;
+  border: 2px solid #fef08a;
+  transform: rotate(-18deg);
+  transform-origin: bottom left;
+  box-shadow: 0 -2px 12px rgba(255, 215, 0, 0.5);
+}
+
+.chestLootInside {
+  position: absolute;
+  top: 6px;
+  left: 16px;
+  display: flex;
+  gap: 2px;
+  font-size: 0.95rem;
+  z-index: 2;
+}
+
+.chestMainBody {
+  width: 68px;
+  height: 38px;
+  background: linear-gradient(180deg, #b45309 0%, #78350f 60%, #451a03 100%);
+  border-radius: 0 0 10px 10px;
+  border: 2px solid #f59e0b;
+  position: relative;
+  margin-top: -6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.6), 0 8px 18px rgba(0, 0, 0, 0.7);
+}
+
+.chestCrownEmblem {
+  font-size: 0.85rem;
+  color: #ffd700;
+  filter: drop-shadow(0 0 4px #ffd700);
+}
+
+.chestGoldTrim {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: #fbbf24;
+  border-radius: 0 0 8px 8px;
+}
+
+@media (max-width: 600px) {
+  .vaultRewardCard {
     flex-direction: column-reverse;
     align-items: flex-start;
     padding: 18px;
@@ -247,15 +279,15 @@
   .rightCol {
     align-self: center;
   }
-  .rewardTitle {
-    font-size: 1.2rem;
+  .vaultHeading {
+    font-size: 1.3rem;
   }
-  .actionButtonsRow {
+  .buttonsRow {
     width: 100%;
   }
-  .viewRewardsBtn,
-  .vaultWheelBtn {
+  .viewPerksBtn, .luckyVaultBtn {
     flex: 1;
     justify-content: center;
   }
 }
+

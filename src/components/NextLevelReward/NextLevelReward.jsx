@@ -1,70 +1,90 @@
 import React from 'react';
 import styles from './NextLevelReward.module.css';
-import { ChevronRight, Sparkles, Gift, Trophy } from 'lucide-react';
+import { ChevronRight, Gift } from 'lucide-react';
 import { soundFx } from '../../utils/soundEffects';
 
 export function NextLevelReward({ user, onOpenLevelModal, onOpenLuckyWheel }) {
   return (
-    <div className={styles.rewardCard}>
-      <div className={styles.cardAuraGlow}></div>
-      
+    <div className={styles.vaultRewardCard}>
+      {/* Crown Aura & Radiance */}
+      <div className={styles.crownAuraBg}>👑</div>
+      <div className={styles.goldGlowRadial}></div>
+
+      {/* Left Column: Text & Action Buttons */}
       <div className={styles.leftCol}>
-        <div className={styles.rewardTag}>
-          <Sparkles size={13} color="var(--accent-gold)" />
-          <span>LEVEL 0{user.currentLevel} REWARDS VAULT</span>
+        <div className={styles.vaultTagRow}>
+          <span className={styles.crownTagIcon}>👑</span>
+          <span className={styles.vaultTagText}>
+            LEVEL 0{user.currentLevel || 5} REWARDS VAULT
+          </span>
         </div>
-        <h3 className={styles.rewardTitle}>+500 VEs & 25 Gems</h3>
-        <p className={styles.rewardSubtext}>
+
+        <h3 className={styles.vaultHeading}>+500 VEs & 25 Gems</h3>
+        
+        <p className={styles.vaultSubtext}>
           Unlocks exclusive high-tier multipliers, XP mini-game bonus mode, and daily spin tokens.
         </p>
 
-        <div className={styles.actionButtonsRow}>
+        <div className={styles.buttonsRow}>
           <button 
-            className={styles.viewRewardsBtn}
+            className={styles.viewPerksBtn}
             onClick={() => {
               soundFx.playClick();
               onOpenLevelModal();
             }}
           >
             <span>View Perks</span>
-            <ChevronRight size={14} />
+            <ChevronRight size={15} />
           </button>
 
           <button 
-            className={styles.vaultWheelBtn}
+            className={styles.luckyVaultBtn}
             onClick={() => {
               soundFx.playStreak();
               if (onOpenLuckyWheel) onOpenLuckyWheel();
             }}
           >
-            <Gift size={14} />
+            <Gift size={15} />
             <span>Lucky Vault</span>
           </button>
         </div>
       </div>
 
+      {/* Right Column: 3D Gold Treasure Chest overflowing with VE Coins and Blue Gems */}
       <div className={styles.rightCol}>
         <div 
-          className={styles.chestWrapper}
+          className={styles.chestContainer}
           onClick={() => {
             soundFx.playStreak();
             if (onOpenLuckyWheel) onOpenLuckyWheel();
             else onOpenLevelModal();
           }}
-          title="Click to open lucky vault!"
+          title="Click to unlock vault!"
         >
-          <div className={styles.chestGlow}></div>
-          <div className={styles.chestGraphic}>
-            <div className={styles.chestLid}></div>
-            <div className={styles.chestBody}>
-              <div className={styles.chestLock}></div>
+          {/* Overflowing gems and coins */}
+          <div className={styles.floatingParticles}>
+            <span className={`${styles.gem} ${styles.gem1}`}>💎</span>
+            <span className={`${styles.gem} ${styles.gem2}`}>💎</span>
+            <span className={`${styles.coin} ${styles.coin1}`}>🪙</span>
+            <span className={`${styles.coin} ${styles.coin2}`}>🪙</span>
+            <span className={`${styles.sparkle} ${styles.sparkle1}`}>✨</span>
+          </div>
+
+          {/* 3D Realistic Chest Graphic */}
+          <div className={styles.chestGraphicBox}>
+            <div className={styles.chestLidOpen}></div>
+            <div className={styles.chestLootInside}>
+              <span className={styles.innerGem}>💎</span>
+              <span className={styles.innerCoin}>🪙</span>
             </div>
-            <div className={`${styles.crystal} ${styles.crystal1}`}>💎</div>
-            <div className={`${styles.crystal} ${styles.crystal2}`}>✨</div>
-            <div className={`${styles.crystal} ${styles.crystal3}`}>🪙</div>
+            <div className={styles.chestMainBody}>
+              <div className={styles.chestCrownEmblem}>👑</div>
+              <div className={styles.chestGoldTrim}></div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   );
 }
+
