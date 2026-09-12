@@ -2,8 +2,8 @@
   position: relative;
   background: var(--bg-panel-gradient);
   border: 1px solid var(--border-highlight);
-  border-radius: var(--radius-lg);
-  padding: 16px 20px;
+  border-radius: var(--radius-xl);
+  padding: 18px 22px;
   display: flex;
   align-items: center;
   justify-content: space-between;

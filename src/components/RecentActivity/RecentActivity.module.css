@@ -3,7 +3,7 @@
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-xl);
   padding: 24px;
   display: flex;
   flex-direction: column;
@@ -89,7 +89,7 @@
   align-items: center;
   gap: 12px;
   padding: 12px 14px;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   background: rgba(255, 255, 255, 0.025);
   border: 1px solid var(--border-subtle);
   transition: var(--transition-smooth);
@@ -170,7 +170,7 @@
 .summaryFooter {
   background: rgba(0, 0, 0, 0.35);
   border: 1px solid var(--border-gold);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   padding: 14px 16px;
   display: flex;
   flex-direction: column;
@@ -198,7 +198,7 @@
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--border-subtle);
   padding: 10px 12px;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-md);
 }
 
 .xpCircle,

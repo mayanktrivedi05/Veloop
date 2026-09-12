@@ -2,7 +2,7 @@
   position: relative;
   background: linear-gradient(135deg, #09173d 0%, #050d24 70%, #0d1e48 100%);
   border: 1.5px solid #f59e0b;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-xl);
   padding: 22px 20px;
   display: flex;
   align-items: center;

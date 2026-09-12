@@ -15,7 +15,7 @@
 .modalCard {
   background: linear-gradient(180deg, #161a2b 0%, #0d0f18 100%);
   border: 1px solid var(--border-gold);
-  border-radius: var(--radius-xl);
+  border-radius: var(--radius-2xl);
   width: 100%;
   max-width: 450px;
   box-shadow: 0 30px 80px -15px rgba(0, 0, 0, 0.9), 0 0 30px rgba(56, 189, 248, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1);
@@ -155,7 +155,7 @@
   font-weight: 850;
   font-size: 0.94rem;
   padding: 14px;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-full);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -179,7 +179,7 @@
 .adSimBox {
   background: rgba(0, 0, 0, 0.45);
   border: 1px solid var(--border-highlight);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   padding: 16px;
   display: flex;
   flex-direction: column;
@@ -234,7 +234,7 @@
   flex: 1;
   background: rgba(0, 0, 0, 0.45);
   border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-md);
   padding: 10px 14px;
   color: #cbd5e1;
   font-size: 0.8rem;
@@ -246,7 +246,7 @@
   border: 1px solid var(--border-subtle);
   color: #fff;
   padding: 0 16px;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   gap: 6px;
@@ -270,8 +270,8 @@
 .itemCard {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md);
-  padding: 14px;
+  border-radius: var(--radius-lg);
+  padding: 14px 16px;
   display: flex;
   align-items: center;
   gap: 14px;
@@ -292,7 +292,7 @@
 .itemIconCircle {
   width: 40px;
   height: 40px;
-  border-radius: var(--radius-sm);
+  border-radius: 14px;
   border: 1px solid;
   display: flex;
   align-items: center;
