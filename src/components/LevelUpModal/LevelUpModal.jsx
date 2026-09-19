@@ -2,6 +2,9 @@ import React, { useEffect } from 'react';
 import styles from './LevelUpModal.module.css';
 import { Sparkles, BarChart2, Target, Gift, Trophy, Check } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import { getBadgeSrc } from '../../assets/badges/index.js';
+import veIcon from '../../assets/coins/ve.svg';
+import gemIcon from '../../assets/coins/gem.svg';
 
 export function LevelUpModal({ isOpen, onClose, onClaim, levelData, user }) {
   useEffect(() => {
@@ -21,7 +24,7 @@ export function LevelUpModal({ isOpen, onClose, onClaim, levelData, user }) {
 
   if (!isOpen) return null;
 
-  const currentLevel = user.currentLevel;
+  const currentLevel = user.currentLevel || 5;
   const rewardVEs = levelData?.rewardVEs || 500;
   const rewardGems = levelData?.rewardGems || 25;
 
@@ -43,14 +46,15 @@ export function LevelUpModal({ isOpen, onClose, onClaim, levelData, user }) {
           <p className={styles.reachedText}>You have ascended to tier rank</p>
         </div>
 
-        {/* 3D Shield Pedestal Stage */}
+        {/* 3D Shield Pedestal Stage with Official Badge */}
         <div className={styles.pedestalStage}>
           <div className={styles.shieldWrapper}>
             <div className={styles.shieldAura}></div>
-            <div className={styles.shieldShape}>
-              <span className={styles.badgeLabel}>LEVEL</span>
-              <span className={styles.badgeNum}>0{currentLevel}</span>
-            </div>
+            <img 
+              className={styles.modalBadgeImg}
+              src={getBadgeSrc(currentLevel)} 
+              alt={`Level ${currentLevel}`} 
+            />
             <div className={styles.laurelWingLeft}>🌿</div>
             <div className={styles.laurelWingRight}>🌿</div>
           </div>
@@ -63,7 +67,7 @@ export function LevelUpModal({ isOpen, onClose, onClaim, levelData, user }) {
         {/* Unlocked Rewards Row */}
         <div className={styles.rewardsRow}>
           <div className={styles.rewardPill}>
-            <span className={styles.rewardIcon}>🪙</span>
+            <img className={styles.rewardTokenImg} src={veIcon} alt="VEs" />
             <div className={styles.rewardTextCol}>
               <span className={styles.rewardVal}>+{rewardVEs} VEs</span>
               <span className={styles.rewardSub}>Token Bonus</span>
@@ -71,7 +75,7 @@ export function LevelUpModal({ isOpen, onClose, onClaim, levelData, user }) {
           </div>
 
           <div className={styles.rewardPill}>
-            <span className={styles.rewardIcon}>💎</span>
+            <img className={styles.rewardTokenImg} src={gemIcon} alt="Gems" />
             <div className={styles.rewardTextCol}>
               <span className={styles.rewardVal}>+{rewardGems} Gems</span>
               <span className={styles.rewardSub}>Vault Gems</span>
