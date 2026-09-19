@@ -1,337 +1,305 @@
-.roadmapContainer {
-  background: var(--bg-card);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-xl);
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.5);
-  transition: var(--transition-smooth);
-}
-
-.roadmapContainer:hover {
-  border-color: var(--border-highlight);
-}
-
-.headerRow {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.roadmapTag {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.74rem;
-  font-weight: 800;
-  color: var(--text-gold);
-  letter-spacing: 0.05em;
-}
-
-.roadmapHeading {
-  font-size: 1.15rem;
-  font-weight: 800;
-  color: #fff;
-  margin-top: 2px;
-}
-
-.headerRightArea {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
-.levelStatusSummary {
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-}
-
-.levelStatusSummary strong {
-  color: var(--accent-primary);
-}
-
-.navArrows {
-  display: flex;
-  gap: 6px;
-}
-
-.arrowBtn {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid var(--border-subtle);
-  color: var(--text-secondary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.arrowBtn:hover {
-  background: rgba(255, 255, 255, 0.15);
-  color: #fff;
-  border-color: var(--border-highlight);
-}
-
-/* Scroll Area */
-.roadmapScrollWrapper {
-  position: relative;
+.section {
   width: 100%;
-  overflow: hidden;
+  margin-bottom: 24px;
 }
 
-.roadmapScroll {
-  display: flex;
-  gap: 14px;
-  overflow-x: auto;
-  padding: 10px 4px 16px 4px;
-  position: relative;
-  scrollbar-width: thin;
-}
-
-.trackLine {
-  position: absolute;
-  top: 56px;
-  left: 20px;
-  right: 20px;
-  height: 2px;
-  background: linear-gradient(90deg, var(--accent-primary) 0%, var(--accent-gold) 60%, rgba(255, 255, 255, 0.1) 100%);
-  z-index: 1;
-}
-
-.roadmapNode {
-  flex: 0 0 160px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  padding: 16px 14px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  cursor: pointer;
-  position: relative;
-  z-index: 2;
-  transition: var(--transition-smooth);
-}
-
-.roadmapNode:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: var(--border-highlight);
-  transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-}
-
-.nodeSelected {
-  border-color: var(--accent-primary);
-  background: rgba(56, 189, 248, 0.12);
-  box-shadow: 0 0 20px var(--accent-primary-glow);
-}
-
-.nodeStatusBadge {
-  min-height: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.completedIcon {
-  color: #10b981;
-}
-
-.lockIcon {
-  color: var(--text-muted);
-}
-
-.currentPulse {
-  font-size: 0.6rem;
-  font-weight: 900;
-  color: #000;
-  background: var(--accent-gold);
-  padding: 2px 7px;
-  border-radius: var(--radius-full);
-  letter-spacing: 0.05em;
-  box-shadow: 0 0 10px var(--accent-gold-glow);
-  animation: pulseGlow 2s infinite;
-}
-
-.nodeCircle {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: var(--bg-main);
-  border: 2px solid var(--accent-primary);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-}
-
-.nodeLvlNum {
-  font-size: 0.68rem;
-  font-weight: 900;
-  color: #fff;
-  line-height: 1;
-}
-
-.tierIcon {
-  margin-top: 1px;
-}
-
-.nodeInfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 3px;
-}
-
-.tierName {
-  font-size: 0.76rem;
-  font-weight: 800;
-  color: #fff;
-  white-space: nowrap;
-}
-
-.tierXP {
-  font-size: 0.7rem;
-  color: var(--text-secondary);
-}
-
-.rewardPillNode {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  background: rgba(255, 255, 255, 0.06);
-  padding: 3px 8px;
-  border-radius: var(--radius-full);
-  font-size: 0.66rem;
-  font-weight: 700;
-  color: var(--text-gold);
-  margin-top: 4px;
-}
-
-.sparkleSmall {
-  color: var(--accent-gold);
-}
-
-/* Detail Card */
-.detailCard {
-  background: rgba(0, 0, 0, 0.35);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  padding: 18px;
-  animation: popIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.detailContent {
+.headingRow {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
+  margin-bottom: 14px;
+  position: relative;
   flex-wrap: wrap;
+  gap: 10px;
 }
 
-.detailLeft {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  flex: 1;
-  min-width: 250px;
-}
-
-.detailBadgeRow {
+.headingGroup {
   display: flex;
   align-items: center;
   gap: 8px;
-  flex-wrap: wrap;
 }
 
-.detailLevelNumber {
-  font-size: 0.72rem;
-  font-weight: 900;
-  color: var(--accent-primary);
-  background: rgba(56, 189, 248, 0.15);
-  padding: 2px 8px;
-  border-radius: var(--radius-xs);
-}
-
-.detailTitle {
-  font-size: 0.95rem;
+.heading {
+  margin: 0;
+  font-size: 1.25rem;
   font-weight: 800;
-  color: #fff;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #c9985c 0%, #fbe2a5 50%, #c3cadc 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  letter-spacing: 0.03em;
 }
 
-.activeTag {
-  font-size: 0.65rem;
-  font-weight: 800;
-  color: #000;
-  background: var(--accent-gold);
-  padding: 2px 7px;
-  border-radius: var(--radius-full);
+.infoWrapper {
+  position: relative;
+  display: inline-flex;
 }
 
-.completedTag {
-  font-size: 0.65rem;
-  font-weight: 800;
-  color: #34d399;
-  background: rgba(16, 185, 129, 0.15);
-  border: 1px solid rgba(16, 185, 129, 0.3);
-  padding: 2px 7px;
-  border-radius: var(--radius-full);
+.infoBtn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border-radius: 50%;
+  transition: color 0.2s ease;
 }
 
-.lockedTag {
-  font-size: 0.65rem;
-  font-weight: 800;
-  color: var(--text-muted);
-  background: rgba(255, 255, 255, 0.06);
-  padding: 2px 7px;
-  border-radius: var(--radius-full);
+.infoBtn:hover {
+  color: var(--accent-gold-light);
 }
 
-.detailDescription {
+.tooltipCard {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 50;
+  width: 260px;
+  background: rgba(14, 16, 24, 0.96);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 10px rgba(245, 158, 11, 0.25);
+  backdrop-filter: blur(12px);
+  animation: popIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tooltipCard p {
+  margin: 0;
   font-size: 0.78rem;
   color: var(--text-secondary);
   line-height: 1.4;
 }
 
-.detailRight {
+.navControls {
   display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.perkList {
+.levelStatusChip {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+}
+
+.levelStatusChip strong {
+  color: var(--accent-gold-light);
+}
+
+.navButtons {
+  display: flex;
+  gap: 6px;
+}
+
+.navBtn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.navBtn:hover {
+  background: rgba(245, 158, 11, 0.2);
+  color: #fff;
+  border-color: var(--accent-gold);
+}
+
+/* Scroller Container */
+.scrollerWrapper {
+  background: rgba(10, 14, 28, 0.75);
+  border: 1px solid rgba(205, 174, 112, 0.25);
+  border-radius: var(--radius-lg);
+  padding: 24px 14px 18px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+}
+
+.scroller {
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+  overflow-x: auto;
+  padding: 28px 10px 6px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-behavior: smooth;
+}
+
+.scroller::-webkit-scrollbar {
+  display: none;
+}
+
+/* Tier Detail Card */
+.tierDetailCard {
+  margin-top: 14px;
+  background: linear-gradient(180deg, rgba(22, 28, 52, 0.85) 0%, rgba(12, 16, 32, 0.95) 100%);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-lg);
+  padding: 16px 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tierDetailHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 10px;
+}
+
+.tierTitleArea {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.tierLevelBadge {
+  background: linear-gradient(135deg, #ffd700 0%, #f59e0b 100%);
+  color: #000;
+  font-size: 0.68rem;
+  font-weight: 900;
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.04em;
+}
+
+.tierName {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.tierStatusTag span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+}
+
+.tagCompleted {
+  background: rgba(85, 185, 106, 0.15);
+  border: 1px solid rgba(85, 185, 106, 0.4);
+  color: #86efac;
+}
+
+.tagCurrent {
+  background: rgba(245, 158, 11, 0.2);
+  border: 1px solid var(--accent-gold);
+  color: #fde047;
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.3);
+}
+
+.tagLocked {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text-muted);
+}
+
+.tierStatsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.statBox {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.statLabel {
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+.statValue {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #38bdf8;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.statValueGold {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--accent-gold-light);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.zapIcon {
+  color: #38bdf8;
+}
+
+.coinIcon {
+  color: var(--accent-gold);
+}
+
+.perksList {
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
 
-.perkItem {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.76rem;
-  color: #fff;
-  background: rgba(255, 255, 255, 0.05);
-  padding: 6px 12px;
-  border-radius: var(--radius-md);
+.perksHeader {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--text-secondary);
 }
 
-@media (max-width: 640px) {
-  .headerRow {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .headerRightArea {
-    width: 100%;
-    justify-content: space-between;
-  }
+.perksList ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.perksList li {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.78rem;
+  color: var(--text-primary);
+}
+
+.perkBullet {
+  color: var(--accent-gold);
+  flex-shrink: 0;
 }

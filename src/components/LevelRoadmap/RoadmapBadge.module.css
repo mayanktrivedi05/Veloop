@@ -1,0 +1,138 @@
+.item {
+  position: relative;
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 110px;
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 0 4px;
+}
+
+.item:hover {
+  transform: translateY(-4px);
+}
+
+.itemSelected .badgeWrapper {
+  filter: drop-shadow(0 0 16px rgba(245, 158, 11, 0.6));
+}
+
+.badgeWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+}
+
+.badge {
+  height: 100%;
+  width: auto;
+  max-width: 80px;
+  object-fit: contain;
+  transition: filter 0.25s ease, transform 0.25s ease;
+}
+
+.badge[data-locked="true"] {
+  filter: blur(2px) grayscale(0.4) brightness(0.7);
+  opacity: 0.65;
+}
+
+.badge[data-current="true"] {
+  filter: drop-shadow(0 0 12px rgba(205, 174, 112, 0.7));
+  animation: pulseGlow 2.5s infinite alternate ease-in-out;
+}
+
+@keyframes pulseGlow {
+  0% {
+    filter: drop-shadow(0 0 8px rgba(205, 174, 112, 0.5));
+  }
+  100% {
+    filter: drop-shadow(0 0 16px rgba(251, 226, 165, 0.9));
+  }
+}
+
+.badge[data-level="1"],
+.badge[data-level="2"] {
+  transform: scale(0.92);
+  transform-origin: bottom center;
+}
+
+.lockOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.lock {
+  position: absolute;
+  left: 50%;
+  bottom: 8%;
+  transform: translateX(-50%);
+  width: 18px;
+  height: auto;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.9));
+}
+
+.tip {
+  position: absolute;
+  left: 50%;
+  top: -18px;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  white-space: nowrap;
+  z-index: 10;
+  animation: bounceTip 1.6s infinite ease-in-out;
+}
+
+@keyframes bounceTip {
+  0%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-4px);
+  }
+}
+
+.tipLabel {
+  background: linear-gradient(135deg, #ffd700 0%, #cdae70 100%);
+  color: #0e1018;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-radius: 9999px;
+  padding: 3px 10px;
+  box-shadow: 0 4px 12px rgba(205, 174, 112, 0.4);
+}
+
+.tipArrow {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #cdae70;
+}
+
+.levelLabel {
+  margin-top: 6px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: color 0.2s ease;
+}
+
+.levelLabelCurrent {
+  color: var(--accent-gold-light);
+  font-weight: 900;
+  text-shadow: 0 0 8px rgba(245, 158, 11, 0.5);
+}

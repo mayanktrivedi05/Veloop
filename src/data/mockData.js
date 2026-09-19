@@ -131,6 +131,32 @@ export const LEVEL_TIERS = [
     icon: "Trophy",
     badgeColor: "#f59e0b",
   },
+  {
+    level: 9,
+    name: "Immortal Master",
+    requiredXP: 45000,
+    rewardText: "+7500 VEs & 500 Gems",
+    rewardAmount: 7500,
+    rewardType: "VEs",
+    gems: 500,
+    spins: 15,
+    status: "locked",
+    icon: "Crown",
+    badgeColor: "#8b5cf6",
+  },
+  {
+    level: 10,
+    name: "Transcendent God",
+    requiredXP: 70000,
+    rewardText: "+15000 VEs & Mythic Crown",
+    rewardAmount: 15000,
+    rewardType: "VEs",
+    gems: 1000,
+    spins: 25,
+    status: "locked",
+    icon: "Sparkles",
+    badgeColor: "#ffd700",
+  },
 ];
 
 export const EARN_ACTIVITIES = [

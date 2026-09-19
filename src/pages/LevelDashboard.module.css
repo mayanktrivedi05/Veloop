@@ -38,7 +38,8 @@
   grid-template-areas:
     "boost reward"
     "banner earn"
-    "activity roadmap";
+    "activity game"
+    "roadmap roadmap";
   gap: 18px;
   align-items: start;
   width: 100%;
@@ -50,6 +51,7 @@
 .rewardArea { grid-area: reward; min-width: 0; width: 100%; }
 .earnArea { grid-area: earn; min-width: 0; width: 100%; }
 .activityArea { grid-area: activity; min-width: 0; width: 100%; }
+.gameSectionArea { grid-area: game; min-width: 0; width: 100%; }
 .roadmapArea { grid-area: roadmap; min-width: 0; width: 100%; }
 
 @media (max-width: 960px) {

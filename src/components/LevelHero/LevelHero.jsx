@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styles from './LevelHero.module.css';
 import { Sparkles, Zap, ChevronRight, Trophy, ChevronUp } from 'lucide-react';
 import { soundFx } from '../../utils/soundEffects';
+import { getBadgeSrc } from '../../assets/badges/index.js';
 
 export function LevelHero({ user, onOpenGame, onEnergyTap, onOpenLevelUp }) {
   const [bursts, setBursts] = useState([]);
@@ -36,21 +37,17 @@ export function LevelHero({ user, onOpenGame, onEnergyTap, onOpenLevelUp }) {
       <div className={styles.cardContent}>
         {/* Top Section: Shield & Rank Details */}
         <div className={styles.headerRow}>
-          {/* 3D Gold Winged Crest */}
+          {/* Official Badge Crest */}
           <div 
             className={styles.shieldWrapper}
             onClick={handleShieldClick}
             title="Tap to boost XP!"
           >
-            <div className={styles.shieldCrown}>👑</div>
-            <div className={styles.wingLeft}>🪽</div>
-            <div className={styles.wingRight}>🪽</div>
-
-            <div className={styles.shieldBody}>
-              <span className={styles.shieldLevelTag}>LEVEL</span>
-              <span className={styles.shieldLevelNum}>0{user.currentLevel || 5}</span>
-              <span className={styles.shieldTapTag}>TAP & XP</span>
-            </div>
+            <img 
+              className={styles.heroBadgeImg} 
+              src={getBadgeSrc(user.currentLevel || 5)} 
+              alt={`Level ${user.currentLevel || 5}`} 
+            />
 
             {/* Click Burst Particles */}
             {bursts.map((b) => (

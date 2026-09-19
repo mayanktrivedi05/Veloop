@@ -9,6 +9,7 @@ import { EarnMoreSection } from '../components/EarnMoreSection/EarnMoreSection';
 import { NextLevelReward } from '../components/NextLevelReward/NextLevelReward';
 import { LevelRoadmap } from '../components/LevelRoadmap/LevelRoadmap';
 import { RecentActivity } from '../components/RecentActivity/RecentActivity';
+import { PlayAndEarn } from '../components/PlayAndEarn/PlayAndEarn';
 import { XPGame } from '../components/PlayAndEarn/XPGame';
 import { LevelUpModal } from '../components/LevelUpModal/LevelUpModal';
 import { ActivityModal } from '../components/ActivityModal/ActivityModal';
@@ -157,6 +158,14 @@ export function LevelDashboard() {
                 <RecentActivity 
                   history={history}
                   user={user}
+                />
+              </div>
+
+              {/* VE Coin Catch Mini-Game Section */}
+              <div className={styles.gameSectionArea}>
+                <PlayAndEarn 
+                  onOpenGame={() => setIsGameOpen(true)}
+                  attemptsLeft={user.spins || 3}
                 />
               </div>
 

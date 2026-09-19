@@ -97,6 +97,14 @@
   right: -20px;
 }
 
+.heroBadgeImg {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 16px rgba(245, 158, 11, 0.6));
+  z-index: 3;
+}
+
 .shieldBody {
   width: 74px;
   height: 80px;
