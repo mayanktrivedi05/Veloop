@@ -13,6 +13,8 @@ import {
   Activity
 } from 'lucide-react';
 import { soundFx } from '../../utils/soundEffects';
+import xpCoin from '../../assets/coins/xp-1.svg';
+import veCoin from '../../assets/coins/ve.svg';
 
 const ICON_MAP = {
   UserPlus: UserPlus,
@@ -107,7 +109,7 @@ export function RecentActivity({ history, user }) {
         <span className={styles.summaryTitle}>⚡ Today's Harvest</span>
         <div className={styles.summaryStats}>
           <div className={styles.summaryItem}>
-            <div className={styles.xpCircle}>XP</div>
+            <img src={xpCoin} alt="XP" className={styles.summaryCoinImg} />
             <div className={styles.summaryTextCol}>
               <span className={styles.summaryValue}>+{user.todayXP} XP</span>
               <span className={styles.summarySub}>Experience</span>
@@ -115,7 +117,7 @@ export function RecentActivity({ history, user }) {
           </div>
 
           <div className={styles.summaryItem}>
-            <div className={styles.veCircle}>V</div>
+            <img src={veCoin} alt="VEs" className={styles.summaryCoinImg} />
             <div className={styles.summaryTextCol}>
               <span className={styles.summaryValue}>+{user.todayVEs} VEs</span>
               <span className={styles.summarySub}>Tokens</span>

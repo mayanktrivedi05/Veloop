@@ -55,41 +55,23 @@
   justify-content: center;
 }
 
-.headerTitleRow h3 {
-  font-size: 1.1rem;
-  font-weight: 800;
+.headerModalTitle {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 850;
   color: #fff;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.02em;
 }
 
-.headerTitleRow p {
-  font-size: 0.76rem;
+.headerModalSub {
+  font-size: 0.74rem;
   color: var(--text-secondary);
-}
-
-.closeBtn {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid var(--border-subtle);
-  color: var(--text-secondary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: var(--transition-fast);
-}
-
-.closeBtn:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: var(--border-highlight);
-  color: #fff;
 }
 
 /* Tab Bar */
-.tabSwitch {
+.tabBar {
   display: flex;
-  background: rgba(0, 0, 0, 0.35);
+  background: rgba(0, 0, 0, 0.4);
   padding: 4px;
   border-radius: var(--radius-full);
   border: 1px solid var(--border-subtle);
@@ -98,19 +80,42 @@
 
 .tabBtn {
   flex: 1;
-  padding: 8px;
+  padding: 8px 12px;
   border-radius: var(--radius-full);
   font-size: 0.8rem;
   font-weight: 750;
   color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
   transition: var(--transition-fast);
 }
 
-.tabBtnActive {
+.tabBtn:hover {
+  color: #fff;
+}
+
+.tabActive {
   background: var(--gold-btn-gradient);
-  color: #0b0c10;
+  color: #0b0c10 !important;
   font-weight: 850;
   box-shadow: 0 2px 10px rgba(245, 158, 11, 0.3);
+}
+
+/* Safe and Coin Assets in Vault */
+.safeImgGraphic {
+  width: 78px;
+  height: 78px;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.7));
+}
+
+.modalPrizeCoin {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.5));
 }
 
 /* Wheel Section */

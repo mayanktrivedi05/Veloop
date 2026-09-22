@@ -1,7 +1,9 @@
 import React from 'react';
 import styles from './TodayBoost.module.css';
-import { Star, CheckSquare, Flame, Zap, Check, ChevronRight, Clock } from 'lucide-react';
+import { CheckSquare, Flame, Zap, Check, ChevronRight, Clock } from 'lucide-react';
 import { soundFx } from '../../utils/soundEffects';
+import xpIcon from '../../assets/coins/xp-1.svg';
+import veIcon from '../../assets/coins/ve.svg';
 
 export function TodayBoost({ user, isStreakClaimed, onClaimStreak, onOpenTasks }) {
   return (
@@ -10,11 +12,11 @@ export function TodayBoost({ user, isStreakClaimed, onClaimStreak, onOpenTasks }
       <div className={styles.headerRow}>
         <div className={styles.titleGroup}>
           <div className={styles.titleWithZap}>
-            <Zap size={18} className={styles.zapIcon} fill="#fbbf24" />
+            <Zap size={18} className={styles.zapIcon} />
             <h3 className={styles.sectionTitle}>TODAY'S POWER BOOST</h3>
           </div>
           <div className={styles.boostPill}>
-            <Zap size={12} fill="#38bdf8" />
+            <Zap size={11} fill="#00f0ff" />
             <span>1.5X BOOST ACTIVE</span>
           </div>
         </div>
@@ -36,12 +38,12 @@ export function TodayBoost({ user, isStreakClaimed, onClaimStreak, onOpenTasks }
           }}
         >
           <div className={`${styles.squircleIcon} ${styles.blueSquircle}`}>
-            <Star size={20} fill="#38bdf8" color="#38bdf8" />
+            <img className={styles.squircleImg} src={xpIcon} alt="XP" />
           </div>
 
           <div className={styles.cardTextCol}>
             <span className={styles.rowLabel}>XP Earned Today</span>
-            <span className={styles.rowValue}>+{user.todayXP || 215} XP</span>
+            <span className={styles.rowValue}>+{user.todayXP?.toLocaleString() || 215} XP</span>
           </div>
 
           <ChevronRight size={18} className={styles.chevronIcon} />
@@ -70,18 +72,22 @@ export function TodayBoost({ user, isStreakClaimed, onClaimStreak, onOpenTasks }
         {/* Card 3: Active Streak */}
         <div className={styles.boostRowCard}>
           <div className={`${styles.squircleIcon} ${styles.redSquircle}`}>
-            <Flame size={20} fill="#f97316" color="#f97316" />
+            <Flame size={22} className={styles.flameIcon} />
           </div>
 
           <div className={styles.cardTextCol}>
-            <span className={styles.rowLabel}>Active Streak</span>
-            <span className={styles.rowValue}>{user.streakDays || 7} Days</span>
+            <span className={styles.rowLabel}>Active Daily Streak</span>
+            <span className={styles.rowValue}>{user.streakDays || 7} Days 🔥</span>
           </div>
 
           <button 
             className={`${styles.claimStreakBtn} ${isStreakClaimed ? styles.claimedBtn : ''}`}
-            onClick={onClaimStreak}
+            onClick={(e) => {
+              e.stopPropagation();
+              onClaimStreak();
+            }}
             disabled={isStreakClaimed}
+            type="button"
           >
             {isStreakClaimed ? (
               <>
@@ -90,7 +96,7 @@ export function TodayBoost({ user, isStreakClaimed, onClaimStreak, onOpenTasks }
               </>
             ) : (
               <>
-                <Zap size={14} fill="#fff" />
+                <Zap size={14} fill="#000" />
                 <span>Claim +50 XP</span>
                 <ChevronRight size={14} />
               </>
@@ -102,3 +108,4 @@ export function TodayBoost({ user, isStreakClaimed, onClaimStreak, onOpenTasks }
   );
 }
 
+export default TodayBoost;

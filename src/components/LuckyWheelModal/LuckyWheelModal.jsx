@@ -3,6 +3,10 @@ import styles from './LuckyWheelModal.module.css';
 import { X, Sparkles, Trophy, Gem, Flame, RefreshCw, Zap, Gift, Check } from 'lucide-react';
 import { soundFx } from '../../utils/soundEffects';
 import confetti from 'canvas-confetti';
+import safeImg from '../../assets/safe/safe-2.svg';
+import xpCoin from '../../assets/coins/xp-1.svg';
+import veCoin from '../../assets/coins/ve.svg';
+import gemCoin from '../../assets/coins/gem.svg';
 
 const WHEEL_PRIZES = [
   { label: '+50 XP', value: 50, type: 'xp', color: '#38bdf8', icon: Zap },
@@ -111,8 +115,8 @@ export function LuckyWheelModal({ isOpen, onClose, onRewardWon, spinsLeft = 2 })
               <Trophy size={18} color="#ffd700" />
             </div>
             <div>
-              <h3>LUCKY VAULT & WHEEL</h3>
-              <p>Spin & Unlock Legendary Rewards Daily</p>
+              <h3 className={styles.headerModalTitle}>LUCKY VAULT & WHEEL</h3>
+              <p className={styles.headerModalSub}>Spin & Unlock Legendary Rewards Daily</p>
             </div>
           </div>
 
@@ -141,7 +145,7 @@ export function LuckyWheelModal({ isOpen, onClose, onRewardWon, spinsLeft = 2 })
             }}
           >
             <Gift size={15} />
-            <span>Mystery Chest</span>
+            <span>Mystery Vault</span>
           </button>
         </div>
 
@@ -221,7 +225,7 @@ export function LuckyWheelModal({ isOpen, onClose, onRewardWon, spinsLeft = 2 })
             >
               <div className={styles.chestAuraGlow}></div>
               <div className={styles.vaultIconWrapper}>
-                <Gift size={64} className={styles.vaultIcon} />
+                <img src={safeImg} alt="Vault Safe" className={styles.safeImgGraphic} />
               </div>
               <div className={styles.sparkleFloating}>✨</div>
               <div className={styles.sparkleFloating2}>💎</div>
@@ -231,15 +235,15 @@ export function LuckyWheelModal({ isOpen, onClose, onRewardWon, spinsLeft = 2 })
               <div className={styles.chestRewardBox}>
                 <div className={styles.rewardGrid}>
                   <div className={styles.rewardChip}>
-                    <Zap size={16} color="#38bdf8" />
+                    <img src={xpCoin} alt="XP" className={styles.modalPrizeCoin} />
                     <span>+{mysteryReward.xp} XP</span>
                   </div>
                   <div className={styles.rewardChip}>
-                    <Trophy size={16} color="#f59e0b" />
+                    <img src={veCoin} alt="VEs" className={styles.modalPrizeCoin} />
                     <span>+{mysteryReward.ves} VEs</span>
                   </div>
                   <div className={styles.rewardChip}>
-                    <Gem size={16} color="#10b981" />
+                    <img src={gemCoin} alt="Gems" className={styles.modalPrizeCoin} />
                     <span>+{mysteryReward.gems} Gems</span>
                   </div>
                 </div>
@@ -248,7 +252,7 @@ export function LuckyWheelModal({ isOpen, onClose, onRewardWon, spinsLeft = 2 })
             ) : (
               <button className={styles.openChestBtn} onClick={handleOpenChest}>
                 <Sparkles size={18} />
-                <span>UNLOCK MYSTERY CHEST</span>
+                <span>UNLOCK MYSTERY VAULT</span>
               </button>
             )}
           </div>

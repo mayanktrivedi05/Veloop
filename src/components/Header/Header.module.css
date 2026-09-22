@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 20px;
+  padding: 10px 20px;
   background: var(--bg-glass);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -16,17 +16,36 @@
   transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
+.leftBrandSection {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.brandLogoWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.brandLogo {
+  height: 28px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.6));
+}
+
 .menuToggle {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 38px;
-  height: 38px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   background: var(--bg-card-inner);
   border: 1px solid var(--border-highlight);
   color: var(--text-primary);
   transition: var(--transition-fast);
+  cursor: pointer;
 }
 
 .menuToggle:hover {
@@ -45,57 +64,78 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  background: var(--bg-card-inner);
+  background: rgba(14, 18, 36, 0.85);
   border: 1px solid var(--border-gold);
-  padding: 6px 12px;
+  padding: 5px 12px;
   border-radius: var(--radius-full);
   cursor: pointer;
-  box-shadow: 0 0 10px rgba(245, 158, 11, 0.15);
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.15);
   transition: var(--transition-fast);
 }
 
 .balanceItemVE:hover {
-  background: var(--bg-card-hover);
+  background: rgba(26, 32, 60, 0.95);
   border-color: var(--accent-gold-light);
-  transform: translateY(-1px);
-}
-
-.veIconCircle {
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: var(--gold-btn-gradient);
-  color: #000;
-  font-weight: 900;
-  font-size: 0.65rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 0 6px var(--accent-gold-glow);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
 }
 
 .balanceItemGem {
   display: flex;
   align-items: center;
   gap: 6px;
-  background: var(--bg-card-inner);
+  background: rgba(14, 18, 36, 0.85);
   border: 1px solid var(--border-highlight);
-  padding: 6px 12px;
+  padding: 5px 12px;
   border-radius: var(--radius-full);
   cursor: pointer;
-  box-shadow: 0 0 10px var(--accent-primary-glow);
+  box-shadow: 0 0 12px var(--accent-primary-glow);
   transition: var(--transition-fast);
 }
 
 .balanceItemGem:hover {
-  background: var(--bg-card-hover);
+  background: rgba(26, 32, 60, 0.95);
   border-color: var(--accent-primary);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px var(--accent-primary-glow);
 }
 
-.gemIcon {
-  color: var(--accent-primary);
-  filter: drop-shadow(0 0 6px var(--accent-primary-glow));
+.tokenIcon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+.levelChip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, rgba(205, 174, 112, 0.2) 0%, rgba(20, 24, 48, 0.8) 100%);
+  border: 1px solid var(--border-gold);
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.levelChip:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 14px rgba(245, 158, 11, 0.4);
+}
+
+.levelBadgeIcon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
+}
+
+.levelChipText {
+  font-size: 0.72rem;
+  font-weight: 900;
+  color: var(--accent-gold-light);
+  letter-spacing: 0.05em;
 }
 
 .balanceValue {

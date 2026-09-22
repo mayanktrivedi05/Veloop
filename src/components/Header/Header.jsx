@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import styles from './Header.module.css';
 import { 
   Bell, 
-  Gem, 
   Menu, 
   X, 
   Sparkles, 
@@ -17,6 +16,10 @@ import {
   Check
 } from 'lucide-react';
 import { soundFx } from '../../utils/soundEffects';
+import logoSvg from '../../assets/logo.svg';
+import veSvg from '../../assets/coins/ve.svg';
+import gemSvg from '../../assets/coins/gem.svg';
+import { getBadgeSrc } from '../../assets/badges/index.js';
 
 const THEMES = [
   { id: 'aurora', name: 'Cosmic Aurora', icon: '🌌', color: '#38bdf8' },
@@ -44,17 +47,23 @@ export function Header({
   return (
     <>
       <header className={styles.headerContainer}>
-        {/* Left Side: Hamburger Menu */}
-        <button 
-          className={styles.menuToggle} 
-          onClick={() => {
-            soundFx.playClick();
-            setMobileMenuOpen(!mobileMenuOpen);
-          }}
-          aria-label="Toggle Navigation"
-        >
-          {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-        </button>
+        {/* Left Side: Brand Logo & Hamburger */}
+        <div className={styles.leftBrandSection}>
+          <button 
+            className={styles.menuToggle} 
+            onClick={() => {
+              soundFx.playClick();
+              setMobileMenuOpen(!mobileMenuOpen);
+            }}
+            aria-label="Toggle Navigation"
+          >
+            {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
+
+          <div className={styles.brandLogoWrapper}>
+            <img className={styles.brandLogo} src={logoSvg} alt="VeLoop" />
+          </div>
+        </div>
 
         {/* Currency Stat Pills */}
         <div className={styles.walletBar}>
@@ -66,8 +75,8 @@ export function Header({
               if (onOpenLuckyWheel) onOpenLuckyWheel();
             }}
           >
-            <div className={styles.veIconCircle}>V</div>
-            <span className={styles.balanceValue}>{user.veCoins || 485} VEs</span>
+            <img className={styles.tokenIcon} src={veSvg} alt="VE" />
+            <span className={styles.balanceValue}>{user.veCoins?.toLocaleString() || 485} VEs</span>
           </div>
 
           <div 
@@ -78,8 +87,24 @@ export function Header({
               if (onOpenLuckyWheel) onOpenLuckyWheel();
             }}
           >
-            <Gem size={15} className={styles.gemIcon} />
-            <span className={styles.balanceValue}>{user.gems || 45}</span>
+            <img className={styles.tokenIcon} src={gemSvg} alt="GEM" />
+            <span className={styles.balanceValue}>{user.gems?.toLocaleString() || 45}</span>
+          </div>
+
+          <div 
+            className={styles.levelChip}
+            title="Current Tier"
+            onClick={() => {
+              soundFx.playClick();
+              if (onOpenLevelUp) onOpenLevelUp();
+            }}
+          >
+            <img 
+              className={styles.levelBadgeIcon} 
+              src={getBadgeSrc(user.currentLevel || 5)} 
+              alt={`Level ${user.currentLevel || 5}`} 
+            />
+            <span className={styles.levelChipText}>LVL {user.currentLevel || 5}</span>
           </div>
         </div>
 

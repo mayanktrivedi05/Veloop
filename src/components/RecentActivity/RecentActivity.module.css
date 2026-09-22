@@ -199,18 +199,14 @@
   border: 1px solid var(--border-subtle);
   padding: 10px 12px;
   border-radius: var(--radius-md);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
-.xpCircle,
-.veCircle {
+.summaryCoinImg {
   width: 28px;
   height: 28px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.68rem;
-  font-weight: 900;
+  object-fit: contain;
+  filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.5));
 }
 
 .xpCircle {

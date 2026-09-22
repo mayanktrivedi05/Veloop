@@ -11,6 +11,8 @@ import {
   Check
 } from 'lucide-react';
 import { soundFx } from '../../utils/soundEffects';
+import xpCoin from '../../assets/coins/xp-1.svg';
+import veCoin from '../../assets/coins/ve.svg';
 
 const QUEST_ITEMS = [
   {
@@ -42,8 +44,8 @@ const QUEST_ITEMS = [
   },
   {
     id: 'xp-catcher',
-    title: 'XP Catcher',
-    rewardXP: 10,
+    title: 'XP Catcher Arcade',
+    rewardXP: 60,
     icon: Rocket,
     squircleClass: styles.cyanSquircle,
     btnClass: styles.cyanBtn,
@@ -52,7 +54,7 @@ const QUEST_ITEMS = [
   },
   {
     id: 'mini-games',
-    title: 'Mini Games',
+    title: 'Mini Games & Quests',
     rewardXP: 75,
     icon: Gamepad2,
     squircleClass: styles.magentaSquircle,
@@ -130,7 +132,7 @@ export function EarnMoreSection({
               <div className={styles.questDetailsCol}>
                 <span className={styles.questTitle}>{quest.title}</span>
                 <div className={styles.xpRewardPill}>
-                  <span className={styles.xpBadgeLabel}>XP</span>
+                  <img src={xpCoin} alt="XP" className={styles.tokenRewardIcon} />
                   <span className={styles.xpAmountText}>+{quest.rewardXP} XP</span>
                 </div>
               </div>

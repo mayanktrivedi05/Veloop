@@ -177,7 +177,14 @@
 .xpRewardPill {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
+}
+
+.tokenRewardIcon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.6));
 }
 
 .xpBadgeLabel {

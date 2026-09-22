@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap');
 
-/* ---------------- GLOBAL & THEME 1: COSMIC (DEFAULT) ---------------- */
+/* ---------------- GLOBAL & THEME 1: COSMIC AURORA (DEFAULT) ---------------- */
 [data-theme='aurora'],
 :root {
   /* Typography */
@@ -9,56 +9,64 @@
 
   /* Smooth Curvatures (Generous Rounded Aesthetic for High Engagement) */
   --radius-xs: 8px;
-  --radius-sm: 14px;
-  --radius-md: 18px;
-  --radius-lg: 24px;
-  --radius-xl: 30px;
-  --radius-2xl: 38px;
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+  --radius-xl: 28px;
+  --radius-2xl: 36px;
   --radius-full: 9999px;
 
   /* Transitions */
   --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-smooth: 0.28s cubic-bezier(0.16, 1, 0.3, 1);
-  --transition-bounce: 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+  --transition-smooth: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-bounce: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 
-  --bg-main: #020617;
-  --bg-canvas: #03071e;
-  --bg-card: #060f2a;
-  --bg-card-alt: #081438;
-  --bg-card-inner: rgba(10, 22, 54, 0.7);
-  --bg-glass: rgba(4, 9, 26, 0.9);
-  --bg-panel-gradient: linear-gradient(180deg, #09173d 0%, #040a1c 100%);
+  /* Surfaces & Backgrounds */
+  --bg-main: #060914;
+  --bg-canvas: #04060e;
+  --bg-card: rgba(14, 19, 36, 0.85);
+  --bg-card-alt: rgba(18, 24, 46, 0.8);
+  --bg-card-hover: rgba(26, 35, 68, 0.9);
+  --bg-card-inner: rgba(10, 14, 28, 0.7);
+  --bg-glass: rgba(8, 12, 24, 0.82);
+  --bg-panel-gradient: linear-gradient(180deg, rgba(20, 27, 54, 0.9) 0%, rgba(8, 12, 24, 0.95) 100%);
   
-  --border-card-blue: #1e40af;
-  --border-card-cyan: #0284c7;
+  /* Borders */
+  --border-card-blue: rgba(56, 189, 248, 0.25);
+  --border-card-cyan: rgba(0, 240, 255, 0.35);
   --border-neon-blue: rgba(56, 189, 248, 0.45);
   --border-neon-gold: rgba(245, 158, 11, 0.55);
-  --border-subtle: rgba(30, 58, 138, 0.4);
-  --border-highlight: rgba(56, 189, 248, 0.45);
-  --border-gold: rgba(245, 158, 11, 0.55);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-highlight: rgba(56, 189, 248, 0.35);
+  --border-gold: rgba(245, 158, 11, 0.45);
+  --border-gold-bright: rgba(255, 215, 0, 0.7);
 
+  /* Accents */
   --accent-primary: #38bdf8;
-  --accent-primary-glow: rgba(56, 189, 248, 0.35);
+  --accent-primary-glow: rgba(56, 189, 248, 0.4);
   --accent-cyan-bright: #00f0ff;
-  --accent-blue: #2563eb;
+  --accent-blue: #3b82f6;
   --accent-blue-deep: #1d4ed8;
-  --accent-secondary: #8b5cf6;
-  --accent-purple: #a855f7;
+  --accent-secondary: #a855f7;
+  --accent-purple: #c084fc;
   --accent-magenta: #ec4899;
   --accent-orange: #f97316;
   --accent-red: #ef4444;
+  --accent-emerald: #10b981;
   
   --accent-gold: #f59e0b;
   --accent-gold-light: #fbbf24;
   --accent-gold-bright: #ffd700;
-  --accent-gold-glow: rgba(255, 215, 0, 0.4);
+  --accent-gold-glow: rgba(255, 215, 0, 0.45);
   
-  --gold-metallic: linear-gradient(180deg, #fffbeb 0%, #ffd700 45%, #f59e0b 100%);
-  --gold-btn-gradient: linear-gradient(180deg, #ffd700 0%, #f59e0b 60%, #d97706 100%);
-  --purple-btn-gradient: linear-gradient(90deg, #2563eb 0%, #7c3aed 50%, #9333ea 100%);
-  --orange-btn-gradient: linear-gradient(90deg, #f97316 0%, #ef4444 100%);
-  --blue-btn-gradient: linear-gradient(90deg, #1d4ed8 0%, #2563eb 100%);
+  /* Gradients */
+  --gold-metallic: linear-gradient(180deg, #fffbeb 0%, #ffd700 45%, #d97706 100%);
+  --gold-btn-gradient: linear-gradient(135deg, #ffd700 0%, #f59e0b 55%, #d97706 100%);
+  --purple-btn-gradient: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #a855f7 100%);
+  --orange-btn-gradient: linear-gradient(135deg, #f97316 0%, #ef4444 100%);
+  --blue-btn-gradient: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);
   
+  /* Text Tokens */
   --text-primary: #ffffff;
   --text-secondary: #94a3b8;
   --text-muted: #64748b;
@@ -66,9 +74,11 @@
   --text-gold-bright: #ffd700;
   --text-cyan: #38bdf8;
 
-  --glow-card-blue: 0 0 20px rgba(37, 99, 235, 0.25);
-  --glow-card-gold: 0 0 24px rgba(245, 158, 11, 0.35);
-  --glow-cyan-pill: 0 0 12px rgba(56, 189, 248, 0.4);
+  /* Glow Effects */
+  --glow-card-blue: 0 10px 30px -10px rgba(56, 189, 248, 0.25);
+  --glow-card-gold: 0 10px 35px -10px rgba(245, 158, 11, 0.35);
+  --glow-cyan-pill: 0 0 14px rgba(56, 189, 248, 0.45);
+  --shadow-elevated: 0 20px 45px -15px rgba(0, 0, 0, 0.85);
 }
 
 /* ---------------- THEME 2: ROYAL GOLD & ONYX ---------------- */

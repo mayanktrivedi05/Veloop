@@ -1,21 +1,27 @@
 import React from 'react';
 import styles from './NextLevelReward.module.css';
-import { ChevronRight, Gift } from 'lucide-react';
+import { ChevronRight, Gift, Sparkles } from 'lucide-react';
 import { soundFx } from '../../utils/soundEffects';
+import safeIcon from '../../assets/safe/safe-2.svg';
+import gemIcon from '../../assets/coins/gem.svg';
+import coinPileHigh from '../../assets/pile-of-coins/high.svg';
+import veIcon from '../../assets/coins/ve.svg';
 
 export function NextLevelReward({ user, onOpenLevelModal, onOpenLuckyWheel }) {
+  const currentLevel = user.currentLevel || 5;
+
   return (
     <div className={styles.vaultRewardCard}>
-      {/* Crown Aura & Radiance */}
-      <div className={styles.crownAuraBg}>👑</div>
+      {/* Background Radiance & Lighting */}
       <div className={styles.goldGlowRadial}></div>
+      <div className={styles.meshAura}></div>
 
       {/* Left Column: Text & Action Buttons */}
       <div className={styles.leftCol}>
         <div className={styles.vaultTagRow}>
           <span className={styles.crownTagIcon}>👑</span>
           <span className={styles.vaultTagText}>
-            LEVEL 0{user.currentLevel || 5} REWARDS VAULT
+            LEVEL 0{currentLevel} REWARDS VAULT
           </span>
         </div>
 
@@ -50,41 +56,31 @@ export function NextLevelReward({ user, onOpenLevelModal, onOpenLuckyWheel }) {
         </div>
       </div>
 
-      {/* Right Column: 3D Gold Treasure Chest overflowing with VE Coins and Blue Gems */}
+      {/* Right Column: 3D Vault Safe overflowing with Gems & Coins */}
       <div className={styles.rightCol}>
         <div 
-          className={styles.chestContainer}
+          className={styles.vaultGraphicContainer}
           onClick={() => {
             soundFx.playStreak();
             if (onOpenLuckyWheel) onOpenLuckyWheel();
             else onOpenLevelModal();
           }}
-          title="Click to unlock vault!"
+          title="Click to explore rewards!"
         >
-          {/* Overflowing gems and coins */}
-          <div className={styles.floatingParticles}>
-            <span className={`${styles.gem} ${styles.gem1}`}>💎</span>
-            <span className={`${styles.gem} ${styles.gem2}`}>💎</span>
-            <span className={`${styles.coin} ${styles.coin1}`}>🪙</span>
-            <span className={`${styles.coin} ${styles.coin2}`}>🪙</span>
-            <span className={`${styles.sparkle} ${styles.sparkle1}`}>✨</span>
+          {/* Floating Gems & Coin Assets */}
+          <div className={styles.floatingLoot}>
+            <img className={`${styles.lootGem} ${styles.lootGem1}`} src={gemIcon} alt="Gem" />
+            <img className={`${styles.lootGem} ${styles.lootGem2}`} src={gemIcon} alt="Gem" />
+            <img className={`${styles.lootCoin} ${styles.lootCoin1}`} src={veIcon} alt="VE" />
+            <img className={styles.lootPile} src={coinPileHigh} alt="Coin Pile" />
           </div>
 
-          {/* 3D Realistic Chest Graphic */}
-          <div className={styles.chestGraphicBox}>
-            <div className={styles.chestLidOpen}></div>
-            <div className={styles.chestLootInside}>
-              <span className={styles.innerGem}>💎</span>
-              <span className={styles.innerCoin}>🪙</span>
-            </div>
-            <div className={styles.chestMainBody}>
-              <div className={styles.chestCrownEmblem}>👑</div>
-              <div className={styles.chestGoldTrim}></div>
-            </div>
-          </div>
+          {/* 3D Official Vault Safe */}
+          <img className={styles.vaultSafeArt} src={safeIcon} alt="Rewards Vault Safe" />
         </div>
       </div>
     </div>
   );
 }
 
+export default NextLevelReward;
