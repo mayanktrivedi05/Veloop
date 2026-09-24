@@ -1,138 +1,277 @@
-.item {
+.nodeCard {
   position: relative;
-  flex: 0 0 auto;
+  flex: 0 0 106px;
+  min-width: 106px;
+  background: linear-gradient(180deg, rgba(20, 27, 52, 0.8) 0%, rgba(10, 14, 28, 0.92) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+  padding: 12px 6px 10px 6px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-end;
-  height: 110px;
+  justify-content: space-between;
   cursor: pointer;
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  padding: 0 4px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+  scroll-snap-align: center;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
 }
 
-.item:hover {
+.nodeCard:hover {
   transform: translateY(-4px);
+  border-color: rgba(56, 189, 248, 0.4);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 12px rgba(56, 189, 248, 0.2);
 }
 
-.itemSelected .badgeWrapper {
-  filter: drop-shadow(0 0 16px rgba(245, 158, 11, 0.6));
+/* Completed Node State */
+.nodeCompleted {
+  background: linear-gradient(180deg, rgba(16, 32, 45, 0.85) 0%, rgba(8, 18, 28, 0.92) 100%);
+  border-color: rgba(56, 189, 248, 0.22);
 }
 
-.badgeWrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 80px;
+.nodeCompleted:hover {
+  border-color: rgba(56, 189, 248, 0.5);
 }
 
-.badge {
-  height: 100%;
-  width: auto;
-  max-width: 80px;
-  object-fit: contain;
-  transition: filter 0.25s ease, transform 0.25s ease;
+/* Current Active Node State */
+.nodeCurrent {
+  background: linear-gradient(180deg, rgba(42, 34, 18, 0.9) 0%, rgba(18, 14, 8, 0.96) 100%);
+  border: 1.5px solid var(--accent-gold);
+  box-shadow: 0 0 20px -2px rgba(245, 158, 11, 0.4), inset 0 0 15px rgba(245, 158, 11, 0.15);
 }
 
-.badge[data-locked="true"] {
-  filter: blur(2px) grayscale(0.4) brightness(0.7);
-  opacity: 0.65;
+.nodeCurrent:hover {
+  border-color: var(--accent-gold-bright);
+  box-shadow: 0 0 25px rgba(245, 158, 11, 0.6);
 }
 
-.badge[data-current="true"] {
-  filter: drop-shadow(0 0 12px rgba(205, 174, 112, 0.7));
-  animation: pulseGlow 2.5s infinite alternate ease-in-out;
+/* Locked Node State */
+.nodeLocked {
+  background: linear-gradient(180deg, rgba(15, 18, 30, 0.6) 0%, rgba(8, 10, 18, 0.8) 100%);
+  opacity: 0.72;
 }
 
-@keyframes pulseGlow {
-  0% {
-    filter: drop-shadow(0 0 8px rgba(205, 174, 112, 0.5));
-  }
-  100% {
-    filter: drop-shadow(0 0 16px rgba(251, 226, 165, 0.9));
-  }
+.nodeLocked:hover {
+  opacity: 0.9;
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
-.badge[data-level="1"],
-.badge[data-level="2"] {
-  transform: scale(0.92);
-  transform-origin: bottom center;
+/* Selected Node Outline */
+.nodeSelected {
+  transform: translateY(-3px);
+  border-color: #ffd700 !important;
+  box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.3), 0 10px 25px rgba(0, 0, 0, 0.7) !important;
 }
 
-.lockOverlay {
+/* Top "YOU" Pill Tag */
+.currentPillWrapper {
   position: absolute;
-  inset: 0;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+.currentPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  background: linear-gradient(135deg, #ffd700 0%, #f59e0b 100%);
+  color: #060914;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  padding: 2px 7px;
+  border-radius: var(--radius-full);
+  box-shadow: 0 2px 10px rgba(245, 158, 11, 0.6);
+  animation: pulsePill 2s infinite ease-in-out;
+  white-space: nowrap;
+}
+
+.sparkleIcon {
+  color: #060914;
+}
+
+@keyframes pulsePill {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 2px 8px rgba(245, 158, 11, 0.5);
+  }
+  50% {
+    transform: scale(1.06);
+    box-shadow: 0 2px 14px rgba(255, 215, 0, 0.85);
+  }
+}
+
+/* Level Tag Header */
+.levelTag {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.nodeCurrent .levelTag {
+  color: var(--accent-gold-light);
+  font-weight: 900;
+}
+
+.nodeCompleted .levelTag {
+  color: var(--accent-primary);
+}
+
+/* Center Badge Pedestal */
+.badgePedestal {
+  position: relative;
+  width: 60px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 2px 0 6px 0;
+}
+
+.badgeGlow {
+  position: absolute;
+  inset: 5px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, transparent 70%);
   pointer-events: none;
 }
 
-.lock {
-  position: absolute;
-  left: 50%;
-  bottom: 8%;
-  transform: translateX(-50%);
-  width: 18px;
-  height: auto;
-  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.9));
+.nodeCurrent .badgeGlow {
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.35) 0%, transparent 70%);
+  animation: glowPulse 2.5s infinite alternate ease-in-out;
 }
 
-.tip {
+@keyframes glowPulse {
+  0% { transform: scale(0.9); opacity: 0.5; }
+  100% { transform: scale(1.2); opacity: 0.9; }
+}
+
+.badgeImg {
+  width: 100%;
+  height: 100%;
+  max-width: 58px;
+  max-height: 58px;
+  object-fit: contain;
+  transition: transform 0.25s ease, filter 0.25s ease;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.6));
+}
+
+.nodeCard:hover .badgeImg {
+  transform: scale(1.08);
+}
+
+.nodeLocked .badgeImg {
+  filter: grayscale(0.55) brightness(0.6) blur(0.5px);
+}
+
+/* Badges for status */
+.completedBadge {
   position: absolute;
-  left: 50%;
-  top: -18px;
-  transform: translateX(-50%);
+  bottom: 0px;
+  right: 0px;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: #10b981;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #070b19;
+  box-shadow: 0 2px 6px rgba(16, 185, 129, 0.5);
+  z-index: 2;
+}
+
+.lockBadge {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: rgba(18, 22, 38, 0.95);
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+  z-index: 2;
+}
+
+/* Footer info */
+.nodeFooter {
   display: flex;
   flex-direction: column;
   align-items: center;
-  white-space: nowrap;
-  z-index: 10;
-  animation: bounceTip 1.6s infinite ease-in-out;
+  gap: 1px;
+  width: 100%;
+  text-align: center;
 }
 
-@keyframes bounceTip {
-  0%, 100% {
-    transform: translateX(-50%) translateY(0);
-  }
-  50% {
-    transform: translateX(-50%) translateY(-4px);
-  }
-}
-
-.tipLabel {
-  background: linear-gradient(135deg, #ffd700 0%, #cdae70 100%);
-  color: #0e1018;
-  font-size: 10px;
+.tierShortName {
+  font-size: 11px;
   font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  border-radius: 9999px;
-  padding: 3px 10px;
-  box-shadow: 0 4px 12px rgba(205, 174, 112, 0.4);
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 90px;
 }
 
-.tipArrow {
+.nodeCurrent .tierShortName {
+  color: #ffffff;
+  font-weight: 900;
+}
+
+.xpRequirement {
+  font-size: 9.5px;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.nodeCurrent .xpRequirement {
+  color: var(--accent-gold-light);
+}
+
+.nodeCompleted .xpRequirement {
+  color: var(--accent-primary);
+}
+
+/* Active Selected Pointer Arrow */
+.activePointer {
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
   width: 0;
   height: 0;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-top: 5px solid #cdae70;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #ffd700;
+  filter: drop-shadow(0 2px 4px rgba(255, 215, 0, 0.5));
 }
 
-.levelLabel {
-  margin-top: 6px;
-  font-size: 0.72rem;
-  font-weight: 800;
-  color: var(--text-muted);
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  transition: color 0.2s ease;
+@media (max-width: 600px) {
+  .nodeCard {
+    flex: 0 0 96px;
+    min-width: 96px;
+    padding: 10px 4px 8px 4px;
+  }
+
+  .badgePedestal {
+    width: 52px;
+    height: 52px;
+  }
+
+  .badgeImg {
+    max-width: 50px;
+    max-height: 50px;
+  }
 }
 
-.levelLabelCurrent {
-  color: var(--accent-gold-light);
-  font-weight: 900;
-  text-shadow: 0 0 8px rgba(245, 158, 11, 0.5);
-}

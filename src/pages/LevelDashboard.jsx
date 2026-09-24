@@ -174,6 +174,7 @@ export function LevelDashboard() {
                 <LevelRoadmap 
                   levelTiers={levelTiers}
                   currentLevel={user.currentLevel}
+                  user={user}
                 />
               </div>
             </div>
