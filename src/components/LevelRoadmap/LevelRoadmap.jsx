@@ -28,25 +28,30 @@ export function LevelRoadmap({ levelTiers = [], currentLevel = 5, user, onSelect
   const [showTooltip, setShowTooltip] = useState(false);
   const scrollerRef = useRef(null);
 
-  // Sync selected level if currentLevel changes
-  useEffect(() => {
-    setSelectedLvl(currentLevel);
-  }, [currentLevel]);
-
-  // Auto-scroll to center current level on mount
-  useEffect(() => {
+  // Reliable smooth centering of level cards
+  const scrollToLevel = (lvl, smooth = true) => {
     if (scrollerRef.current) {
-      const activeItem = scrollerRef.current.querySelector(`[data-current="true"]`);
-      if (activeItem) {
-        setTimeout(() => {
-          activeItem.scrollIntoView({
-            behavior: 'smooth',
-            inline: 'center',
-            block: 'nearest'
-          });
-        }, 150);
+      const item = scrollerRef.current.querySelector(`[data-level="${lvl}"]`);
+      if (item) {
+        const scroller = scrollerRef.current;
+        const scrollerRect = scroller.getBoundingClientRect();
+        const itemRect = item.getBoundingClientRect();
+        const targetScrollLeft = scroller.scrollLeft + (itemRect.left - scrollerRect.left) - (scrollerRect.width / 2) + (itemRect.width / 2);
+        scroller.scrollTo({ 
+          left: Math.max(0, targetScrollLeft), 
+          behavior: smooth ? 'smooth' : 'auto' 
+        });
       }
     }
+  };
+
+  // Sync selected level if currentLevel changes & auto-center
+  useEffect(() => {
+    setSelectedLvl(currentLevel);
+    const timer = setTimeout(() => {
+      scrollToLevel(currentLevel, false);
+    }, 100);
+    return () => clearTimeout(timer);
   }, [currentLevel]);
 
   const scroll = (direction) => {
@@ -60,6 +65,7 @@ export function LevelRoadmap({ levelTiers = [], currentLevel = 5, user, onSelect
   const handleSelectLevel = (lvl) => {
     soundFx.playClick();
     setSelectedLvl(lvl);
+    scrollToLevel(lvl, true);
     const tier = levelTiers.find((t) => t.level === lvl);
     if (onSelectLevel && tier) onSelectLevel(tier);
   };

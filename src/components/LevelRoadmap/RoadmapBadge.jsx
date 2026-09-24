@@ -1,7 +1,7 @@
 import React from 'react';
-import { getBadgeSrc, lockBadgeSrc } from '../../assets/badges/index.js';
+import { getBadgeSrc } from '../../assets/badges/index.js';
 import styles from './RoadmapBadge.module.css';
-import { Check, Lock, Sparkles } from 'lucide-react';
+import { Check, Lock, Sparkles, Crown } from 'lucide-react';
 
 export function RoadmapBadge({ tier, level, status, isSelected, onClick }) {
   const locked = status === 'locked';
@@ -33,7 +33,7 @@ export function RoadmapBadge({ tier, level, status, isSelected, onClick }) {
       {isCurrent && (
         <div className={styles.currentPillWrapper}>
           <span className={styles.currentPill}>
-            <Sparkles size={10} className={styles.sparkleIcon} />
+            <Crown size={10} className={styles.crownPillIcon} />
             YOU
           </span>
         </div>
@@ -66,7 +66,7 @@ export function RoadmapBadge({ tier, level, status, isSelected, onClick }) {
 
         {locked && (
           <div className={styles.lockBadge} title="Locked">
-            <Lock size={12} strokeWidth={2.5} />
+            <Lock size={11} strokeWidth={2.5} />
           </div>
         )}
       </div>
@@ -77,11 +77,12 @@ export function RoadmapBadge({ tier, level, status, isSelected, onClick }) {
         <span className={styles.xpRequirement}>{xpFormatted}</span>
       </div>
 
-      {/* Active Selected Underline / Indicator */}
+      {/* Active Selected Glow Pointer */}
       {isSelected && <div className={styles.activePointer} />}
     </div>
   );
 }
 
 export default RoadmapBadge;
+
 

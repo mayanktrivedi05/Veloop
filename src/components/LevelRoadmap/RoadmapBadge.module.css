@@ -1,8 +1,8 @@
 .nodeCard {
   position: relative;
-  flex: 0 0 106px;
-  min-width: 106px;
-  background: linear-gradient(180deg, rgba(20, 27, 52, 0.8) 0%, rgba(10, 14, 28, 0.92) 100%);
+  flex: 0 0 102px;
+  min-width: 102px;
+  background: linear-gradient(180deg, rgba(20, 27, 52, 0.85) 0%, rgba(10, 14, 28, 0.95) 100%);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-md);
   padding: 12px 6px 10px 6px;
@@ -14,45 +14,45 @@
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   user-select: none;
   scroll-snap-align: center;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45);
 }
 
 .nodeCard:hover {
   transform: translateY(-4px);
   border-color: rgba(56, 189, 248, 0.4);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 12px rgba(56, 189, 248, 0.2);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.6), 0 0 14px rgba(56, 189, 248, 0.25);
 }
 
 /* Completed Node State */
 .nodeCompleted {
-  background: linear-gradient(180deg, rgba(16, 32, 45, 0.85) 0%, rgba(8, 18, 28, 0.92) 100%);
-  border-color: rgba(56, 189, 248, 0.22);
+  background: linear-gradient(180deg, rgba(16, 32, 48, 0.88) 0%, rgba(8, 18, 28, 0.95) 100%);
+  border-color: rgba(56, 189, 248, 0.25);
 }
 
 .nodeCompleted:hover {
-  border-color: rgba(56, 189, 248, 0.5);
+  border-color: rgba(56, 189, 248, 0.6);
 }
 
 /* Current Active Node State */
 .nodeCurrent {
-  background: linear-gradient(180deg, rgba(42, 34, 18, 0.9) 0%, rgba(18, 14, 8, 0.96) 100%);
+  background: linear-gradient(180deg, rgba(46, 36, 16, 0.92) 0%, rgba(18, 14, 8, 0.98) 100%);
   border: 1.5px solid var(--accent-gold);
-  box-shadow: 0 0 20px -2px rgba(245, 158, 11, 0.4), inset 0 0 15px rgba(245, 158, 11, 0.15);
+  box-shadow: 0 0 22px -2px rgba(245, 158, 11, 0.45), inset 0 0 16px rgba(245, 158, 11, 0.15);
 }
 
 .nodeCurrent:hover {
   border-color: var(--accent-gold-bright);
-  box-shadow: 0 0 25px rgba(245, 158, 11, 0.6);
+  box-shadow: 0 0 28px rgba(245, 158, 11, 0.65);
 }
 
 /* Locked Node State */
 .nodeLocked {
   background: linear-gradient(180deg, rgba(15, 18, 30, 0.6) 0%, rgba(8, 10, 18, 0.8) 100%);
-  opacity: 0.72;
+  opacity: 0.68;
 }
 
 .nodeLocked:hover {
-  opacity: 0.9;
+  opacity: 0.88;
   border-color: rgba(255, 255, 255, 0.2);
 }
 
@@ -60,13 +60,13 @@
 .nodeSelected {
   transform: translateY(-3px);
   border-color: #ffd700 !important;
-  box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.3), 0 10px 25px rgba(0, 0, 0, 0.7) !important;
+  box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.35), 0 12px 28px rgba(0, 0, 0, 0.75) !important;
 }
 
 /* Top "YOU" Pill Tag */
 .currentPillWrapper {
   position: absolute;
-  top: -10px;
+  top: -11px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
@@ -88,7 +88,7 @@
   white-space: nowrap;
 }
 
-.sparkleIcon {
+.crownPillIcon {
   color: #060914;
 }
 
@@ -110,11 +110,11 @@
   letter-spacing: 0.05em;
   color: var(--text-muted);
   text-transform: uppercase;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 
 .nodeCurrent .levelTag {
-  color: var(--accent-gold-light);
+  color: var(--accent-gold-bright);
   font-weight: 900;
 }
 
@@ -125,19 +125,19 @@
 /* Center Badge Pedestal */
 .badgePedestal {
   position: relative;
-  width: 60px;
-  height: 60px;
+  width: 56px;
+  height: 56px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 2px 0 6px 0;
+  margin: 2px 0 4px 0;
 }
 
 .badgeGlow {
   position: absolute;
-  inset: 5px;
+  inset: 4px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.12) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -154,8 +154,8 @@
 .badgeImg {
   width: 100%;
   height: 100%;
-  max-width: 58px;
-  max-height: 58px;
+  max-width: 54px;
+  max-height: 54px;
   object-fit: contain;
   transition: transform 0.25s ease, filter 0.25s ease;
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.6));
@@ -166,16 +166,16 @@
 }
 
 .nodeLocked .badgeImg {
-  filter: grayscale(0.55) brightness(0.6) blur(0.5px);
+  filter: grayscale(0.6) brightness(0.6) blur(0.5px);
 }
 
 /* Badges for status */
 .completedBadge {
   position: absolute;
-  bottom: 0px;
-  right: 0px;
-  width: 17px;
-  height: 17px;
+  bottom: -1px;
+  right: -1px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   background: #10b981;
   color: #ffffff;
@@ -189,10 +189,10 @@
 
 .lockBadge {
   position: absolute;
-  bottom: 0px;
-  right: 0px;
-  width: 17px;
-  height: 17px;
+  bottom: -1px;
+  right: -1px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   background: rgba(18, 22, 38, 0.95);
   color: #94a3b8;
@@ -221,7 +221,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 90px;
+  max-width: 88px;
 }
 
 .nodeCurrent .tierShortName {
@@ -259,19 +259,20 @@
 
 @media (max-width: 600px) {
   .nodeCard {
-    flex: 0 0 96px;
-    min-width: 96px;
+    flex: 0 0 94px;
+    min-width: 94px;
     padding: 10px 4px 8px 4px;
   }
 
   .badgePedestal {
-    width: 52px;
-    height: 52px;
+    width: 48px;
+    height: 48px;
   }
 
   .badgeImg {
-    max-width: 50px;
-    max-height: 50px;
+    max-width: 46px;
+    max-height: 46px;
   }
 }
+
 
