@@ -171,10 +171,10 @@
 /* Scroller Container */
 .scrollerContainer {
   position: relative;
-  background: linear-gradient(180deg, rgba(14, 19, 36, 0.85) 0%, rgba(8, 11, 22, 0.95) 100%);
+  background: linear-gradient(180deg, rgba(14, 19, 36, 0.88) 0%, rgba(8, 11, 22, 0.96) 100%);
   border: 1px solid rgba(245, 158, 11, 0.25);
   border-radius: var(--radius-lg);
-  padding: 24px 14px 18px 14px;
+  padding: 22px 10px 14px 10px;
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(12px);
@@ -207,9 +207,9 @@
   position: relative;
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
   overflow-x: auto;
-  padding: 10px 10px 14px 10px;
+  padding: 10px 8px 16px 8px;
   scrollbar-width: none;
   -ms-overflow-style: none;
   scroll-behavior: smooth;
@@ -220,38 +220,64 @@
   display: none;
 }
 
-/* Background Progression Track */
-.milestoneLineTrack {
-  position: absolute;
-  top: 52px;
-  left: 50px;
-  right: 50px;
-  height: 3px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
-  pointer-events: none;
-  z-index: 0;
+/* Bottom Progress Rail Below Badges */
+.bottomRailWrapper {
+  padding: 12px 14px 4px 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
-.milestoneLineProgress {
+.railTrack {
+  height: 5px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  overflow: hidden;
+  position: relative;
+}
+
+.railFill {
   height: 100%;
   background: linear-gradient(90deg, #38bdf8 0%, #ffd700 80%, #f59e0b 100%);
-  box-shadow: 0 0 10px rgba(245, 158, 11, 0.7);
-  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.6);
+  border-radius: 999px;
   transition: width 0.5s ease;
 }
 
-/* Tier Detail Deep Dive Card */
+.railMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
+.railCenterText {
+  color: var(--text-secondary);
+}
+
+.railCenterText strong {
+  color: var(--accent-gold-light);
+}
+
+/* Tier Detail Deep Dive Card (Platinum Master & Tiers) */
 .tierDetailCard {
-  margin-top: 14px;
-  background: linear-gradient(180deg, rgba(20, 27, 52, 0.9) 0%, rgba(10, 14, 28, 0.98) 100%);
-  border: 1px solid rgba(245, 158, 11, 0.35);
+  margin-top: 16px;
+  background: linear-gradient(180deg, rgba(20, 27, 54, 0.92) 0%, rgba(10, 14, 28, 0.98) 100%);
+  border: 1.5px solid rgba(245, 158, 11, 0.35);
   border-radius: var(--radius-lg);
-  padding: 18px 20px;
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  padding: 20px 22px;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.08);
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 16px;
+  transition: all 0.3s ease;
+}
+
+.tierDetailCardCurrent {
+  border-color: rgba(255, 215, 0, 0.55);
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.75), 0 0 25px rgba(245, 158, 11, 0.18), inset 0 1px 0 rgba(255, 215, 0, 0.2);
 }
 
 .tierDetailHeader {
@@ -259,53 +285,82 @@
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 12px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  padding-bottom: 12px;
+  padding-bottom: 14px;
 }
 
 .tierTitleArea {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
 }
 
-.tierLevelBadge {
-  background: linear-gradient(135deg, #ffd700 0%, #f59e0b 100%);
-  color: #070b19;
-  font-size: 0.7rem;
-  font-weight: 900;
-  padding: 4px 10px;
-  border-radius: var(--radius-full);
-  letter-spacing: 0.04em;
-  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.4);
+.tierBadgeThumbnail {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 5px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.tierThumbImg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 8px rgba(245, 158, 11, 0.5));
 }
 
 .tierNameCol {
   display: flex;
   flex-direction: column;
-  gap: 1px;
+  gap: 2px;
+}
+
+.tierPillRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tierLevelBadge {
+  background: linear-gradient(135deg, #ffd700 0%, #f59e0b 100%);
+  color: #070b19;
+  font-size: 0.68rem;
+  font-weight: 900;
+  padding: 3px 9px;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.04em;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.4);
+}
+
+.tierTierCountText {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  font-weight: 600;
 }
 
 .tierName {
   margin: 0;
-  font-size: 1.15rem;
-  font-weight: 800;
+  font-size: 1.25rem;
+  font-weight: 900;
   color: #ffffff;
-}
-
-.tierStatusText {
-  font-size: 0.72rem;
-  color: var(--text-secondary);
+  letter-spacing: -0.01em;
 }
 
 .tierStatusTag span {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
   font-size: 0.75rem;
   font-weight: 800;
-  padding: 4px 12px;
+  padding: 5px 14px;
   border-radius: var(--radius-full);
 }
 
@@ -319,7 +374,7 @@
   background: rgba(245, 158, 11, 0.2);
   border: 1px solid var(--accent-gold);
   color: #ffd700;
-  box-shadow: 0 0 12px rgba(245, 158, 11, 0.35);
+  box-shadow: 0 0 14px rgba(245, 158, 11, 0.4);
 }
 
 .tagLocked {
@@ -330,20 +385,30 @@
 
 /* Tier Progress Bar */
 .tierProgressBarContainer {
-  background: rgba(0, 0, 0, 0.35);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 12px;
-  padding: 10px 14px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 12px 16px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 
 .progressBarMeta {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 0.72rem;
+  font-size: 0.75rem;
+}
+
+.progressLabelGroup {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.progressZapIcon {
+  color: #38bdf8;
 }
 
 .progressLabel {
@@ -353,88 +418,165 @@
 
 .progressValue {
   font-weight: 800;
+  color: #ffffff;
+}
+
+.percentBadge {
   color: var(--accent-gold-light);
+  margin-left: 4px;
 }
 
 .progressTrack {
-  height: 7px;
+  height: 8px;
   background: rgba(255, 255, 255, 0.08);
   border-radius: 999px;
   overflow: hidden;
+  position: relative;
 }
 
 .progressFill {
   height: 100%;
-  background: linear-gradient(90deg, #f59e0b 0%, #ffd700 100%);
+  background: linear-gradient(90deg, #38bdf8 0%, #ffd700 70%, #f59e0b 100%);
   border-radius: 999px;
   box-shadow: 0 0 10px rgba(245, 158, 11, 0.6);
-  transition: width 0.4s ease;
+  transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
 }
 
-/* Stats Grid */
-.tierStatsGrid {
+.progressTipGlow {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 12px;
+  background: #ffffff;
+  border-radius: 999px;
+  box-shadow: 0 0 10px #ffffff;
+}
+
+.progressSubMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.remainingXPText strong {
+  color: var(--accent-gold-light);
+}
+
+/* Reward Highlights Grid */
+.rewardCardsGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
 }
 
-.statBox {
+.rewardCard {
   background: rgba(0, 0, 0, 0.35);
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 12px;
   padding: 12px 14px;
   display: flex;
-  flex-direction: column;
-  gap: 3px;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.2s ease;
 }
 
-.statLabel {
-  font-size: 0.65rem;
+.rewardCard:hover {
+  background: rgba(0, 0, 0, 0.5);
+  border-color: rgba(255, 255, 255, 0.12);
+  transform: translateY(-2px);
+}
+
+.rewardCardIconGold {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  color: #ffd700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.rewardCardIconCyan {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(56, 189, 248, 0.15);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  color: #38bdf8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.rewardCardIconPurple {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(168, 85, 247, 0.15);
+  border: 1px solid rgba(168, 85, 247, 0.35);
+  color: #c084fc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.rewardCardInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.rewardCardLabel {
+  font-size: 0.62rem;
   font-weight: 800;
   color: var(--text-muted);
   letter-spacing: 0.05em;
 }
 
-.statValueBlue {
-  font-size: 0.95rem;
-  font-weight: 800;
-  color: #38bdf8;
-  display: flex;
-  align-items: center;
-  gap: 6px;
+.rewardCardValGold {
+  font-size: 0.92rem;
+  font-weight: 900;
+  color: #ffd700;
 }
 
-.statValueGold {
-  font-size: 0.95rem;
-  font-weight: 800;
-  color: var(--accent-gold-light);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.zapIcon {
+.rewardCardValCyan {
+  font-size: 0.92rem;
+  font-weight: 900;
   color: #38bdf8;
 }
 
-.coinIcon {
-  color: var(--accent-gold);
+.rewardCardValPurple {
+  font-size: 0.92rem;
+  font-weight: 900;
+  color: #c084fc;
 }
 
 /* Perks List */
 .perksList {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
+}
+
+.perksHeaderRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .perksHeader {
   font-size: 0.75rem;
   font-weight: 800;
   color: var(--text-secondary);
-  display: flex;
-  align-items: center;
-  gap: 6px;
 }
 
 .sparkleHeadingIcon {
@@ -449,38 +591,104 @@
 
 .perkItem {
   background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 10px;
-  padding: 8px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 10px 14px;
   display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.78rem;
-  color: var(--text-primary);
-  line-height: 1.35;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.perkBulletBox {
+  margin-top: 2px;
+  flex-shrink: 0;
 }
 
 .perkBullet {
   color: var(--accent-gold);
-  flex-shrink: 0;
+}
+
+.perkText {
+  font-size: 0.78rem;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+/* Quick Tier Step Switcher */
+.tierNavFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.tierStepBtn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tierStepBtn:hover:not(:disabled) {
+  background: rgba(245, 158, 11, 0.2);
+  border-color: var(--accent-gold);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.tierStepBtn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.tierStepIndicator {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.tierStepIndicator strong {
+  color: var(--accent-gold-light);
+}
+
+@media (max-width: 768px) {
+  .rewardCardsGrid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
 }
 
 @media (max-width: 600px) {
   .scrollerContainer {
-    padding: 20px 8px 14px 8px;
+    padding: 18px 6px 12px 6px;
   }
   
   .tierDetailCard {
-    padding: 14px 14px;
+    padding: 16px 14px;
   }
   
-  .tierStatsGrid {
-    grid-template-columns: 1fr;
-    gap: 8px;
-  }
-
   .perksGrid {
     grid-template-columns: 1fr;
   }
+  
+  .tierDetailHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .tierStatusTag {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+  }
 }
+
 
